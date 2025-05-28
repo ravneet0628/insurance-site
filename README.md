@@ -101,11 +101,6 @@ A modern, responsive insurance broker website built with React, TypeScript, Tail
    - Build output directory: `dist`
    - Node.js version: `20`
 
-3. **Environment variables**:
-   ```
-   VITE_API_BASE=https://your-api-domain.com
-   ```
-
 ### Other Platforms
 
 The site can be deployed to any static hosting service:
@@ -114,18 +109,6 @@ The site can be deployed to any static hosting service:
 - GitHub Pages
 - AWS S3 + CloudFront
 
-## 🔒 Security
-
-- Content Security Policy headers configured
-- No sensitive data in client-side code
-- Environment variables for API endpoints
-
-## 📊 Performance
-
-- Lighthouse scores target: ≥ 90 in all categories
-- Lazy-loaded route chunks
-- Optimized images and assets
-- Minimal bundle size
 
 ## 🧪 Testing
 
