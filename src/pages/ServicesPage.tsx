@@ -1,5 +1,4 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Car, Home, Heart, Building, Plane } from 'lucide-react';
 import Hero from '../components/Hero';
@@ -24,16 +23,14 @@ const ServicesPage: React.FC = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Insurance Services - SecureChoice Insurance | Auto, Home, Life & More</title>
-        <meta 
-          name="description" 
-          content="Explore our comprehensive insurance services including auto, home, life, commercial, and travel insurance. Compare coverage options and get personalized quotes." 
-        />
-        <meta property="og:title" content="Insurance Services - SecureChoice" />
-        <meta property="og:description" content="Comprehensive insurance solutions for auto, home, life, business, and travel coverage." />
-        <link rel="canonical" href="/services" />
-      </Helmet>
+      <title>Insurance Services - SecureChoice Insurance | Auto, Home, Life & More</title>
+      <meta 
+        name="description" 
+        content="Explore our comprehensive insurance services including auto, home, life, commercial, and travel insurance. Compare coverage options and get personalized quotes." 
+      />
+      <meta property="og:title" content="Insurance Services - SecureChoice" />
+      <meta property="og:description" content="Comprehensive insurance solutions for auto, home, life, business, and travel coverage." />
+      <link rel="canonical" href="/services" />
 
       <Hero
         title="Our Insurance Services"

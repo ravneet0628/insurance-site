@@ -1,20 +1,17 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
 import Hero from '../components/Hero';
 
 const QuotePage: React.FC = () => {
   return (
     <>
-      <Helmet>
-        <title>Get a Quote - SecureChoice Insurance | Free Insurance Quotes</title>
-        <meta 
-          name="description" 
-          content="Get a personalized insurance quote in minutes. Compare rates for auto, home, life, commercial, and travel insurance. Free quotes with no obligation." 
-        />
-        <meta property="og:title" content="Get a Quote - SecureChoice Insurance" />
-        <meta property="og:description" content="Get personalized insurance quotes in minutes. Free, fast, and no obligation." />
-        <link rel="canonical" href="/quote" />
-      </Helmet>
+      <title>Get a Quote - SecureChoice Insurance | Free Insurance Quotes</title>
+      <meta 
+        name="description" 
+        content="Get a personalized insurance quote in minutes. Compare rates for auto, home, life, commercial, and travel insurance. Free quotes with no obligation." 
+      />
+      <meta property="og:title" content="Get a Quote - SecureChoice Insurance" />
+      <meta property="og:description" content="Get personalized insurance quotes in minutes. Free, fast, and no obligation." />
+      <link rel="canonical" href="/quote" />
 
       <Hero
         title="Get Your Insurance Quote"

@@ -13,14 +13,14 @@ A modern, responsive insurance broker website built with React, TypeScript, Tail
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: React 18, TypeScript
+- **Frontend**: React 19, TypeScript
 - **Styling**: Tailwind CSS v3 with custom design system
 - **Build Tool**: Vite
 - **Routing**: React Router DOM v6
 - **Icons**: Lucide React
 - **Animations**: Framer Motion
 - **Forms**: React Hook Form + Zod validation
-- **SEO**: React Helmet Async
+- **SEO**: React 19 meta tags
 - **Testing**: Vitest, Testing Library
 - **Code Quality**: ESLint, Prettier, Husky
 
@@ -131,10 +131,3 @@ npm run test:ui     # Run tests with UI
 
 This project is licensed under the MIT License.
 
-## 🆘 Support
-
-For support, email info@securechoice.com or create an issue in the repository.
-
----
-
-Built with ❤️ by the SecureChoice team

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { motion } from 'framer-motion';
 import { Users, Target, Eye, Award, Shield, Heart } from 'lucide-react';
 import Hero from '../components/Hero';
@@ -62,12 +62,10 @@ const AboutPage: React.FC = () => {
 
   return (
     <>
-      <Helmet>
-        <title>About Us - SecureChoice Insurance | Your Trusted Insurance Partner</title>
-        <meta name="description" content="Learn about SecureChoice Insurance - over 15 years of experience providing personalized insurance solutions. Meet our team and discover our mission." />
-        <meta property="og:title" content="About SecureChoice Insurance" />
-        <meta property="og:description" content="Your trusted insurance partner since 2010. Learn about our mission, values, and experienced team." />
-      </Helmet>
+      <title>About Us - SecureChoice Insurance | Your Trusted Insurance Partner</title>
+      <meta name="description" content="Learn about SecureChoice Insurance - over 15 years of experience providing personalized insurance solutions. Meet our team and discover our mission." />
+      <meta property="og:title" content="About SecureChoice Insurance" />
+      <meta property="og:description" content="Your trusted insurance partner since 2010. Learn about our mission, values, and experienced team." />
 
       <Hero
         title="About SecureChoice Insurance"
