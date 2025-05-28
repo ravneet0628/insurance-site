@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -120,45 +119,43 @@ const ContactPage: React.FC = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Contact Us - SecureChoice Insurance | Get in Touch</title>
-        <meta 
-          name="description" 
-          content="Contact SecureChoice Insurance in Toronto. Get quotes, file claims, or ask questions. Office location, phone numbers, email, and business hours." 
-        />
-        <meta property="og:title" content="Contact SecureChoice Insurance" />
-        <meta property="og:description" content="Get in touch with our Toronto office for insurance quotes, claims, and expert advice." />
-        <link rel="canonical" href="/contact" />
-        
-        {/* Local SEO Schema */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "InsuranceAgency",
-            "name": "SecureChoice Insurance",
-            "address": {
-              "@type": "PostalAddress",
-              "streetAddress": "123 Insurance Street",
-              "addressLocality": "Toronto",
-              "addressRegion": "ON",
-              "postalCode": "M5V 3A8",
-              "addressCountry": "CA"
-            },
-            "geo": {
-              "@type": "GeoCoordinates",
-              "latitude": 43.6532,
-              "longitude": -79.3832
-            },
-            "telephone": "+1-123-456-7890",
-            "email": "info@securechoice.com",
-            "url": "https://securechoice.com",
-            "openingHours": [
-              "Mo-Fr 08:00-18:00",
-              "Sa 09:00-16:00"
-            ]
-          })}
-        </script>
-      </Helmet>
+      <title>Contact Us - SecureChoice Insurance | Get in Touch</title>
+      <meta 
+        name="description" 
+        content="Contact SecureChoice Insurance in Toronto. Get quotes, file claims, or ask questions. Office location, phone numbers, email, and business hours." 
+      />
+      <meta property="og:title" content="Contact SecureChoice Insurance" />
+      <meta property="og:description" content="Get in touch with our Toronto office for insurance quotes, claims, and expert advice." />
+      <link rel="canonical" href="/contact" />
+      
+      {/* Local SEO Schema */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "InsuranceAgency",
+          "name": "SecureChoice Insurance",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "123 Insurance Street",
+            "addressLocality": "Toronto",
+            "addressRegion": "ON",
+            "postalCode": "M5V 3A8",
+            "addressCountry": "CA"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 43.6532,
+            "longitude": -79.3832
+          },
+          "telephone": "+1-123-456-7890",
+          "email": "info@securechoice.com",
+          "url": "https://securechoice.com",
+          "openingHours": [
+            "Mo-Fr 08:00-18:00",
+            "Sa 09:00-16:00"
+          ]
+        })}
+      </script>
 
       <Hero
         title="Contact SecureChoice"

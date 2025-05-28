@@ -1,15 +1,13 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { Home, ArrowLeft } from 'lucide-react';
 import CTAButton from '../components/CTAButton';
 
 const NotFoundPage: React.FC = () => {
   return (
     <>
-      <Helmet>
-        <title>Page Not Found - SecureChoice Insurance</title>
-        <meta name="description" content="The page you're looking for doesn't exist. Return to SecureChoice Insurance homepage." />
-      </Helmet>
+      <title>Page Not Found - SecureChoice Insurance</title>
+      <meta name="description" content="The page you're looking for doesn't exist. Return to SecureChoice Insurance homepage." />
 
       <div className="min-h-[600px] flex items-center justify-center bg-neutral-bg">
         <div className="max-w-md mx-auto text-center px-4">
