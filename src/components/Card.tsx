@@ -13,7 +13,7 @@ const Card: React.FC<CardProps> = ({
   hover = true,
   padding = 'md',
 }) => {
-  const baseClasses = 'bg-white rounded-lg shadow-md transition-all duration-300';
+  const baseClasses = 'bg-white text-center items-end justrounded-lg shadow-md transition-all duration-300';
   const hoverClasses = hover ? 'hover:shadow-lg hover:scale-105' : '';
   
   const paddingClasses = {
