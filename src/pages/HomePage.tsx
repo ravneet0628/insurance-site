@@ -1,77 +1,45 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Shield, Users, Cross, Heart, Activity, Award, Clock, CheckCircle, Wallet } from 'lucide-react';
+import { Shield, Users, Heart, Activity, Award, Clock, CheckCircle, Wallet, DollarSign } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 import Hero from '../components/Hero';
 import Card from '../components/Card';
 import CTAButton from '../components/CTAButton';
+import { useHomePageContent } from '../content/hooks/usePageContent';
 
 const HomePage: React.FC = () => {
-  const products = [
-    {
-      icon: Shield,
-      title: "Super Visa Insurance",
-      description: "Mandatory insurance for parents or grandparents seeking a Super Visa for Canada.",
-      slug: "super-visa-insurance"
-    },
-    {
-      icon: Users,
-      title: "Visitors Insurance",
-      description: "Whether it is you or your family or friends visiting Canada, always consider purchasing an all-encompassing visitors insurance plan.",
-      slug: "visitors-insurance"
-    },
-    {
-      icon: Heart,
-      title: "Life Insurance",
-      description: "Mishappenings are never intentional and can happen at any time. Life Insurance can be a safety net to keep your mind at ease when you least expect it.",
-      slug: "life-insurance"
-    },
-    {
-      icon: Cross,
-      title: "Disability Insurance",
-      description: "An accident is more financially disastrous than a disability. If you are disabled, you might not be able to work, resulting in no or less income.",
-      slug: "disability-insurance"
-    },
-    {
-      icon: Activity,
-      title: "Critical Illness Insurance",
-      description: "Offers a substantial amount of money to the insured client who is diagnosed with any critical illness.",
-      slug: "critical-illness-insurance"
-    },
-    {
-      icon: Award,
-      title: "RESP",
-      description: "You can consider RESP as a long-term investment strategy that can help your children with the expenses of higher education in Canada.",
-      slug: "resp"
-    },
-    {
-      icon: Clock,
-      title: "RRSP",
-      description: "Short for Registered Retirement Savings Plan, this policy is an investment vehicle for both employees and self-employed individuals in Canada.",
-      slug: "rrsp"
-    },
-    {
-      icon: CheckCircle,
-      title: "Drug & Dental Insurance",
-      description: "Drug and Dental Plan benefits generally include dental care, eye care, prescription drugs, semi-private…",
-      slug: "drug-dental-insurance"
-    },
-    {
-      icon: Wallet,
-      title: "TFSA",
-      description: "A federal government tax-sheltered savings program intended to encourage Canadians to save and invest for short or long term goals.",
-      slug: "tfsa"
-    }
-  ];
+  const content = useHomePageContent();
+
+  // Icon mapping for dynamic content
+  const iconMap = {
+    Shield,
+    Users,
+    Heart,
+    Activity,
+    Award,
+    Clock,
+    CheckCircle,
+    Wallet,
+    DollarSign,
+  };
 
   return (
     <div>
+      <Helmet>
+        <title>{content.meta.title}</title>
+        <meta name="description" content={content.meta.description} />
+        {content.meta.keywords && (
+          <meta name="keywords" content={content.meta.keywords.join(', ')} />
+        )}
+      </Helmet>
+
       {/* Hero Section */}
       <Hero
-        title="Secure Your Future with Trusted Insurance Solutions"
-        subtitle="Get comprehensive coverage including Super Visa, Visitors, Life, Disability, and Critical Illness insurance plus RESP, RRSP, TFSA investments with personalized service and competitive rates."
-        bgImg="/images/hero-bg.jpg"
-        ctaText="Get a Free Quote"
-        ctaLink="/quote"
+        title={content.hero.title}
+        subtitle={content.hero.subtitle}
+        bgImg={content.hero.backgroundImage}
+        ctaText={content.hero.primaryCTA.text}
+        ctaLink={content.hero.primaryCTA.link}
       />
 
       {/* Products Section */}
@@ -85,17 +53,17 @@ const HomePage: React.FC = () => {
             className="text-center mb-8"
           >
             <h2 className="text-clamp-2xl font-ubuntu font-bold text-neutral-text mb-4">
-              Our Insurance Products
+              {content.services.title}
             </h2>
             <p className="text-sm text-gray-600 max-w-2xl mx-auto">
-              Comprehensive protection from what matters most to you
+              {content.services.subtitle}
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {products.map((product, index) => (
+            {content.services.cards.map((service, index) => (
               <motion.div
-                key={product.title}
+                key={service.id}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -103,25 +71,69 @@ const HomePage: React.FC = () => {
               >
                 <Card className="h-full p-6 flex flex-col items-center text-center hover:shadow-lg transition-shadow duration-300 min-h-[320px]">
                   <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                    <product.icon className="w-8 h-8 text-primary" />
+                    {React.createElement(iconMap[service.icon as keyof typeof iconMap] || Shield, {
+                      className: "w-8 h-8 text-primary"
+                    })}
                   </div>
                   <h3 className="text-lg font-ubuntu font-bold text-neutral-text mb-3 h-14 flex items-center">
-                    {product.title}
+                    {service.title}
                   </h3>
                   <p className="text-sm text-gray-600 mb-4 flex-1 flex items-start leading-relaxed">
                     <span className="line-clamp-4">
-                      {product.description}
+                      {service.description}
                     </span>
                   </p>
                   <CTAButton 
                     variant="outline" 
                     size="sm" 
-                    to={`/services/${product.slug}`}
+                    to={service.link}
                     className="mt-auto"
                   >
                     Learn More →
                   </CTAButton>
                 </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Trust Badges Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-clamp-2xl font-ubuntu font-bold text-neutral-text mb-4">
+              {content.trustBadges.title}
+            </h2>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {content.trustBadges.badges.map((badge, index) => (
+              <motion.div
+                key={badge.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="text-center"
+              >
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  {React.createElement(iconMap[badge.icon as keyof typeof iconMap] || Shield, {
+                    className: "w-8 h-8 text-primary"
+                  })}
+                </div>
+                <h3 className="text-lg font-ubuntu font-bold text-neutral-text mb-3">
+                  {badge.title}
+                </h3>
+                <p className="text-gray-600">
+                  {badge.description}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -139,34 +151,21 @@ const HomePage: React.FC = () => {
               viewport={{ once: true }}
             >
               <h2 className="text-clamp-2xl font-ubuntu font-bold text-neutral-text mb-6">
-                Why Choose SecureChoice?
+                {content.about.title}
               </h2>
               <p className="text-clamp-base text-gray-600 mb-6 leading-relaxed">
-                With over 15 years of experience in the insurance industry, SecureChoice has been 
-                helping families and businesses protect what matters most. Our commitment to 
-                personalized service and competitive rates has made us a trusted partner for 
-                thousands of customers across Canada.
+                {content.about.content}
               </p>
               <ul className="space-y-3 mb-8">
-                <li className="flex items-center text-gray-600">
-                  <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
-                  Licensed insurance professionals
-                </li>
-                <li className="flex items-center text-gray-600">
-                  <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
-                  Competitive rates from top insurers
-                </li>
-                <li className="flex items-center text-gray-600">
-                  <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
-                  24/7 claims support and assistance
-                </li>
-                <li className="flex items-center text-gray-600">
-                  <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
-                  Personalized coverage recommendations
-                </li>
+                {content.about.highlights.map((highlight, index) => (
+                  <li key={index} className="flex items-center text-gray-600">
+                    <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
+                    {highlight}
+                  </li>
+                ))}
               </ul>
-              <CTAButton to="/about" variant="outline">
-                Learn More About Us
+              <CTAButton to={content.about.ctaLink} variant="outline">
+                {content.about.ctaText}
               </CTAButton>
             </motion.div>
             <motion.div

@@ -1,32 +1,38 @@
 import { useMemo } from 'react';
-import type { HomePageContent } from '../types/pages';
+import type { HomePageContent, AboutPageContent, ContactPageContent } from '../types/pages';
 
 // Import page content
 import { homePageContent } from '../data/pages/home';
+import { aboutPageContent } from '../data/pages/about';
+import { contactPageContent } from '../data/pages/contact';
 
 const pageContentMap = {
   home: homePageContent,
-  // TODO: Add about page content when created
-  // about: aboutPageContent,
+  about: aboutPageContent,
+  contact: contactPageContent,
 } as const;
 
 export function useHomePageContent(): HomePageContent {
   return useMemo(() => homePageContent, []);
 }
 
-// Type-safe page content getter
-export function usePageContent<T extends keyof typeof pageContentMap>(
-  page: T
-): typeof pageContentMap[T] {
+export function useAboutPageContent(): AboutPageContent {
+  return useMemo(() => aboutPageContent, []);
+}
+
+export function useContactPageContent(): ContactPageContent {
+  return useMemo(() => contactPageContent, []);
+}
+
+export function usePageContent(pageSlug: 'home' | 'about' | 'contact') {
   return useMemo(() => {
-    const content = pageContentMap[page];
-    
+    const content = pageContentMap[pageSlug];
     if (!content) {
-      console.warn(`No content found for page: ${page}. Available pages:`, Object.keys(pageContentMap));
+      console.warn(`No content found for page: ${pageSlug}`);
+      return null;
     }
-    
     return content;
-  }, [page]);
+  }, [pageSlug]);
 }
 
 export function getAvailablePages(): string[] {
