@@ -11,7 +11,7 @@ export const insuranceProducts: InsuranceProduct[] = [
   {
     id: 'super-visa',
     title: 'Super Visa Insurance',
-    description: 'Mandatory insurance for parents or grandparents seeking a Super Visa for Canada.',
+    description: 'Mandatory insurance coverage for parents or grandparents seeking a Super Visa for Canada. Meets all government requirements.',
     features: [
       'Meets Government of Canada minimum requirements',
       'Coverage from $100,000 to $500,000',
@@ -28,7 +28,7 @@ export const insuranceProducts: InsuranceProduct[] = [
   {
     id: 'visitors',
     title: 'Visitors Insurance',
-    description: 'Whether it is you or your family or friends visiting Canada, always consider purchasing an all-encompassing visitors insurance plan.',
+    description: 'Comprehensive emergency medical coverage for visitors to Canada. Protects against unexpected medical expenses during your stay.',
     features: [
       'Emergency medical coverage',
       'Trip interruption and cancellation',
@@ -45,7 +45,7 @@ export const insuranceProducts: InsuranceProduct[] = [
   {
     id: 'life',
     title: 'Life Insurance',
-    description: 'Mishappenings are never intentional and can happen at any time. Life Insurance can be a safety net to keep your mind at ease when you least expect it.',
+    description: 'Financial protection for your loved ones when they need it most. Term, whole, and universal life insurance options available.',
     features: [
       'Term life insurance options',
       'Whole life insurance',
@@ -62,7 +62,7 @@ export const insuranceProducts: InsuranceProduct[] = [
   {
     id: 'disability',
     title: 'Disability Insurance',
-    description: 'An accident is more financially disastrous than a disability. If you are disabled, you might not be able to work, resulting in no or less income.',
+    description: 'Income protection when illness or injury prevents you from working. Short-term and long-term coverage options available.',
     features: [
       'Short-term disability coverage',
       'Long-term disability coverage',
@@ -73,13 +73,13 @@ export const insuranceProducts: InsuranceProduct[] = [
       'Return to work incentives',
       'Workplace and non-workplace coverage'
     ],
-    icon: 'Cross',
+    icon: 'Shield',
     slug: 'disability-insurance'
   },
   {
     id: 'critical-illness',
     title: 'Critical Illness Insurance',
-    description: 'Offers a substantial amount of money to the insured client who is diagnosed with any critical illness.',
+    description: 'Lump sum payment upon diagnosis of covered critical illnesses. Provides financial support for cancer, heart attack, stroke, and more.',
     features: [
       'Coverage for 25+ critical illnesses',
       'Cancer coverage',
@@ -96,7 +96,7 @@ export const insuranceProducts: InsuranceProduct[] = [
   {
     id: 'resp',
     title: 'RESP',
-    description: 'You can consider RESP as a long-term investment strategy that can help your children with the expenses of higher education in Canada.',
+    description: 'Education savings plan with government grants and tax-deferred growth. Helps fund your children\'s post-secondary education costs.',
     features: [
       'Government grants and bonds',
       'Canada Education Savings Grant (CESG)',
@@ -113,7 +113,7 @@ export const insuranceProducts: InsuranceProduct[] = [
   {
     id: 'rrsp',
     title: 'RRSP',
-    description: 'Short for Registered Retirement Savings Plan, this policy is an investment vehicle for both employees and self-employed individuals in Canada.',
+    description: 'Registered Retirement Savings Plan for tax-deferred retirement savings. Reduces current taxes while building your retirement fund.',
     features: [
       'Tax-deductible contributions',
       'Tax-deferred growth',
@@ -130,7 +130,7 @@ export const insuranceProducts: InsuranceProduct[] = [
   {
     id: 'drug-dental',
     title: 'Drug & Dental Insurance',
-    description: 'Drug and Dental Plan benefits generally include dental care, eye care, prescription drugs, semi-private hospital room coverage.',
+    description: 'Comprehensive health benefits coverage including prescription drugs, dental care, vision care, and paramedical services.',
     features: [
       'Prescription drug coverage',
       'Dental care coverage',
@@ -147,7 +147,7 @@ export const insuranceProducts: InsuranceProduct[] = [
   {
     id: 'tfsa',
     title: 'TFSA',
-    description: 'A federal government tax-sheltered savings program intended to encourage Canadians to save and invest for short or long term goals.',
+    description: 'Tax-Free Savings Account for flexible, tax-free growth on your savings. Ideal for short-term and long-term financial goals.',
     features: [
       'Tax-free growth and withdrawals',
       'Flexible contribution and withdrawal',
