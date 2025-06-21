@@ -1,76 +1,73 @@
 import React from 'react';
-
 import { motion } from 'framer-motion';
-import { Users, Target, Eye, Award, Shield, Heart } from 'lucide-react';
+import { Shield, CheckCircle, Heart, Target, Eye, Users } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 import Hero from '../components/Hero';
 import Card from '../components/Card';
+import { useAboutPageContent } from '../content/hooks/usePageContent';
 
 const AboutPage: React.FC = () => {
-  const timeline = [
-    { year: '2010', event: 'SecureChoice Insurance founded with a mission to provide personalized insurance solutions.' },
-    { year: '2013', event: 'Expanded services to include comprehensive life insurance products.' },
-    { year: '2016', event: 'Reached 10,000 satisfied customers milestone.' },
-    { year: '2019', event: 'Launched digital platform for seamless quote and claims processing.' },
-    { year: '2022', event: 'Achieved A+ rating from Better Business Bureau.' },
-    { year: '2024', event: 'Serving over 50,000 customers across Canada.' },
-  ];
+  const content = useAboutPageContent();
 
-  const team = [
-    {
-      name: 'Sarah Johnson',
-      role: 'CEO & Founder',
-      experience: '20+ years',
-      specialization: 'Strategic Leadership',
-    },
-    {
-      name: 'Michael Chen',
-      role: 'VP of Operations',
-      experience: '15+ years',
-      specialization: 'Claims Management',
-    },
-    {
-      name: 'Emily Rodriguez',
-      role: 'Senior Insurance Advisor',
-      experience: '12+ years',
-      specialization: 'Auto & Home Insurance',
-    },
-    {
-      name: 'David Thompson',
-      role: 'Life Insurance Specialist',
-      experience: '10+ years',
-      specialization: 'Life & Health Insurance',
-    },
-  ];
+  // Icon mapping for dynamic icons
+  const iconMap = {
+    Target,
+    Eye,
+    Shield,
+    Heart,
+    CheckCircle,
+    Users,
+  };
 
+  // Values data (could be moved to content management system later)
   const values = [
     {
+      title: 'Integrity',
+      description: 'We believe in honest, transparent communication and ethical business practices in everything we do.',
       icon: Shield,
-      title: 'Trust & Integrity',
-      description: 'We build lasting relationships through honest, transparent communication and ethical business practices.',
     },
     {
-      icon: Heart,
-      title: 'Customer First',
-      description: 'Your needs come first. We listen, understand, and provide personalized solutions that fit your life.',
-    },
-    {
-      icon: Award,
       title: 'Excellence',
-      description: 'We strive for excellence in everything we do, from customer service to claims processing.',
+      description: 'We strive for excellence in our service delivery, continuously improving to exceed expectations.',
+      icon: CheckCircle,
+    },
+    {
+      title: 'Compassion',
+      description: 'We understand that insurance decisions are personal and treat every client with empathy and care.',
+      icon: Heart,
     },
   ];
+
+  // Team data mapped from content
+  const team = content.team.members.map(member => ({
+    name: member.name,
+    role: member.position,
+    experience: member.bio,
+    specialization: '', // Could be added to content structure if needed
+  }));
+
+  // Timeline data from content
+  const timeline = content.timeline.items.map(item => ({
+    year: item.year,
+    event: item.description
+  }));
 
   return (
     <>
-      <title>About Us - SecureChoice Insurance | Your Trusted Insurance Partner</title>
-      <meta name="description" content="Learn about SecureChoice Insurance - over 15 years of experience providing personalized insurance solutions. Meet our team and discover our mission." />
-      <meta property="og:title" content="About SecureChoice Insurance" />
-      <meta property="og:description" content="Your trusted insurance partner since 2010. Learn about our mission, values, and experienced team." />
+      <Helmet>
+        <title>{content.meta.title}</title>
+        <meta name="description" content={content.meta.description} />
+        {content.meta.keywords && (
+          <meta name="keywords" content={content.meta.keywords.join(', ')} />
+        )}
+      </Helmet>
 
-              <Hero
-        title="About SecureChoice Insurance"
-        subtitle="Your trusted insurance partner since 2010, committed to protecting what matters most to you and your family."
-        bgImg="/images/office-building.jpg"
+      <Hero
+        title={content.hero.title}
+        subtitle={content.hero.subtitle}
+        bgImg={content.hero.backgroundImage}
+        ctaText={content.hero.primaryCTA.text}
+        ctaLink={content.hero.primaryCTA.link}
         height="md"
       />
 
@@ -86,13 +83,13 @@ const AboutPage: React.FC = () => {
             >
               <Card>
                 <div className="flex items-center mb-6">
-                  <Target className="w-8 h-8 text-primary mr-3" />
-                  <h2 className="text-2xl font-ubuntu font-bold text-neutral-text">Our Mission</h2>
+                  {React.createElement(iconMap[content.mission.icon as keyof typeof iconMap] || Target, {
+                    className: "w-8 h-8 text-primary mr-3"
+                  })}
+                  <h2 className="text-2xl font-ubuntu font-bold text-neutral-text">{content.mission.title}</h2>
                 </div>
                 <p className="text-gray-600 leading-relaxed">
-                  To provide comprehensive, affordable insurance solutions that give our clients peace of mind 
-                  and financial security. We are committed to building lasting relationships through exceptional 
-                  service, expert guidance, and unwavering support when you need it most.
+                  {content.mission.content}
                 </p>
               </Card>
             </motion.div>
@@ -105,13 +102,13 @@ const AboutPage: React.FC = () => {
             >
               <Card>
                 <div className="flex items-center mb-6">
-                  <Eye className="w-8 h-8 text-primary mr-3" />
-                  <h2 className="text-2xl font-ubuntu font-bold text-neutral-text">Our Vision</h2>
+                  {React.createElement(iconMap[content.vision.icon as keyof typeof iconMap] || Eye, {
+                    className: "w-8 h-8 text-primary mr-3"
+                  })}
+                  <h2 className="text-2xl font-ubuntu font-bold text-neutral-text">{content.vision.title}</h2>
                 </div>
                 <p className="text-gray-600 leading-relaxed">
-                  To be Canada's most trusted insurance brokerage, known for our personalized approach, 
-                  innovative solutions, and commitment to protecting families and businesses. We envision 
-                  a future where everyone has access to the right insurance coverage at the right price.
+                  {content.vision.content}
                 </p>
               </Card>
             </motion.div>
@@ -130,7 +127,7 @@ const AboutPage: React.FC = () => {
             className="text-center mb-12"
           >
             <h2 className="text-clamp-2xl font-ubuntu font-bold text-neutral-text mb-4">
-              Our Journey
+              {content.timeline.title}
             </h2>
             <p className="text-clamp-base text-gray-600">
               From humble beginnings to becoming a trusted insurance partner for thousands of Canadians.
@@ -197,10 +194,10 @@ const AboutPage: React.FC = () => {
             className="text-center mb-12"
           >
             <h2 className="text-clamp-2xl font-ubuntu font-bold text-neutral-text mb-4">
-              Meet Our Team
+              {content.team.title}
             </h2>
             <p className="text-clamp-base text-gray-600">
-              Our experienced professionals are here to help you find the right insurance solutions.
+              {content.team.subtitle}
             </p>
           </motion.div>
 

@@ -83,4 +83,60 @@ export interface AboutPageContent {
       image?: string;
     }>;
   };
+}
+
+export interface ContactPageContent {
+  meta: SEOContent;
+  hero: HeroSectionContent;
+  contactInfo: {
+    title: string;
+    subtitle: string;
+    office: {
+      title: string;
+      address: string[];
+      coordinates: [number, number];
+    };
+    phone: {
+      title: string;
+      numbers: Array<{
+        label: string;
+        value: string;
+        href: string;
+      }>;
+    };
+    email: {
+      title: string;
+      addresses: Array<{
+        label: string;
+        value: string;
+        href: string;
+      }>;
+    };
+    hours: {
+      title: string;
+      schedule: string[];
+    };
+  };
+  form: {
+    title: string;
+    subtitle: string;
+    successMessage: string;
+    fields: {
+      name: {
+        label: string;
+        placeholder: string;
+        required: boolean;
+      };
+      email: {
+        label: string;
+        placeholder: string;
+        required: boolean;
+      };
+      message: {
+        label: string;
+        placeholder: string;
+        required: boolean;
+      };
+    };
+  };
 } 

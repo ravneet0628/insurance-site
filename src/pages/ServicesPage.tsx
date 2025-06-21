@@ -1,16 +1,34 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Shield, Users, Cross, Heart, Activity, Award, Clock, CheckCircle, Wallet } from 'lucide-react';
+import { Shield, Users, Heart, Activity, Award, Clock, CheckCircle, Wallet } from 'lucide-react';
 import Hero from '../components/Hero';
 import Accordion from '../components/Accordion';
-import { insuranceProducts } from '../data/services';
+import { useServiceContent } from '../content/hooks/useServiceContent';
+import type { ServiceContent } from '../content/types/services';
 
 const ServicesPage: React.FC = () => {
+  // Service slugs in order
+  const serviceSlugs = [
+    'super-visa-insurance',
+    'visitors-insurance', 
+    'life-insurance',
+    'disability-insurance',
+    'critical-illness-insurance',
+    'resp',
+    'rrsp',
+    'drug-dental-insurance',
+    'tfsa'
+  ];
+
+  // Get all service content from content management system
+  const allServices = serviceSlugs
+    .map(slug => ({ slug, content: useServiceContent(slug) }))
+    .filter(service => service.content !== null) as { slug: string; content: ServiceContent }[];
+
   // Map icon strings to actual components
   const iconMap = {
     Shield,
     Users,
-    Cross,
     Heart,
     Activity,
     Award,
@@ -19,10 +37,14 @@ const ServicesPage: React.FC = () => {
     Wallet,
   };
 
-  // Transform the data to include actual icon components
-  const accordionItems = insuranceProducts.map((product) => ({
-    ...product,
-    icon: iconMap[product.icon as keyof typeof iconMap] || Shield,
+  // Transform the content management data to accordion format
+  const accordionItems = allServices.map((service, index) => ({
+    id: `service-${index}`,
+    title: service.content.meta.title.split(' | ')[0] || service.content.meta.title, // Extract just the service name
+    description: service.content.hero.subtitle,
+    features: service.content.features.features.map((feature: any) => feature.description),
+    icon: iconMap[service.content.features.features[0]?.icon as keyof typeof iconMap] || Shield,
+    slug: service.slug
   }));
 
   return (
