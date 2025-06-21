@@ -67,9 +67,10 @@ const AboutPage: React.FC = () => {
       <meta property="og:title" content="About SecureChoice Insurance" />
       <meta property="og:description" content="Your trusted insurance partner since 2010. Learn about our mission, values, and experienced team." />
 
-      <Hero
+              <Hero
         title="About SecureChoice Insurance"
         subtitle="Your trusted insurance partner since 2010, committed to protecting what matters most to you and your family."
+        bgImg="/images/office-building.jpg"
         height="md"
       />
 
@@ -165,6 +166,29 @@ const AboutPage: React.FC = () => {
       {/* Team */}
       <section className="py-16 bg-neutral-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Team Hero Image */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="mb-16"
+          >
+            <div className="relative h-64 rounded-xl overflow-hidden">
+              <img 
+                src="/images/about-team.jpg" 
+                alt="Professional team collaboration at SecureChoice Insurance"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-primary/30 flex items-center justify-center">
+                <div className="text-center text-white">
+                  <h2 className="text-3xl font-ubuntu font-bold mb-2">Our Expert Team</h2>
+                  <p className="text-lg">Dedicated professionals working for your peace of mind</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+          
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}

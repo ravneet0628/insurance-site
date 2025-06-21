@@ -62,26 +62,13 @@ const HomePage: React.FC = () => {
   }
 ];
 
- const trustBadges = [
-    { name: 'A+ Rating', description: 'Better Business Bureau' },
-    { name: '50,000+', description: 'Satisfied Customers' },
-    { name: '15 Years', description: 'Industry Experience' },
-    { name: '24/7', description: 'Customer Support' },
-  ];
-
-    const stats = [
-    { icon: Users, number: '50,000+', label: 'Happy Customers' },
-    { icon: Shield, number: '99.9%', label: 'Claims Satisfaction' },
-    { icon: Award, number: '15+', label: 'Years Experience' },
-    { icon: Clock, number: '24/7', label: 'Support Available' },
-  ];
-
   return (
     <div>
       {/* Hero Section */}
       <Hero
         title="Secure Your Future with Trusted Insurance Solutions"
-        subtitle="Get comprehensive coverage for auto, home, and life insurance with personalizeAlld service and competitive rates. Your peace of mind is our priority."
+        subtitle="Get comprehensive coverage for auto, home, and life insurance with personalized service and competitive rates. Your peace of mind is our priority."
+        bgImg="/images/hero-bg.jpg"
         ctaText="Get a Free Quote"
         ctaLink="/quote"
       />
@@ -123,9 +110,14 @@ const HomePage: React.FC = () => {
                   <p className="text-xs text-gray-600 mb-3 line-clamp-3">
                   {product.description}
                   </p>
-                 <CTAButton variant="outline" size="sm" to="/quote" className="mt-auto text-xs">
+                 <CTAButton 
+                    variant="outline" 
+                    size="sm" 
+                    to={`/services/${product.title.toLowerCase().replace(/\s+/g, '-').replace(/&/g, '')}`}
+                    className="mt-auto text-xs"
+                  >
                     Learn More →
-                    </CTAButton>
+                  </CTAButton>
                       </Card>
               </motion.div>
             ))}
@@ -181,11 +173,16 @@ const HomePage: React.FC = () => {
               viewport={{ once: true }}
               className="relative"
             >
-              <div className="aspect-w-4 aspect-h-3 rounded-lg overflow-hidden bg-gradient-to-br from-primary to-blue-600">
-                <div className="flex items-center justify-center text-white">
-                  <div className="text-center">
-                    <Shield className="w-24 h-24 mx-auto mb-4 opacity-80" />
-                    <p className="text-xl font-ubuntu">Your Protection, Our Priority</p>
+              <div className="aspect-w-4 aspect-h-3 rounded-lg overflow-hidden">
+                <img 
+                  src="/images/handshake.jpg" 
+                  alt="Professional handshake representing trust and partnership in insurance"
+                  className="w-full h-full object-cover rounded-lg"
+                />
+                <div className="absolute inset-0 bg-primary/20 rounded-lg flex items-center justify-center">
+                  <div className="text-center text-white">
+                    <Shield className="w-16 h-16 mx-auto mb-4 drop-shadow-lg" />
+                    <p className="text-xl font-ubuntu font-bold drop-shadow-lg">Your Protection, Our Priority</p>
                   </div>
                 </div>
               </div>
@@ -198,4 +195,4 @@ const HomePage: React.FC = () => {
   );
 };
 
-export default HomePage; 
+export default HomePage;

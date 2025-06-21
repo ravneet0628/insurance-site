@@ -17,12 +17,12 @@ const Navbar: React.FC = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <nav className="bg-white shadow-lg sticky top-0 z-50">
+    <nav className="bg-white shadow-lg sticky top-0 z-50" role="navigation" aria-label="Main Navigation">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <Link to="/" className="flex-shrink-0">
+            <Link to="/" className="flex-shrink-0" aria-label="Go to homepage">
               <span className="text-2xl font-ubuntu font-bold text-primary">
                 SecureChoice
               </span>
@@ -40,6 +40,8 @@ const Navbar: React.FC = () => {
                     ? 'text-primary'
                     : 'text-neutral-text hover:text-primary'
                 }`}
+                aria-current={isActive(item.href) ? 'page' : undefined}
+                aria-label={item.name}
               >
                 {item.name}
                 {isActive(item.href) && (
@@ -54,8 +56,9 @@ const Navbar: React.FC = () => {
             <a
               href="tel:+1234567890"
               className="flex items-center text-sm text-neutral-text hover:text-primary transition-colors"
+              aria-label="Call SecureChoice Insurance"
             >
-              <Phone className="w-4 h-4 mr-1" />
+              <Phone className="w-4 h-4 mr-1" aria-hidden="true" />
               (123) 456-7890
             </a>
             <a
@@ -126,4 +129,4 @@ const Navbar: React.FC = () => {
   );
 };
 
-export default Navbar; 
+export default Navbar;

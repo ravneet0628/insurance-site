@@ -65,6 +65,7 @@ const Hero: React.FC<HeroProps> = ({
                 to={ctaLink}
                 size="lg"
                 className="shadow-xl hover:shadow-2xl"
+                aria-label={ctaText}
               >
                 {ctaText}
               </CTAButton>
@@ -92,4 +93,4 @@ const Hero: React.FC<HeroProps> = ({
   );
 };
 
-export default Hero; 
+export default Hero;

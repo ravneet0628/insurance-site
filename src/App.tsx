@@ -11,6 +11,10 @@ const QuotePage = React.lazy(() => import('./pages/QuotePage'));
 const ContactPage = React.lazy(() => import('./pages/ContactPage'));
 const NotFoundPage = React.lazy(() => import('./pages/NotFoundPage'));
 
+// Service-specific pages
+const SuperVisaInsurancePage = React.lazy(() => import('./pages/SuperVisaInsurancePage'));
+const VisitorsInsurancePage = React.lazy(() => import('./pages/VisitorsInsurancePage'));
+
 // Loading component
 const LoadingSpinner: React.FC = () => (
   <div className="flex items-center justify-center min-h-[400px]">
@@ -29,6 +33,8 @@ function App() {
               <Route index element={<HomePage />} />
               <Route path="about" element={<AboutPage />} />
               <Route path="services" element={<ServicesPage />} />
+              <Route path="services/super-visa-insurance" element={<SuperVisaInsurancePage />} />
+              <Route path="services/visitors-insurance" element={<VisitorsInsurancePage />} />
               <Route path="quote" element={<QuotePage />} />
               <Route path="contact" element={<ContactPage />} />
               <Route path="*" element={<NotFoundPage />} />
