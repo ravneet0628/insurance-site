@@ -7,67 +7,68 @@ import CTAButton from '../components/CTAButton';
 
 const HomePage: React.FC = () => {
   const products = [
-  {
-    icon: Shield,
-    title: "Super Visa Insurance",
-    description: "Mandatory insurance for parents or grandparents seeking a Super Visa for Canada.",
+    {
+      icon: Shield,
+      title: "Super Visa Insurance",
+      description: "Mandatory insurance for parents or grandparents seeking a Super Visa for Canada.",
+      slug: "super-visa-insurance"
     },
-  {
-    icon: Users,
-    title: "Visitors Insurance",
-    description: "Whether it is you or your family or friends visiting Canada, always consider purchasing an all-encompassing visitors insurance plan.",
-    
-  },
-  {
-    icon: Heart,
-    title: "Life Insurance",
-    description: "Mishappenings are never intentional and can happen at any time. Life Insurance can be a safety net to keep your mind at ease when you least expect it.",
-    
-  },
-  {
-    icon: Cross,
-    title: "Disability Insurance",
-    description: "An accident is more financially disastrous than a disability. If you are disabled, you might not be able to work, resulting in no or less income.",
-    
-  },
-  {
-    icon: Activity,
-    title: "Critical Illness Insurance",
-    description: "Offers a substantial amount of money to the insured client who is diagnosed with any critical illness.",
-    
-  },
-  {
-    icon: Award,
-    title: "RESP",
-    description: "You can consider RESP as a long-term investment strategy that can help your children with the expenses of higher education in Canada.",
-    
-  },
-  {
-    icon: Clock,
-    title: "RRSP",
-    description: "Short for Registered Retirement Savings Plan, this policy is an investment vehicle for both employees and self-employed individuals in Canada.",
-    
-  },
-  {
-    icon: CheckCircle,
-    title: "Drug & Dental Insurance",
-    description: "Drug and Dental Plan benefits generally include dental care, eye care, prescription drugs, semi-private…",
-    
-  },
-  {
-    icon: Wallet,
-    title: "TFSA",
-    description: "A federal government tax-sheltered savings program intended to encourage Canadians to save and invest for short or long term goals.",
-    
-  }
-];
+    {
+      icon: Users,
+      title: "Visitors Insurance",
+      description: "Whether it is you or your family or friends visiting Canada, always consider purchasing an all-encompassing visitors insurance plan.",
+      slug: "visitors-insurance"
+    },
+    {
+      icon: Heart,
+      title: "Life Insurance",
+      description: "Mishappenings are never intentional and can happen at any time. Life Insurance can be a safety net to keep your mind at ease when you least expect it.",
+      slug: "life-insurance"
+    },
+    {
+      icon: Cross,
+      title: "Disability Insurance",
+      description: "An accident is more financially disastrous than a disability. If you are disabled, you might not be able to work, resulting in no or less income.",
+      slug: "disability-insurance"
+    },
+    {
+      icon: Activity,
+      title: "Critical Illness Insurance",
+      description: "Offers a substantial amount of money to the insured client who is diagnosed with any critical illness.",
+      slug: "critical-illness-insurance"
+    },
+    {
+      icon: Award,
+      title: "RESP",
+      description: "You can consider RESP as a long-term investment strategy that can help your children with the expenses of higher education in Canada.",
+      slug: "resp"
+    },
+    {
+      icon: Clock,
+      title: "RRSP",
+      description: "Short for Registered Retirement Savings Plan, this policy is an investment vehicle for both employees and self-employed individuals in Canada.",
+      slug: "rrsp"
+    },
+    {
+      icon: CheckCircle,
+      title: "Drug & Dental Insurance",
+      description: "Drug and Dental Plan benefits generally include dental care, eye care, prescription drugs, semi-private…",
+      slug: "drug-dental-insurance"
+    },
+    {
+      icon: Wallet,
+      title: "TFSA",
+      description: "A federal government tax-sheltered savings program intended to encourage Canadians to save and invest for short or long term goals.",
+      slug: "tfsa"
+    }
+  ];
 
   return (
     <div>
       {/* Hero Section */}
       <Hero
         title="Secure Your Future with Trusted Insurance Solutions"
-        subtitle="Get comprehensive coverage for auto, home, and life insurance with personalized service and competitive rates. Your peace of mind is our priority."
+        subtitle="Get comprehensive coverage including Super Visa, Visitors, Life, Disability, and Critical Illness insurance plus RESP, RRSP, TFSA investments with personalized service and competitive rates."
         bgImg="/images/hero-bg.jpg"
         ctaText="Get a Free Quote"
         ctaLink="/quote"
@@ -91,7 +92,7 @@ const HomePage: React.FC = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols4 gap-3 sm:gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {products.map((product, index) => (
               <motion.div
                 key={product.title}
@@ -100,25 +101,27 @@ const HomePage: React.FC = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Card className="h-full p-4 flex flex-col items-center text-center">
-                <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mb-3">
-                <product.icon className="w-5 h-5 text-primary" />
+                <Card className="h-full p-6 flex flex-col items-center text-center hover:shadow-lg transition-shadow duration-300 min-h-[320px]">
+                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                    <product.icon className="w-8 h-8 text-primary" />
                   </div>
-                    <h3 className="text-sm font-ubuntu font-bold text-neutral-text mb-1">
+                  <h3 className="text-lg font-ubuntu font-bold text-neutral-text mb-3 h-14 flex items-center">
                     {product.title}
-                    </h3>
-                  <p className="text-xs text-gray-600 mb-3 line-clamp-3">
-                  {product.description}
+                  </h3>
+                  <p className="text-sm text-gray-600 mb-4 flex-1 flex items-start leading-relaxed">
+                    <span className="line-clamp-4">
+                      {product.description}
+                    </span>
                   </p>
-                 <CTAButton 
+                  <CTAButton 
                     variant="outline" 
                     size="sm" 
-                    to={`/services/${product.title.toLowerCase().replace(/\s+/g, '-').replace(/&/g, '')}`}
-                    className="mt-auto text-xs"
+                    to={`/services/${product.slug}`}
+                    className="mt-auto"
                   >
                     Learn More →
                   </CTAButton>
-                      </Card>
+                </Card>
               </motion.div>
             ))}
           </div>
