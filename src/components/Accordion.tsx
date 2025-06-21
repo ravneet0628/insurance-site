@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ChevronDown, CheckCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 interface AccordionItem {
   id: string;
@@ -8,6 +9,7 @@ interface AccordionItem {
   description: string;
   features: string[];
   icon: React.ComponentType<{ className?: string }>;
+  slug: string;
 }
 
 interface AccordionProps {
@@ -90,9 +92,12 @@ const Accordion: React.FC<AccordionProps> = ({ items }) => {
                         ))}
                       </ul>
                       <div className="mt-4 pt-4 border-t border-gray-100">
-                        <button className="text-primary hover:text-primary/80 text-sm font-medium transition-colors">
+                        <Link 
+                          to={`/services/${item.slug}`}
+                          className="text-primary hover:text-primary/80 text-sm font-medium transition-colors"
+                        >
                           Learn More →
-                        </button>
+                        </Link>
                       </div>
                     </div>
                   </div>

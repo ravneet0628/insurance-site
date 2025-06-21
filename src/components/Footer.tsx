@@ -18,30 +18,34 @@ const Footer: React.FC = () => {
             </p>
             <div className="flex space-x-4">
               <a
-                href="#"
+                href="https://facebook.com/securechoiceinsurance"
                 className="text-gray-300 hover:text-white transition-colors"
                 aria-label="Facebook"
+                target="_blank" rel="noopener noreferrer"
               >
                 <Facebook className="w-5 h-5" />
               </a>
               <a
-                href="#"
+                href="https://twitter.com/securechoiceca"
                 className="text-gray-300 hover:text-white transition-colors"
                 aria-label="Twitter"
+                target="_blank" rel="noopener noreferrer"
               >
                 <Twitter className="w-5 h-5" />
               </a>
               <a
-                href="#"
+                href="https://linkedin.com/company/securechoiceinsurance"
                 className="text-gray-300 hover:text-white transition-colors"
                 aria-label="LinkedIn"
+                target="_blank" rel="noopener noreferrer"
               >
                 <Linkedin className="w-5 h-5" />
               </a>
               <a
-                href="#"
+                href="https://instagram.com/securechoiceinsurance"
                 className="text-gray-300 hover:text-white transition-colors"
                 aria-label="Instagram"
+                target="_blank" rel="noopener noreferrer"
               >
                 <Instagram className="w-5 h-5" />
               </a>
@@ -100,44 +104,44 @@ const Footer: React.FC = () => {
             <h4 className="text-lg font-ubuntu font-semibold">Insurance Types</h4>
             <ul className="space-y-2">
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/auto-insurance"
                   className="text-gray-300 hover:text-white transition-colors text-sm"
                 >
                   Auto Insurance
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/home-insurance"
                   className="text-gray-300 hover:text-white transition-colors text-sm"
                 >
                   Home Insurance
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/life-insurance"
                   className="text-gray-300 hover:text-white transition-colors text-sm"
                 >
                   Life Insurance
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/business-insurance"
                   className="text-gray-300 hover:text-white transition-colors text-sm"
                 >
                   Business Insurance
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/travel-insurance"
                   className="text-gray-300 hover:text-white transition-colors text-sm"
                 >
                   Travel Insurance
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -183,24 +187,24 @@ const Footer: React.FC = () => {
               © {currentYear} SecureChoice Insurance. All rights reserved.
             </p>
             <div className="flex space-x-6">
-              <a
-                href="#"
+              <Link
+                to="/privacy-policy"
                 className="text-gray-300 hover:text-white transition-colors text-sm"
               >
                 Privacy Policy
-              </a>
-              <a
-                href="#"
+              </Link>
+              <Link
+                to="/terms-of-service"
                 className="text-gray-300 hover:text-white transition-colors text-sm"
               >
                 Terms of Service
-              </a>
-              <a
-                href="#"
+              </Link>
+              <Link
+                to="/cookie-policy"
                 className="text-gray-300 hover:text-white transition-colors text-sm"
               >
                 Cookie Policy
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -209,4 +213,4 @@ const Footer: React.FC = () => {
   );
 };
 
-export default Footer; 
+export default Footer;

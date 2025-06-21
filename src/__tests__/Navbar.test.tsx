@@ -15,11 +15,12 @@ describe('Navbar', () => {
     render(<NavbarWrapper />);
     
     expect(screen.getByText('SecureChoice')).toBeInTheDocument();
-    expect(screen.getByText('Home')).toBeInTheDocument();
-    expect(screen.getByText('About')).toBeInTheDocument();
-    expect(screen.getByText('Services')).toBeInTheDocument();
-    expect(screen.getByText('Quote')).toBeInTheDocument();
-    expect(screen.getByText('Contact')).toBeInTheDocument();
+    // Use getAllByText for Home and About since they appear in both desktop and mobile nav
+    expect(screen.getAllByText('Home').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('About').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('Services').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('Quote').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('Contact').length).toBeGreaterThan(0);
   });
 
   it('should toggle mobile menu when hamburger button is clicked', () => {
@@ -73,4 +74,4 @@ describe('Navbar', () => {
       expect(homeLink).toHaveClass('text-primary');
     }
   });
-}); 
+});

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Car, Home, Heart, Building, Plane } from 'lucide-react';
+import { Shield, Users, Cross, Heart, Activity, Award, Clock, CheckCircle, Wallet } from 'lucide-react';
 import Hero from '../components/Hero';
 import Accordion from '../components/Accordion';
 import { insuranceProducts } from '../data/services';
@@ -8,17 +8,21 @@ import { insuranceProducts } from '../data/services';
 const ServicesPage: React.FC = () => {
   // Map icon strings to actual components
   const iconMap = {
-    Car,
-    Home,
+    Shield,
+    Users,
+    Cross,
     Heart,
-    Building,
-    Plane,
+    Activity,
+    Award,
+    Clock,
+    CheckCircle,
+    Wallet,
   };
 
   // Transform the data to include actual icon components
   const accordionItems = insuranceProducts.map((product) => ({
     ...product,
-    icon: iconMap[product.icon as keyof typeof iconMap] || Car,
+    icon: iconMap[product.icon as keyof typeof iconMap] || Shield,
   }));
 
   return (
@@ -35,6 +39,7 @@ const ServicesPage: React.FC = () => {
       <Hero
         title="Our Insurance Services"
         subtitle="Comprehensive coverage solutions tailored to protect what matters most to you and your family"
+        bgImg="/images/family-protection.jpg"
         height="md"
       />
 
@@ -72,6 +77,29 @@ const ServicesPage: React.FC = () => {
       {/* Why Choose Us */}
       <section className="py-16 bg-neutral-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Service Quality Image */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="mb-16"
+          >
+            <div className="relative h-80 rounded-xl overflow-hidden">
+              <img 
+                src="/images/handshake.jpg" 
+                alt="Professional service and trust in insurance partnerships"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-transparent flex items-center">
+                <div className="text-white px-12">
+                  <h2 className="text-4xl font-ubuntu font-bold mb-4">Trusted Partnership</h2>
+                  <p className="text-xl max-w-lg">Building lasting relationships through exceptional service and expert guidance</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+          
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}

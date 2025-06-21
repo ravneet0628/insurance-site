@@ -160,6 +160,7 @@ const ContactPage: React.FC = () => {
       <Hero
         title="Contact SecureChoice"
         subtitle="We're here to help with all your insurance needs. Get in touch with our experienced team today."
+        bgImg="/images/office-building.jpg"
         height="md"
       />
 
