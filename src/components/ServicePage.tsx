@@ -1,38 +1,79 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { useServiceContent } from '../content/hooks/useServiceContent';
-import Hero from './Hero';
-import Navbar from './Navbar';
-import Footer from './Footer';
+
 import ScrollToTop from './ScrollToTop';
 import CTAButton from './CTAButton';
+import Card from './Card';
 import * as Icons from 'lucide-react';
 
+/**
+ * ServicePage component - Dynamic service page with enhanced layout and contextual imagery
+ * Implements comprehensive design improvements with proper responsive behavior
+ */
 const ServicePage: React.FC = () => {
   const { serviceSlug } = useParams<{ serviceSlug: string }>();
   const content = useServiceContent(serviceSlug || '');
 
   if (!content) {
     return (
-      <div className="min-h-screen flex flex-col">
-        <Navbar />
+      <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-50 to-white">
+        
         <main className="flex-grow flex items-center justify-center">
-          <div className="text-center">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">Service Not Found</h1>
-            <p className="text-gray-600 mb-4">The requested service page could not be found.</p>
-            <p className="text-sm text-gray-500">Service slug: {serviceSlug}</p>
+          <div className="text-center max-w-md mx-auto px-4">
+            <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Icons.AlertCircle className="w-12 h-12 text-primary" />
+            </div>
+            <h1 className="text-3xl font-ubuntu font-bold text-gray-900 mb-4">Service Not Found</h1>
+            <p className="text-gray-600 mb-6 leading-relaxed">
+              The requested service page could not be found. Please check the URL or return to our services page.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <CTAButton to="/services" variant="primary">
+                View All Services
+              </CTAButton>
+              <CTAButton to="/" variant="outline">
+                Return Home
+              </CTAButton>
+            </div>
+            {serviceSlug && (
+              <p className="text-sm text-gray-400 mt-4">Service slug: {serviceSlug}</p>
+            )}
           </div>
         </main>
-        <Footer />
+        
         <ScrollToTop />
       </div>
     );
   }
 
+  /**
+   * Renders an icon component with fallback
+   */
   const renderIcon = (iconName: string, className: string = '') => {
     const IconComponent = Icons[iconName as keyof typeof Icons] as React.ComponentType<{ className?: string }>;
     return IconComponent ? <IconComponent className={className} /> : <Icons.Shield className={className} />;
+  };
+
+  /**
+   * Gets contextual image based on service type
+   */
+  const getServiceImage = (serviceSlug: string): string => {
+    const imageMap: Record<string, string> = {
+      'life-insurance': '/images/family-protection.jpg',
+      'super-visa-insurance': '/images/family-protection.jpg',
+      'visitors-insurance': '/images/handshake.jpg',
+      'disability-insurance': '/images/family-protection.jpg',
+      'critical-illness-insurance': '/images/family-protection.jpg',
+      'resp': '/images/family-protection.jpg',
+      'rrsp': '/images/office-building.jpg',
+      'drug-dental-insurance': '/images/handshake.jpg',
+      'tfsa': '/images/office-building.jpg',
+    };
+    
+    return imageMap[serviceSlug] || '/images/handshake.jpg';
   };
 
   return (
@@ -46,157 +87,357 @@ const ServicePage: React.FC = () => {
         {content.meta.ogImage && (
           <meta property="og:image" content={content.meta.ogImage} />
         )}
+        <meta property="og:title" content={content.meta.title} />
+        <meta property="og:description" content={content.meta.description} />
+        <meta property="og:type" content="website" />
       </Helmet>
 
-      <Navbar />
+      
       
       <main className="flex-grow">
-        {/* Hero Section */}
-        <Hero
-          title={content.hero.title}
-          subtitle={content.hero.subtitle}
-          bgImg={content.hero.backgroundImage}
-          ctaText={content.hero.ctaText}
-          ctaLink={content.hero.ctaLink}
-        />
-
-        {/* Overview Section */}
-        <section className="py-16 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">
-                {content.overview.title}
-              </h2>
-              <p className="text-lg text-gray-600 mb-8">
-                {content.overview.content}
-              </p>
-              {content.overview.highlights && (
-                <div className="grid md:grid-cols-2 gap-4">
-                  {content.overview.highlights.map((highlight, index) => (
-                    <div key={index} className="flex items-center justify-center md:justify-start">
-                      <div className="h-2 w-2 bg-blue-600 rounded-full mr-3"></div>
-                      <span className="text-gray-700">{highlight}</span>
-                    </div>
-                  ))}
+        {/* Enhanced Hero Section */}
+        <section className="relative py-24 md:py-32 bg-gradient-to-br from-primary to-blue-600 overflow-hidden">
+          {/* Background Image */}
+          <div className="absolute inset-0">
+            <img 
+              src={content.hero.backgroundImage || getServiceImage(serviceSlug || '')}
+              alt={`${content.hero.title} background`}
+              className="w-full h-full object-cover opacity-20"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-blue-600/90"></div>
+          </div>
+          
+          {/* Content */}
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              {/* Text Content */}
+              <motion.div
+                initial={{ opacity: 0, x: -40 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+                className="text-white"
+              >
+                <div className="flex items-center mb-4">
+                  <div className="h-1 w-12 bg-white mr-4"></div>
+                  <span className="text-blue-100 font-semibold uppercase tracking-wider text-sm">Insurance Service</span>
                 </div>
-              )}
+                
+                <h1 className="text-4xl md:text-6xl font-ubuntu font-bold mb-6 leading-tight">
+                  {content.hero.title}
+                </h1>
+                
+                <p className="text-xl md:text-2xl text-blue-100 mb-8 leading-relaxed">
+                  {content.hero.subtitle}
+                </p>
+                
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <CTAButton 
+                    to={content.hero.ctaLink}
+                    size="lg"
+                    className="bg-white text-primary hover:bg-gray-100 shadow-lg"
+                  >
+                    {content.hero.ctaText}
+                  </CTAButton>
+                  <CTAButton 
+                    to="/contact"
+                    variant="outline"
+                    size="lg"
+                    className="border-white text-white hover:bg-white hover:text-primary"
+                  >
+                    <Icons.Phone className="w-5 h-5 mr-2" />
+                    Get Expert Advice
+                  </CTAButton>
+                </div>
+              </motion.div>
+
+              {/* Visual Element */}
+              <motion.div
+                initial={{ opacity: 0, x: 40 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="hidden lg:block"
+              >
+                <div className="relative">
+                  <div className="w-96 h-96 bg-white/10 rounded-full border border-white/20 flex items-center justify-center">
+                    <div className="w-64 h-64 bg-white/20 rounded-full border border-white/20 flex items-center justify-center">
+                      <div className="w-32 h-32 bg-white rounded-full flex items-center justify-center shadow-xl">
+                        {renderIcon(content.features.features[0]?.icon || 'Shield', 'w-16 h-16 text-primary')}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
             </div>
           </div>
         </section>
 
-        {/* Features Section */}
-        <section className="py-16 bg-gray-50">
+        {/* Overview Section - Enhanced */}
+        <section className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              {/* Content */}
+              <motion.div
+                initial={{ opacity: 0, x: -40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+              >
+                <div className="flex items-center mb-6">
+                  <div className="h-1 w-12 bg-primary mr-4"></div>
+                  <span className="text-primary font-semibold uppercase tracking-wider text-sm">Service Overview</span>
+                </div>
+                
+                <h2 className="text-4xl md:text-5xl font-ubuntu font-bold text-neutral-text mb-8 leading-tight">
+                  {content.overview.title}
+                </h2>
+                
+                <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+                  {content.overview.content}
+                </p>
+                
+                {content.overview.highlights && (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                    {content.overview.highlights.map((highlight, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                        viewport={{ once: true }}
+                        className="flex items-center p-4 bg-gray-50 rounded-lg"
+                      >
+                        <Icons.CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
+                        <span className="text-gray-700 font-medium">{highlight}</span>
+                      </motion.div>
+                    ))}
+                  </div>
+                )}
+              </motion.div>
+
+              {/* Image */}
+              <motion.div
+                initial={{ opacity: 0, x: 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+              >
+                <div className="relative">
+                  <div className="rounded-2xl overflow-hidden shadow-2xl">
+                    <img 
+                      src={getServiceImage(serviceSlug || '')}
+                      alt={`${content.overview.title} consultation and planning`}
+                      className="w-full h-[400px] object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent"></div>
+                  </div>
+                  
+                  {/* Floating Stats */}
+                  <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-xl border">
+                    <div className="flex items-center space-x-4">
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-primary">24/7</div>
+                        <div className="text-sm text-gray-600">Support</div>
+                      </div>
+                      <div className="h-8 w-px bg-gray-200"></div>
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-primary">100%</div>
+                        <div className="text-sm text-gray-600">Satisfaction</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Features Section - Enhanced */}
+        <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <div className="flex items-center justify-center mb-4">
+                <Icons.Star className="w-6 h-6 text-primary mr-2" />
+                <span className="text-primary font-semibold uppercase tracking-wider text-sm">Key Features</span>
+                <Icons.Star className="w-6 h-6 text-primary ml-2" />
+              </div>
+              <h2 className="text-4xl md:text-5xl font-ubuntu font-bold text-neutral-text mb-6">
                 {content.features.title}
               </h2>
               {content.features.subtitle && (
-                <p className="text-lg text-gray-600">
+                <p className="text-lg text-gray-600 max-w-3xl mx-auto">
                   {content.features.subtitle}
                 </p>
               )}
-            </div>
+            </motion.div>
             
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {content.features.features.map((feature, index) => (
-                <div key={index} className="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                  <div className="text-blue-600 mb-4">
-                    {renderIcon(feature.icon, "h-12 w-12")}
-                  </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                    {feature.title}
-                  </h3>
-                  <p className="text-gray-600 mb-6">
-                    {feature.description}
-                  </p>
-                  {feature.details && (
-                    <ul className="space-y-2">
-                      {feature.details.map((detail, detailIndex) => (
-                        <li key={detailIndex} className="flex items-start">
-                          <div className="h-1.5 w-1.5 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                          <span className="text-sm text-gray-600">{detail}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.7, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="group"
+                >
+                  <Card className="h-full p-8 hover:shadow-xl transition-all duration-500 group-hover:-translate-y-2 bg-white border-0 relative overflow-hidden">
+                    {/* Background Pattern */}
+                    <div className="absolute top-0 right-0 w-20 h-20 bg-primary/5 rounded-full -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500"></div>
+                    
+                    <div className="relative z-10">
+                      {/* Enhanced Icon */}
+                      <div className="w-16 h-16 bg-gradient-to-br from-primary to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        {renderIcon(feature.icon, "w-8 h-8 text-white")}
+                      </div>
+                      
+                      <h3 className="text-xl font-ubuntu font-bold text-neutral-text mb-4">
+                        {feature.title}
+                      </h3>
+                      
+                      <p className="text-gray-600 mb-6 leading-relaxed">
+                        {feature.description}
+                      </p>
+                      
+                      {feature.details && (
+                        <ul className="space-y-3">
+                          {feature.details.map((detail, detailIndex) => (
+                            <li key={detailIndex} className="flex items-start">
+                              <Icons.CheckCircle className="w-4 h-4 text-green-500 mt-0.5 mr-3 flex-shrink-0" />
+                              <span className="text-sm text-gray-600">{detail}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  </Card>
+                </motion.div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Details Section */}
-        <section className="py-16 bg-white">
+        {/* Details Section - Enhanced */}
+        <section className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <div className="flex items-center justify-center mb-4">
+                <Icons.Info className="w-6 h-6 text-primary mr-2" />
+                <span className="text-primary font-semibold uppercase tracking-wider text-sm">Detailed Information</span>
+                <Icons.Info className="w-6 h-6 text-primary ml-2" />
+              </div>
+              <h2 className="text-4xl md:text-5xl font-ubuntu font-bold text-neutral-text mb-6">
                 {content.details.title}
               </h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              <p className="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed">
                 {content.details.content}
               </p>
-            </div>
+            </motion.div>
 
             {content.details.items && (
-              <div className="grid lg:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 {content.details.items.map((item, index) => (
-                  <div key={index} className="bg-gray-50 p-8 rounded-lg">
-                    <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                      {item.title}
-                    </h3>
-                    <p className="text-gray-600 mb-6">
-                      {item.description}
-                    </p>
-                    {item.benefits && (
-                      <ul className="space-y-3">
-                        {item.benefits.map((benefit, benefitIndex) => (
-                          <li key={benefitIndex} className="flex items-start">
-                            <div className="h-1.5 w-1.5 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                            <span className="text-sm text-gray-700">{benefit}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.7, delay: index * 0.15 }}
+                    viewport={{ once: true }}
+                    className="group"
+                  >
+                    <Card className="h-full p-8 bg-gradient-to-br from-gray-50 to-white hover:shadow-xl transition-all duration-500 group-hover:-translate-y-1">
+                      <div className="mb-6">
+                        <h3 className="text-2xl font-ubuntu font-bold text-neutral-text mb-4">
+                          {item.title}
+                        </h3>
+                        <div className="w-12 h-1 bg-primary"></div>
+                      </div>
+                      
+                      <p className="text-gray-600 mb-6 leading-relaxed">
+                        {item.description}
+                      </p>
+                      
+                      {item.benefits && (
+                        <ul className="space-y-3">
+                          {item.benefits.map((benefit, benefitIndex) => (
+                            <li key={benefitIndex} className="flex items-start">
+                              <Icons.ArrowRight className="w-4 h-4 text-primary mt-0.5 mr-3 flex-shrink-0" />
+                              <span className="text-sm text-gray-700">{benefit}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </Card>
+                  </motion.div>
                 ))}
               </div>
             )}
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section 
-          className="py-16 bg-blue-600 relative overflow-hidden"
-          style={{
-            backgroundImage: content.cta.backgroundImage ? `url(${content.cta.backgroundImage})` : undefined,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center'
-          }}
-        >
+        {/* Enhanced CTA Section */}
+        <section className="py-20 bg-gradient-to-r from-primary to-blue-600 relative overflow-hidden">
+          {/* Background Image */}
           {content.cta.backgroundImage && (
-            <div className="absolute inset-0 bg-blue-600 bg-opacity-80"></div>
+            <div className="absolute inset-0">
+              <img 
+                src={content.cta.backgroundImage}
+                alt="Call to action background"
+                className="w-full h-full object-cover opacity-20"
+              />
+            </div>
           )}
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-            <div className="text-center">
-              <h2 className="text-3xl font-bold text-white mb-4">
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-blue-600/90"></div>
+          
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-3xl md:text-4xl font-ubuntu font-bold text-white mb-6">
                 {content.cta.title}
               </h2>
-              <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+              <p className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto leading-relaxed">
                 {content.cta.subtitle}
               </p>
-              <CTAButton 
-                to={content.cta.buttonLink}
-                className="bg-white text-blue-600 hover:bg-gray-100"
-              >
-                {content.cta.buttonText}
-              </CTAButton>
-            </div>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <CTAButton 
+                  to={content.cta.buttonLink}
+                  size="lg"
+                  className="bg-white text-primary hover:bg-gray-100 shadow-lg"
+                >
+                  {content.cta.buttonText}
+                </CTAButton>
+                <CTAButton 
+                  to="/contact"
+                  variant="outline"
+                  size="lg"
+                  className="border-white text-white hover:bg-white hover:text-primary"
+                >
+                  <Icons.MessageCircle className="w-5 h-5 mr-2" />
+                  Ask Questions
+                </CTAButton>
+              </div>
+            </motion.div>
           </div>
         </section>
       </main>
 
-      <Footer />
+      
       <ScrollToTop />
     </div>
   );

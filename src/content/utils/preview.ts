@@ -92,7 +92,7 @@ function calculatePageWordCount(content: HomePageContent | AboutPageContent | Co
   if ('services' in content) {
     // Home page
     const homeContent = content as HomePageContent;
-    words += homeContent.about.content.split(' ').length;
+    words += homeContent.about.description.split(' ').length;
     homeContent.services.cards.forEach(card => {
       words += card.title.split(' ').length;
       words += card.description.split(' ').length;

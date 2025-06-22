@@ -31,10 +31,14 @@ export interface TrustBadgeContent {
 
 export interface AboutSectionContent {
   title: string;
-  content: string;
-  highlights: string[];
-  ctaText: string;
-  ctaLink: string;
+  subtitle: string;
+  description: string;
+  image: string;
+  features: string[];
+  cta: {
+    text: string;
+    link: string;
+  };
 }
 
 export interface HomePageContent {
@@ -47,6 +51,7 @@ export interface HomePageContent {
   };
   trustBadges: {
     title: string;
+    subtitle: string;
     badges: TrustBadgeContent[];
   };
   about: AboutSectionContent;

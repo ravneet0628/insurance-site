@@ -2,181 +2,147 @@ import type { HomePageContent } from '../../types/pages';
 
 export const homePageContent: HomePageContent = {
   meta: {
-    title: 'SecureChoice Insurance | Comprehensive Coverage Solutions',
-    description: 'SecureChoice Insurance provides comprehensive insurance solutions for auto, home, life, commercial, and travel coverage with expert guidance and competitive rates.',
-    keywords: ['insurance', 'auto insurance', 'home insurance', 'life insurance', 'commercial insurance', 'travel insurance', 'insurance broker'],
+    title: 'SecureChoice Insurance - Comprehensive Coverage for Life, Travel & Investment',
+    description: 'Protect what matters most with SecureChoice Insurance. Comprehensive life, travel, disability insurance and investment solutions. Get expert advice and competitive rates.',
+    keywords: ['insurance', 'life insurance', 'travel insurance', 'super visa', 'visitors insurance', 'RESP', 'RRSP', 'TFSA', 'disability insurance', 'critical illness', 'Canada insurance']
   },
   hero: {
-    title: 'Your Trusted Insurance Partner',
-    subtitle: 'Comprehensive coverage solutions tailored to protect what matters most to you and your family. Get expert guidance and competitive rates.',
+    title: 'Secure Your Future with Confidence',
+    subtitle: 'Comprehensive insurance solutions tailored to protect what matters most to you and your family. From life and travel insurance to investment planning - we have you covered.',
+    backgroundImage: '/images/hero-bg.jpg',
     primaryCTA: {
-      text: 'Get Free Quote',
-      link: '/quote',
+      text: 'Get Your Quote',
+      link: '/quote'
     },
     secondaryCTA: {
-      text: 'Learn More',
-      link: '/about',
-    },
-    backgroundImage: '/images/hero-bg.jpg',
+      text: 'Explore Services',
+      link: '/services'
+    }
   },
   services: {
     title: 'Comprehensive Insurance Solutions',
-    subtitle: 'Discover our range of insurance products designed to protect your assets, family, and future.',
+    subtitle: 'Tailored protection for every stage of life, backed by expert guidance and competitive rates',
     cards: [
       {
-        id: 'super-visa',
+        id: 'super-visa-insurance',
         title: 'Super Visa Insurance',
-        description: 'Mandatory insurance coverage for parents or grandparents seeking a Super Visa for Canada.',
+        description: 'Mandatory medical insurance for parents and grandparents visiting Canada on a Super Visa. Comprehensive coverage with competitive rates.',
         icon: 'Shield',
-        link: '/services/super-visa-insurance',
         features: [
-          'Meets Government requirements',
-          'Coverage from $100,000+',
-          'Emergency medical expenses',
-          'COVID-19 coverage included'
+          'Minimum $100,000 coverage required',
+          'Valid for multiple entries',
+          'Coverage for pre-existing conditions available',
+          'Emergency medical and hospitalization'
         ],
+        link: '/services/super-visa-insurance'
       },
       {
-        id: 'visitors',
+        id: 'visitors-insurance',
         title: 'Visitors Insurance',
-        description: 'Comprehensive emergency medical coverage for visitors to Canada and Canadians traveling abroad.',
-        icon: 'Users',
-        link: '/services/visitors-insurance',
+        description: 'Essential travel medical insurance for visitors to Canada. Protect yourself from unexpected medical emergencies during your stay.',
+        icon: 'Heart',
         features: [
           'Emergency medical coverage',
-          'Trip interruption benefits',
-          'Pre-existing conditions covered',
-          'Worldwide emergency assistance'
+          'Prescription drugs coverage',
+          'Trip interruption protection',
+          'Coverage for family members'
         ],
+        link: '/services/visitors-insurance'
       },
       {
-        id: 'life',
+        id: 'life-insurance',
         title: 'Life Insurance',
-        description: 'Financial protection for your loved ones when they need it most. Term, whole, and universal options.',
-        icon: 'Heart',
-        link: '/services/life-insurance',
+        description: 'Secure your family\'s financial future with comprehensive life insurance coverage. Term and permanent life insurance options available.',
+        icon: 'Users',
         features: [
-          'Term and permanent options',
-          'Tax-free death benefits',
-          'Flexible coverage amounts',
-          'Fast approval process'
+          'Term and whole life options',
+          'Affordable premium rates',
+          'Tax-free death benefit',
+          'Living benefits available'
         ],
+        link: '/services/life-insurance'
       },
       {
-        id: 'disability',
+        id: 'disability-insurance',
         title: 'Disability Insurance',
-        description: 'Income protection when illness or injury prevents you from working.',
-        icon: 'Shield',
-        link: '/services/disability-insurance',
-        features: [
-          'Replace 60-85% of income',
-          'Short and long-term options',
-          'Tax-free benefits',
-          'Return to work incentives'
-        ],
-      },
-      {
-        id: 'critical-illness',
-        title: 'Critical Illness Insurance',
-        description: 'Lump sum payment upon diagnosis of covered critical illnesses like cancer, heart attack, stroke.',
+        description: 'Protect your income with disability insurance. Short-term and long-term coverage to maintain your lifestyle if you can\'t work.',
         icon: 'Activity',
-        link: '/services/critical-illness-insurance',
         features: [
+          'Income replacement up to 85%',
+          'Short and long-term options',
+          'Own occupation coverage',
+          'Cost of living adjustments'
+        ],
+        link: '/services/disability-insurance'
+      },
+      {
+        id: 'critical-illness-insurance',
+        title: 'Critical Illness Insurance',
+        description: 'Financial protection when facing serious illness. Lump sum payment to help with medical costs and lifestyle adjustments.',
+        icon: 'Shield',
+        features: [
+          'Lump sum tax-free benefit',
           'Coverage for 25+ conditions',
-          'Tax-free lump sum payment',
-          'Use benefits however needed',
-          'Return of premium options'
+          'Return of premium options',
+          'Family coverage available'
         ],
+        link: '/services/critical-illness-insurance'
       },
       {
-        id: 'resp',
-        title: 'RESP',
-        description: 'Education savings plan with government grants and tax-deferred growth for your children.',
-        icon: 'Award',
-        link: '/services/resp',
+        id: 'investment-planning',
+        title: 'Investment & Savings',
+        description: 'Build your financial future with RESP, RRSP, and TFSA solutions. Expert guidance for education savings and retirement planning.',
+        icon: 'TrendingUp',
         features: [
-          'Government grants up to $7,200',
-          'Tax-deferred growth',
-          'Flexible investment options',
-          'No annual contribution limits'
+          'RESP education savings',
+          'RRSP retirement planning',
+          'TFSA tax-free savings',
+          'Professional investment advice'
         ],
-      },
-      {
-        id: 'rrsp',
-        title: 'RRSP',
-        description: 'Registered Retirement Savings Plan for tax-deferred retirement savings and wealth building.',
-        icon: 'Clock',
-        link: '/services/rrsp',
-        features: [
-          'Tax-deductible contributions',
-          'Tax-deferred growth',
-          'Home Buyers\' Plan access',
-          'Professional management available'
-        ],
-      },
-      {
-        id: 'drug-dental',
-        title: 'Drug & Dental Insurance',
-        description: 'Comprehensive health benefits including prescription drugs, dental care, and vision coverage.',
-        icon: 'CheckCircle',
-        link: '/services/drug-dental-insurance',
-        features: [
-          'Prescription drug coverage',
-          'Dental and vision care',
-          'Paramedical services',
-          'Flexible spending accounts'
-        ],
-      },
-      {
-        id: 'tfsa',
-        title: 'TFSA',
-        description: 'Tax-Free Savings Account for flexible, tax-free growth on your savings and investments.',
-        icon: 'Wallet',
-        link: '/services/tfsa',
-        features: [
-          'Tax-free growth and withdrawals',
-          'Flexible contributions',
-          'Wide investment options',
-          'No age limit for contributions'
-        ],
-      },
-    ],
+        link: '/services/resp'
+      }
+    ]
   },
   trustBadges: {
-    title: 'Why Choose SecureChoice?',
+    title: 'Why Choose SecureChoice Insurance?',
+    subtitle: 'Trusted by thousands of Canadians for our expertise, reliability, and exceptional service',
     badges: [
       {
-        icon: 'Award',
-        title: 'Licensed Professionals',
-        description: 'Our experienced agents provide expert guidance for all your insurance needs.',
+        title: '20+ Years Experience',
+        description: 'Two decades of serving Canadian families with expert insurance advice and comprehensive coverage solutions.',
+        icon: 'Award'
       },
       {
-        icon: 'DollarSign',
-        title: 'Competitive Rates',
-        description: 'We work with top-rated insurers to find you the best coverage at competitive prices.',
+        title: '50+ Insurance Partners',
+        description: 'We work with Canada\'s top insurance companies to find you the best coverage at the most competitive rates.',
+        icon: 'Wallet'
       },
       {
-        icon: 'Clock',
-        title: '24/7 Support',
-        description: 'Round-the-clock claims support and customer service when you need it most.',
+        title: '24/7 Claims Support',
+        description: 'Round-the-clock assistance when you need it most. Our claims support team is always here to help.',
+        icon: 'Clock'
       },
       {
-        icon: 'Shield',
-        title: 'Comprehensive Coverage',
-        description: 'Wide range of insurance products to protect all aspects of your life and business.',
-      },
-    ],
+        title: '98% Customer Satisfaction',
+        description: 'Our clients consistently rate us highly for service quality, expertise, and competitive pricing.',
+        icon: 'Star'
+      }
+    ]
   },
   about: {
-    title: 'About SecureChoice Insurance',
-    content: 'With over two decades of experience in the insurance industry, SecureChoice Insurance has been providing comprehensive coverage solutions to families and businesses across Canada. Our commitment to exceptional service, expert guidance, and competitive rates has made us a trusted partner for thousands of satisfied clients.',
-    highlights: [
-      'Over 20 years of industry experience',
-      'Thousands of satisfied clients served',
-      'Comprehensive range of insurance products',
-      'Expert guidance and personalized service'
+    title: 'Your Trusted Insurance Partner',
+    subtitle: 'Professional guidance you can rely on',
+    description: 'At SecureChoice Insurance, we understand that choosing the right insurance can be overwhelming. That\'s why we\'ve dedicated ourselves to providing clear, honest advice and comprehensive coverage options tailored to your unique needs.',
+    image: '/images/about-team.jpg',
+    features: [
+      'Licensed insurance professionals',
+      'Personalized coverage recommendations',
+      'Competitive rates from top insurers',
+      'Ongoing policy management and support'
     ],
-    ctaText: 'Learn More About Us',
-    ctaLink: '/about',
-  },
+    cta: {
+      text: 'Learn More About Us',
+      link: '/about'
+    }
+  }
 }; 
