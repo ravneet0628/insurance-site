@@ -165,14 +165,14 @@ const ContactPage: React.FC = () => {
       />
 
       {/* Contact Information Grid */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <section className="section-spacing-sm bg-white">
+          <div className="page-container">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center heading-spacing-sm"
           >
             <h2 className="text-clamp-2xl font-ubuntu font-bold text-neutral-text mb-4">
               Get In Touch
@@ -293,8 +293,8 @@ const ContactPage: React.FC = () => {
                   />
 
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                      Full Name *
+                    <label htmlFor="name" className="form-label">
+                      Name <span className="text-accent" aria-label="required">*</span>
                     </label>
                     <input
                       {...register('name')}
@@ -311,9 +311,9 @@ const ContactPage: React.FC = () => {
                   </div>
 
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                      Email Address *
-                    </label>
+                                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                    Email Address <span className="text-accent" aria-label="required">*</span>
+                  </label>
                     <input
                       {...register('email')}
                       type="email"
@@ -329,9 +329,9 @@ const ContactPage: React.FC = () => {
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                      Message *
-                    </label>
+                                      <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                    Message <span className="text-accent" aria-label="required">*</span>
+                  </label>
                     <textarea
                       {...register('message')}
                       id="message"

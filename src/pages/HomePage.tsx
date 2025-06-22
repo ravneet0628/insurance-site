@@ -1,16 +1,20 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Shield, Users, Heart, Activity, Award, Clock, CheckCircle, Wallet, DollarSign } from 'lucide-react';
+import { Shield, Users, Heart, Activity, Award, Clock, CheckCircle, Wallet, DollarSign, Star, TrendingUp, Phone } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import Hero from '../components/Hero';
 import Card from '../components/Card';
 import CTAButton from '../components/CTAButton';
 import { useHomePageContent } from '../content/hooks/usePageContent';
 
+/**
+ * HomePage component - Main landing page with hero, services, trust badges, and about sections
+ * Implements comprehensive layout improvements with proper image usage and responsive design
+ */
 const HomePage: React.FC = () => {
   const content = useHomePageContent();
 
-  // Icon mapping for dynamic content
+  // Icon mapping for dynamic content with enhanced icon set
   const iconMap = {
     Shield,
     Users,
@@ -21,19 +25,25 @@ const HomePage: React.FC = () => {
     CheckCircle,
     Wallet,
     DollarSign,
+    Star,
+    TrendingUp,
+    Phone,
   };
 
   return (
-    <div>
+    <div className="min-h-screen">
       <Helmet>
         <title>{content.meta.title}</title>
         <meta name="description" content={content.meta.description} />
         {content.meta.keywords && (
           <meta name="keywords" content={content.meta.keywords.join(', ')} />
         )}
+        <meta property="og:title" content={content.meta.title} />
+        <meta property="og:description" content={content.meta.description} />
+        <meta property="og:type" content="website" />
       </Helmet>
 
-      {/* Hero Section */}
+      {/* Enhanced Hero Section */}
       <Hero
         title={content.hero.title}
         subtitle={content.hero.subtitle}
@@ -42,55 +52,85 @@ const HomePage: React.FC = () => {
         ctaLink={content.hero.primaryCTA.link}
       />
 
-      {/* Products Section */}
-      <section className="py-16 bg-neutral-bg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Services Section - Enhanced Layout */}
+      <section className="section-spacing gradient-neutral" id="services">
+        <div className="page-container">
+          {/* Section Header with Better Typography */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-center mb-8"
+            className="text-center mb-16"
           >
-            <h2 className="text-clamp-2xl font-ubuntu font-bold text-neutral-text mb-4">
+            <div className="section-divider">
+              <div className="section-divider-line mr-4"></div>
+              <span className="section-divider-text">Our Services</span>
+              <div className="section-divider-line ml-4"></div>
+            </div>
+            <h2 className="text-section-title content-spacing-sm leading-tight">
               {content.services.title}
             </h2>
-            <p className="text-sm text-gray-600 max-w-2xl mx-auto">
+            <p className="text-body-large max-w-3xl mx-auto">
               {content.services.subtitle}
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Enhanced Service Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
             {content.services.cards.map((service, index) => (
               <motion.div
                 key={service.id}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                transition={{ duration: 0.7, delay: index * 0.1 }}
                 viewport={{ once: true }}
+                className="group"
               >
-                <Card className="h-full p-6 flex flex-col items-center text-center hover:shadow-lg transition-shadow duration-300 min-h-[320px]">
-                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                    {React.createElement(iconMap[service.icon as keyof typeof iconMap] || Shield, {
-                      className: "w-8 h-8 text-primary"
-                    })}
+                <Card className="h-full p-8 flex flex-col card-hover border-0 bg-white relative overflow-hidden min-h-[400px]">
+                  {/* Background Pattern */}
+                  <div className="absolute top-0 right-0 w-20 h-20 bg-primary/5 rounded-full -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500"></div>
+                  
+                  {/* Icon with Enhanced Design */}
+                  <div className="relative z-10 mb-6">
+                    <div className="icon-container mb-4 hover-scale">
+                      {React.createElement(iconMap[service.icon as keyof typeof iconMap] || Shield, {
+                        className: "w-10 h-10 text-white"
+                      })}
+                    </div>
                   </div>
-                  <h3 className="text-lg font-ubuntu font-bold text-neutral-text mb-3 h-14 flex items-center">
-                    {service.title}
-                  </h3>
-                  <p className="text-sm text-gray-600 mb-4 flex-1 flex items-start leading-relaxed">
-                    <span className="line-clamp-4">
+
+                  {/* Content */}
+                  <div className="relative z-10 flex-1 flex flex-col">
+                    <h3 className="text-card-title mb-4 leading-tight">
+                      {service.title}
+                    </h3>
+                    <p className="text-body content-spacing-sm flex-1">
                       {service.description}
-                    </span>
-                  </p>
-                  <CTAButton 
-                    variant="outline" 
-                    size="sm" 
-                    to={service.link}
-                    className="mt-auto"
-                  >
-                    Learn More →
-                  </CTAButton>
+                    </p>
+
+                    {/* Feature List */}
+                    <div className="content-spacing">
+                      <ul className="space-y-2">
+                        {service.features.slice(0, 3).map((feature, featureIndex) => (
+                          <li key={featureIndex} className="flex items-start text-sm text-gray-600">
+                            <CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                            <span>{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* CTA Button */}
+                    <CTAButton 
+                      variant="outline" 
+                      size="md" 
+                      to={service.link}
+                      className="mt-auto w-full"
+                    >
+                      Learn More →
+                    </CTAButton>
+                  </div>
                 </Card>
               </motion.div>
             ))}
@@ -98,19 +138,32 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* Trust Badges Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Trust Badges Section - Enhanced Design */}
+      <section className="section-spacing bg-white relative overflow-hidden" id="why-choose-us">
+        {/* Background Elements */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-transparent"></div>
+        <div className="absolute top-10 right-10 w-40 h-40 bg-primary/5 rounded-full"></div>
+        <div className="absolute bottom-10 left-10 w-32 h-32 bg-blue-100 rounded-full"></div>
+        
+        <div className="page-container relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-16"
           >
-            <h2 className="text-clamp-2xl font-ubuntu font-bold text-neutral-text mb-4">
+            <div className="section-divider">
+              <Star className="w-6 h-6 text-yellow-500 mr-2" />
+              <span className="section-divider-text">Why Choose Us</span>
+              <Star className="w-6 h-6 text-yellow-500 ml-2" />
+            </div>
+            <h2 className="text-section-title content-spacing-sm">
               {content.trustBadges.title}
             </h2>
+            <p className="text-body-large max-w-2xl mx-auto">
+              {content.trustBadges.subtitle}
+            </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -119,19 +172,21 @@ const HomePage: React.FC = () => {
                 key={badge.title}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                transition={{ duration: 0.6, delay: index * 0.15 }}
                 viewport={{ once: true }}
-                className="text-center"
+                className="text-center group"
               >
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  {React.createElement(iconMap[badge.icon as keyof typeof iconMap] || Shield, {
-                    className: "w-8 h-8 text-primary"
-                  })}
+                <div className="relative">
+                  <div className="icon-container-soft mx-auto content-spacing-sm hover-scale">
+                    {React.createElement(iconMap[badge.icon as keyof typeof iconMap] || Shield, {
+                      className: "w-10 h-10 text-primary"
+                    })}
+                  </div>
                 </div>
-                <h3 className="text-lg font-ubuntu font-bold text-neutral-text mb-3">
+                <h3 className="text-card-title content-spacing-xs">
                   {badge.title}
                 </h3>
-                <p className="text-gray-600">
+                <p className="text-body">
                   {badge.description}
                 </p>
               </motion.div>
@@ -140,59 +195,146 @@ const HomePage: React.FC = () => {
         </div>
       </section>
       
-      {/* About Section */}
-      <section className="py-10 bg-neutral-bg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      {/* About Section - Redesigned with Better Image Usage */}
+      <section className="section-spacing gradient-neutral-dark" id="about">
+                  <div className="page-container">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            {/* Content Column */}
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
+              initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.8 }}
               viewport={{ once: true }}
+              className="order-2 lg:order-1"
             >
-              <h2 className="text-clamp-2xl font-ubuntu font-bold text-neutral-text mb-6">
+              <div className="section-divider">
+                <div className="section-divider-line mr-4"></div>
+                <span className="section-divider-text">About Us</span>
+              </div>
+              
+              <h2 className="text-section-title content-spacing leading-tight">
                 {content.about.title}
               </h2>
-              <p className="text-clamp-base text-gray-600 mb-6 leading-relaxed">
-                {content.about.content}
+              
+              <p className="text-body-large content-spacing">
+                {content.about.description}
               </p>
-              <ul className="space-y-3 mb-8">
-                {content.about.highlights.map((highlight, index) => (
-                  <li key={index} className="flex items-center text-gray-600">
+              
+              {/* Enhanced Features */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+                {content.about.features.map((feature: string, index: number) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    className="flex items-center p-4 bg-white rounded-lg shadow-sm"
+                  >
                     <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
-                    {highlight}
-                  </li>
+                    <span className="text-gray-700 font-medium">{feature}</span>
+                  </motion.div>
                 ))}
-              </ul>
-              <CTAButton to={content.about.ctaLink} variant="outline">
-                {content.about.ctaText}
-              </CTAButton>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row gap-4">
+                <CTAButton to={content.about.cta.link} variant="primary" size="lg">
+                  {content.about.cta.text}
+                </CTAButton>
+                <CTAButton to="/contact" variant="outline" size="lg">
+                  <Phone className="w-5 h-5 mr-2" />
+                  Contact Us
+                </CTAButton>
+              </div>
             </motion.div>
+
+            {/* Image Column - Better Context */}
             <motion.div
-              initial={{ opacity: 0, x: 30 }}
+              initial={{ opacity: 0, x: 40 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="relative"
+              className="order-1 lg:order-2"
             >
-              <div className="aspect-w-4 aspect-h-3 rounded-lg overflow-hidden">
-                <img 
-                  src="/images/handshake.jpg" 
-                  alt="Professional handshake representing trust and partnership in insurance"
-                  className="w-full h-full object-cover rounded-lg"
-                />
-                <div className="absolute inset-0 bg-primary/20 rounded-lg flex items-center justify-center">
-                  <div className="text-center text-white">
-                    <Shield className="w-16 h-16 mx-auto mb-4 drop-shadow-lg" />
-                    <p className="text-xl font-ubuntu font-bold drop-shadow-lg">Your Protection, Our Priority</p>
-                  </div>
+              <div className="relative">
+                {/* Main Image */}
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                  <img 
+                    src={content.about.image} 
+                    alt="Professional insurance consultation and advisory services"
+                    className="w-full h-[500px] object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent"></div>
                 </div>
+                
+                {/* Floating Stats Card */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                  viewport={{ once: true }}
+                  className="absolute -bottom-8 -left-8 bg-white p-6 rounded-xl shadow-xl border"
+                >
+                  <div className="flex items-center space-x-4">
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-primary">20+</div>
+                      <div className="text-sm text-gray-600">Years Experience</div>
+                    </div>
+                    <div className="h-12 w-px bg-gray-200"></div>
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-primary">50K+</div>
+                      <div className="text-sm text-gray-600">Happy Clients</div>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Decorative Elements */}
+                <div className="absolute -top-4 -right-4 w-24 h-24 bg-primary/10 rounded-full"></div>
+                <div className="absolute top-1/2 -right-6 w-12 h-12 bg-blue-100 rounded-full"></div>
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
+      {/* Call to Action Section */}
+      <section className="section-spacing gradient-primary relative overflow-hidden">
+        <div className="absolute inset-0 bg-black/10"></div>
+                  <div className="text-container text-center relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-subsection-title text-white content-spacing-sm">
+              Ready to Protect What Matters Most?
+            </h2>
+            <p className="text-xl text-blue-100 content-spacing max-w-2xl mx-auto">
+              Get a personalized insurance quote in minutes. Our experts are here to help you find the perfect coverage.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <CTAButton 
+                to="/quote" 
+                variant="primary"
+                theme="dark"
+                size="lg"
+              >
+                Get Free Quote
+              </CTAButton>
+              <CTAButton 
+                to="/contact" 
+                variant="outline" 
+                theme="dark"
+                size="lg"
+              >
+                <Phone className="w-5 h-5 mr-2" />
+                Call Now
+              </CTAButton>
+            </div>
+          </motion.div>
+        </div>
+      </section>
     </div>
   );
 };
