@@ -137,6 +137,15 @@
   @apply bg-gradient-to-br from-neutral-bg to-gray-100;
 }
 
+/* Enhanced CTA gradients */
+.gradient-cta {
+  @apply bg-gradient-to-br from-blue-600 via-primary to-indigo-700;
+}
+
+.gradient-cta-light {
+  @apply bg-gradient-to-br from-blue-500/90 via-primary/90 to-indigo-600/90;
+}
+
 /* Standardized containers */
 .page-container {
   @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
@@ -196,4 +205,12 @@
 
 .form-error {
   @apply mt-1 text-sm text-red-500;
+}
+
+/* Text utilities */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }

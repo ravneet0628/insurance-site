@@ -79,7 +79,7 @@ const AboutPage: React.FC = () => {
         title={content.hero.title}
         subtitle={content.hero.subtitle}
         bgImg={content.hero.backgroundImage}
-        height="lg"
+        height="md"
         ctaText={content.hero.primaryCTA.text}
         ctaLink={content.hero.primaryCTA.link}
       />
@@ -242,8 +242,8 @@ const AboutPage: React.FC = () => {
           >
             <div className="relative h-80 rounded-3xl overflow-hidden shadow-2xl">
               <img 
-                src="/images/office-building.jpg" 
-                alt="SecureChoice Insurance modern office building and headquarters"
+                src="/images/modern-office-team.jpg" 
+                alt="SecureChoice Insurance professional team collaboration and expertise"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-blue-600/80 flex items-center justify-center">
@@ -379,8 +379,16 @@ const AboutPage: React.FC = () => {
       </section>
 
       {/* Call to Action Section */}
-      <section className="py-20 bg-gradient-to-r from-primary to-blue-600 relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/10"></div>
+      <section className="py-20 gradient-cta relative overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <img 
+            src="/images/client-meeting.jpg"
+            alt="Professional client consultation and advisory meeting"
+            className="w-full h-full object-cover opacity-15"
+          />
+        </div>
+        <div className="absolute inset-0 gradient-cta-light"></div>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -388,25 +396,23 @@ const AboutPage: React.FC = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-ubuntu font-bold text-white mb-6">
+            <h2 className="text-3xl md:text-4xl font-ubuntu font-bold text-white mb-6 drop-shadow-lg">
               Ready to Experience the SecureChoice Difference?
             </h2>
-            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-blue-50 mb-8 max-w-2xl mx-auto drop-shadow-md">
               Join thousands of satisfied clients who trust us with their insurance needs. Let's build your protection plan together.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <CTAButton
                 to="/quote"
-                variant="primary"
-                theme="dark"
+                variant="light"
                 size="lg"
               >
                 Get Started Today
               </CTAButton>
               <CTAButton
                 to="/contact"
-                variant="outline"
-                theme="dark"
+                variant="light-outline"
                 size="lg"
               >
                 <Handshake className="w-5 h-5 mr-2" />

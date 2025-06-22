@@ -6,7 +6,7 @@ import { z } from 'zod';
 import { motion } from 'framer-motion';
 import { Toaster, toast } from 'react-hot-toast';
 import { MapPin, Phone, Mail, Clock, Send, Loader2 } from 'lucide-react';
-import Hero from '../components/Hero';
+
 import Card from '../components/Card';
 import CTAButton from '../components/CTAButton';
 import { submitContact, type ContactFormData } from '../utils/api';
@@ -157,12 +157,6 @@ const ContactPage: React.FC = () => {
         })}
       </script>
 
-      <Hero
-        title="Contact SecureChoice"
-        subtitle="We're here to help with all your insurance needs. Get in touch with our experienced team today."
-        bgImg="/images/office-building.jpg"
-        height="md"
-      />
 
       {/* Contact Information Grid */}
               <section className="section-spacing-sm bg-white">

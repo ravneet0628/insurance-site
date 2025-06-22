@@ -20,7 +20,7 @@ const QuotePage: React.FC = () => {
         title="Get Your Insurance Quote"
         subtitle="Quick, easy, and personalized quotes in just a few minutes. Compare coverage options and find the perfect protection for your needs."
         bgImg="/images/office-building.jpg"
-        height="lg"
+        height="md"
       />
 
       <div className="py-16 bg-neutral-bg">
