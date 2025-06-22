@@ -102,8 +102,8 @@ const ServicesPage: React.FC = () => {
       <Hero
         title="Our Insurance Services"
         subtitle="Comprehensive coverage solutions tailored to protect what matters most to you and your family"
-        bgImg="/images/family-protection.jpg"
-        height="lg"
+        bgImg="/images/insurance-security.jpg"
+        height="md"
         overlay="medium"
       />
 
@@ -137,21 +137,21 @@ const ServicesPage: React.FC = () => {
               {
                 category: 'Personal Protection',
                 description: 'Life, disability, and critical illness insurance to protect you and your family',
-                image: '/images/family-protection.jpg',
+                image: '/images/life-protection.jpg',
                 services: ['Life Insurance', 'Disability Insurance', 'Critical Illness'],
                 color: 'from-blue-600 to-purple-600'
               },
               {
                 category: 'Travel Insurance',
                 description: 'Comprehensive coverage for visitors and super visa applicants',
-                image: '/images/handshake.jpg',
+                image: '/images/travel-insurance.jpg',
                 services: ['Super Visa Insurance', 'Visitors Insurance', 'Travel Coverage'],
                 color: 'from-green-600 to-teal-600'
               },
               {
                 category: 'Investment Planning',
                 description: 'RESP, RRSP, and TFSA solutions for your financial future',
-                image: '/images/office-building.jpg',
+                image: '/images/investment-growth.jpg',
                 services: ['RESP Plans', 'RRSP Contributions', 'TFSA Options'],
                 color: 'from-orange-600 to-red-600'
               }
@@ -261,8 +261,8 @@ const ServicesPage: React.FC = () => {
           >
             <div className="relative h-96 rounded-3xl overflow-hidden shadow-2xl">
               <img 
-                src="/images/about-team.jpg" 
-                alt="Professional insurance team providing expert consultation and personalized service"
+                src="/images/insurance-security.jpg" 
+                alt="Professional insurance security and protection services"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-blue-600/70 flex items-center">
@@ -358,8 +358,16 @@ const ServicesPage: React.FC = () => {
       </section>
 
       {/* Call to Action Section */}
-      <section className="py-20 bg-gradient-to-r from-primary to-blue-600 relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/10"></div>
+      <section className="py-20 gradient-cta relative overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <img 
+            src="/images/business-growth.jpg"
+            alt="Business growth and financial security"
+            className="w-full h-full object-cover opacity-15"
+          />
+        </div>
+        <div className="absolute inset-0 gradient-cta-light"></div>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -367,10 +375,10 @@ const ServicesPage: React.FC = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-ubuntu font-bold text-white mb-6">
+            <h2 className="text-3xl md:text-4xl font-ubuntu font-bold text-white mb-6 drop-shadow-lg">
               Ready to Get Protected?
             </h2>
-            <p className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
+            <p className="text-xl text-blue-50 mb-8 max-w-3xl mx-auto drop-shadow-md">
               Don't wait until it's too late. Get a personalized insurance quote today and secure your family's future with confidence.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

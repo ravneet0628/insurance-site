@@ -6,9 +6,8 @@ interface CTAButtonProps {
   to?: string;
   href?: string;
   onClick?: () => void;
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'light' | 'light-outline';
   size?: 'sm' | 'md' | 'lg';
-  theme?: 'light' | 'dark';
   className?: string;
   disabled?: boolean;
   type?: 'button' | 'submit' | 'reset';
@@ -21,27 +20,21 @@ const CTAButton: React.FC<CTAButtonProps> = ({
   onClick,
   variant = 'primary',
   size = 'md',
-  theme = 'light',
   className = '',
   disabled = false,
   type = 'button',
 }) => {
   const baseClasses = 'inline-flex items-center justify-center font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 active:scale-95';
   
-  // Theme-aware variant classes
+  // Simplified variant classes without theme complexity
   const variantClasses = {
-    primary: theme === 'dark' 
-      ? 'bg-white hover:bg-gray-100 text-primary focus:ring-white shadow-lg hover:shadow-xl'
-      : 'bg-primary hover:bg-primary/90 text-white focus:ring-primary shadow-lg hover:shadow-xl',
-    secondary: theme === 'dark'
-      ? 'bg-white hover:bg-gray-100 text-accent focus:ring-white shadow-lg hover:shadow-xl'
-      : 'bg-accent hover:bg-accent/90 text-white focus:ring-accent shadow-lg hover:shadow-xl',
-    outline: theme === 'dark'
-      ? 'border-2 border-white text-white hover:bg-white hover:text-primary focus:ring-white bg-transparent hover:shadow-lg'
-      : 'border-2 border-primary text-primary hover:bg-primary hover:text-white focus:ring-primary bg-transparent hover:shadow-lg',
-    ghost: theme === 'dark'
-      ? 'text-white hover:bg-white/10 focus:ring-white hover:shadow-md'
-      : 'text-primary hover:bg-primary/10 focus:ring-primary hover:shadow-md',
+    primary: 'bg-primary hover:bg-primary/90 text-white focus:ring-primary shadow-lg hover:shadow-xl',
+    secondary: 'bg-accent hover:bg-accent/90 text-white focus:ring-accent shadow-lg hover:shadow-xl',
+    outline: 'border-2 border-primary text-primary hover:bg-primary hover:text-white focus:ring-primary bg-transparent hover:shadow-lg',
+    ghost: 'text-primary hover:bg-primary/10 focus:ring-primary hover:shadow-md',
+    // New variants for use on dark backgrounds
+    light: 'bg-white hover:bg-gray-100 text-primary focus:ring-white shadow-lg hover:shadow-xl',
+    'light-outline': 'border-2 border-white text-white hover:bg-white hover:text-primary focus:ring-white bg-transparent hover:shadow-lg',
   };
 
   const sizeClasses = {

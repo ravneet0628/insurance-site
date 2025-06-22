@@ -42,19 +42,19 @@ const Accordion: React.FC<AccordionProps> = ({ items }) => {
           >
             <button
               onClick={() => toggleItem(item.id)}
-              className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset"
+              className="w-full px-6 py-5 text-left flex items-center justify-between hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset min-h-[100px]"
               aria-expanded={isOpen}
               aria-controls={`accordion-content-${item.id}`}
             >
-              <div className="flex items-center space-x-4">
-                <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
-                  <IconComponent className="w-5 h-5 text-primary" />
+              <div className="flex items-center space-x-4 flex-1">
+                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                  <IconComponent className="w-6 h-6 text-primary" />
                 </div>
-                <div>
-                  <h3 className="text-lg font-ubuntu font-semibold text-neutral-text">
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-xl font-ubuntu font-semibold text-neutral-text mb-2 leading-tight">
                     {item.title}
                   </h3>
-                  <p className="text-sm text-gray-600 mt-1">
+                  <p className="text-sm text-gray-600 leading-relaxed line-clamp-2">
                     {item.description}
                   </p>
                 </div>
@@ -79,24 +79,27 @@ const Accordion: React.FC<AccordionProps> = ({ items }) => {
                   className="overflow-hidden"
                 >
                   <div className="px-6 pb-6">
-                    <div className="border-t border-gray-200 pt-4">
-                      <h4 className="text-sm font-medium text-neutral-text mb-3">
+                    <div className="border-t border-gray-200 pt-5">
+                      <h4 className="text-base font-medium text-neutral-text mb-4">
                         Key Features:
                       </h4>
-                      <ul className="space-y-2">
+                      <ul className="space-y-3">
                         {item.features.map((feature, index) => (
-                          <li key={index} className="flex items-start space-x-2">
-                            <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                            <span className="text-sm text-gray-600">{feature}</span>
+                          <li key={index} className="flex items-start space-x-3">
+                            <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                            <span className="text-gray-700 leading-relaxed">{feature}</span>
                           </li>
                         ))}
                       </ul>
-                      <div className="mt-4 pt-4 border-t border-gray-100">
+                      <div className="mt-6 pt-4 border-t border-gray-100">
                         <Link 
                           to={`/services/${item.slug}`}
-                          className="text-primary hover:text-primary/80 text-sm font-medium transition-colors"
+                          className="inline-flex items-center text-primary hover:text-primary/80 font-medium transition-colors"
                         >
-                          Learn More →
+                          Learn More 
+                          <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
                         </Link>
                       </div>
                     </div>

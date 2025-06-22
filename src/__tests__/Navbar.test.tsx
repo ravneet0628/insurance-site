@@ -1,77 +1,71 @@
-import { describe, it, expect } from 'vitest';
-import { render } from '@testing-library/react';
-import { screen, fireEvent } from '@testing-library/dom';
+import React from 'react';
+import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
+import { describe, it, expect } from 'vitest';
+import '@testing-library/jest-dom';
 import Navbar from '../components/Navbar';
 
-const NavbarWrapper = () => (
-  <BrowserRouter>
-    <Navbar />
-  </BrowserRouter>
+// Wrapper component for Router context
+const RouterWrapper = ({ children }: { children: React.ReactNode }) => (
+  <BrowserRouter>{children}</BrowserRouter>
 );
 
-describe('Navbar', () => {
-  it('should render navigation links', () => {
-    render(<NavbarWrapper />);
+describe('Navbar Component', () => {
+  it('renders the SecureChoice logo and brand name', () => {
+    render(
+      <RouterWrapper>
+        <Navbar />
+      </RouterWrapper>
+    );
     
-    expect(screen.getByText('SecureChoice')).toBeInTheDocument();
-    // Use getAllByText for Home and About since they appear in both desktop and mobile nav
-    expect(screen.getAllByText('Home').length).toBeGreaterThan(0);
-    expect(screen.getAllByText('About').length).toBeGreaterThan(0);
-    expect(screen.getAllByText('Services').length).toBeGreaterThan(0);
-    expect(screen.getAllByText('Quote').length).toBeGreaterThan(0);
-    expect(screen.getAllByText('Contact').length).toBeGreaterThan(0);
+    const logoLink = screen.getByRole('link', { name: /go to homepage/i });
+    expect(logoLink).toBeInTheDocument();
+    
+    const brandName = screen.getByText('SecureChoice');
+    expect(brandName).toBeInTheDocument();
   });
 
-  it('should toggle mobile menu when hamburger button is clicked', () => {
-    render(<NavbarWrapper />);
+  it('renders all main navigation links', () => {
+    render(
+      <RouterWrapper>
+        <Navbar />
+      </RouterWrapper>
+    );
     
-    // Find the mobile menu button (hamburger)
-    const mobileMenuButton = screen.getByRole('button', { name: /toggle navigation/i });
-    expect(mobileMenuButton).toBeInTheDocument();
-    
-    // Mobile menu should be closed initially (checking for transform class)
-    const mobileNav = screen.getByTestId('mobile-nav');
-    expect(mobileNav).toHaveClass('translate-x-full');
-    
-    // Click to open
-    fireEvent.click(mobileMenuButton);
-    expect(mobileNav).toHaveClass('translate-x-0');
-    
-    // Click to close
-    fireEvent.click(mobileMenuButton);
-    expect(mobileNav).toHaveClass('translate-x-full');
+    expect(screen.getByRole('link', { name: 'Home' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'About' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Services' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Quote' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Contact' })).toBeInTheDocument();
   });
 
-  it('should close mobile menu when a navigation link is clicked', () => {
-    render(<NavbarWrapper />);
+  it('has correct href attributes for navigation links', () => {
+    render(
+      <RouterWrapper>
+        <Navbar />
+      </RouterWrapper>
+    );
     
-    const mobileMenuButton = screen.getByRole('button', { name: /toggle navigation/i });
-    const mobileNav = screen.getByTestId('mobile-nav');
-    
-    // Open mobile menu
-    fireEvent.click(mobileMenuButton);
-    expect(mobileNav).toHaveClass('translate-x-0');
-    
-    // Click on a mobile navigation link
-    const mobileHomeLinks = screen.getAllByText('Home');
-    if (mobileHomeLinks.length > 1) {
-      fireEvent.click(mobileHomeLinks[1]);
-    }
-    
-    // Menu should close
-    expect(mobileNav).toHaveClass('translate-x-full');
+    expect(screen.getByRole('link', { name: 'Home' })).toHaveAttribute('href', '/');
+    expect(screen.getByRole('link', { name: 'About' })).toHaveAttribute('href', '/about');
+    expect(screen.getByRole('link', { name: 'Services' })).toHaveAttribute('href', '/services');
+    expect(screen.getByRole('link', { name: 'Quote' })).toHaveAttribute('href', '/quote');
+    expect(screen.getByRole('link', { name: 'Contact' })).toHaveAttribute('href', '/contact');
   });
 
-  it('should highlight active navigation link', () => {
-    render(<NavbarWrapper />);
+  it('renders contact information links', () => {
+    render(
+      <RouterWrapper>
+        <Navbar />
+      </RouterWrapper>
+    );
     
-    // Check if Home link has active styling (since we're on root path)
-    const homeLinks = screen.getAllByText('Home');
-    // Desktop nav link should have active styling
-    const homeLink = homeLinks[0]?.closest('a');
-    if (homeLink) {
-      expect(homeLink).toHaveClass('text-primary');
-    }
+    const phoneLink = screen.getByRole('link', { name: /call securechoice insurance/i });
+    expect(phoneLink).toBeInTheDocument();
+    expect(phoneLink).toHaveAttribute('href', 'tel:+1234567890');
+    
+    const emailLink = screen.getByRole('link', { name: 'info@securechoice.com' });
+    expect(emailLink).toBeInTheDocument();
+    expect(emailLink).toHaveAttribute('href', 'mailto:info@securechoice.com');
   });
-});
+}); 

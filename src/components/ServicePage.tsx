@@ -62,18 +62,18 @@ const ServicePage: React.FC = () => {
    */
   const getServiceImage = (serviceSlug: string): string => {
     const imageMap: Record<string, string> = {
-      'life-insurance': '/images/family-protection.jpg',
-      'super-visa-insurance': '/images/family-protection.jpg',
-      'visitors-insurance': '/images/handshake.jpg',
-      'disability-insurance': '/images/family-protection.jpg',
-      'critical-illness-insurance': '/images/family-protection.jpg',
-      'resp': '/images/family-protection.jpg',
-      'rrsp': '/images/office-building.jpg',
-      'drug-dental-insurance': '/images/handshake.jpg',
-      'tfsa': '/images/office-building.jpg',
+      'life-insurance': '/images/life-protection.jpg',
+      'super-visa-insurance': '/images/travel-insurance.jpg',
+      'visitors-insurance': '/images/travel-insurance.jpg',
+      'disability-insurance': '/images/professional-consultation.jpg',
+      'critical-illness-insurance': '/images/critical-care.jpg',
+      'resp': '/images/education-savings.jpg',
+      'rrsp': '/images/investment-growth.jpg',
+      'drug-dental-insurance': '/images/health-protection.jpg',
+      'tfsa': '/images/investment-growth.jpg',
     };
     
-    return imageMap[serviceSlug] || '/images/handshake.jpg';
+    return imageMap[serviceSlug] || '/images/professional-consultation.jpg';
   };
 
   return (
@@ -387,18 +387,16 @@ const ServicePage: React.FC = () => {
         </section>
 
         {/* Enhanced CTA Section */}
-        <section className="py-20 bg-gradient-to-r from-primary to-blue-600 relative overflow-hidden">
+        <section className="py-20 gradient-cta relative overflow-hidden">
           {/* Background Image */}
-          {content.cta.backgroundImage && (
-            <div className="absolute inset-0">
-              <img 
-                src={content.cta.backgroundImage}
-                alt="Call to action background"
-                className="w-full h-full object-cover opacity-20"
-              />
-            </div>
-          )}
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-blue-600/90"></div>
+          <div className="absolute inset-0">
+            <img 
+              src="/images/financial-planning.jpg"
+              alt="Financial planning and insurance consultation"
+              className="w-full h-full object-cover opacity-15"
+            />
+          </div>
+          <div className="absolute inset-0 gradient-cta-light"></div>
           
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
             <motion.div
@@ -407,10 +405,10 @@ const ServicePage: React.FC = () => {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-3xl md:text-4xl font-ubuntu font-bold text-white mb-6">
+              <h2 className="text-3xl md:text-4xl font-ubuntu font-bold text-white mb-6 drop-shadow-lg">
                 {content.cta.title}
               </h2>
-              <p className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-xl text-blue-50 mb-8 max-w-3xl mx-auto leading-relaxed drop-shadow-md">
                 {content.cta.subtitle}
               </p>
               
