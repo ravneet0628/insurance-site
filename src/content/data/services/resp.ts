@@ -39,7 +39,7 @@ export const respContent: ServiceContent = {
         ],
       },
       {
-        icon: 'TrendingUp',
+        icon: 'LineChart',
         title: 'Tax-Deferred Growth',
         description: 'Investment growth accumulates tax-free until withdrawal for education.',
         details: [

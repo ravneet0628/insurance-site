@@ -50,7 +50,7 @@ export const disabilityInsuranceContent: ServiceContent = {
         ],
       },
       {
-        icon: 'DollarSign',
+        icon: 'Settings',
         title: 'Flexible Benefits',
         description: 'Choose benefit amounts and features that fit your needs and budget.',
         details: [

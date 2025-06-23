@@ -50,7 +50,7 @@ export const drugDentalInsuranceContent: ServiceContent = {
         ],
       },
       {
-        icon: 'Eye',
+        icon: 'Glasses',
         title: 'Vision & Paramedical',
         description: 'Coverage for eye care and alternative healthcare services.',
         details: [

@@ -53,7 +53,7 @@ export const lifeInsuranceContent: ServiceContent = {
         ]
       },
       {
-        icon: "TrendingUp",
+        icon: "ArrowUpRight",
         title: "Universal Life Insurance",
         description: "Flexible permanent insurance with investment options and adjustable premiums.",
         details: [
