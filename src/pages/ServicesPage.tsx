@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Shield, Heart, Award, CheckCircle, Star, TrendingUp, Phone, ArrowRight, ShieldCheck, Plane, HeartHandshake, UserCheck, BookOpen, Tablets, PiggyBank } from 'lucide-react';
-import { Helmet } from 'react-helmet-async';
 import Hero from '../components/Hero';
 import Accordion from '../components/Accordion';
 import Card from '../components/Card';
@@ -84,17 +83,15 @@ const ServicesPage: React.FC = () => {
 
   return (
     <div className="min-h-screen">
-      <Helmet>
-        <title>Insurance Services - SecureChoice Insurance | Auto, Home, Life & More</title>
-        <meta 
-          name="description" 
-          content="Explore our comprehensive insurance services including auto, home, life, commercial, and travel insurance. Compare coverage options and get personalized quotes." 
-        />
-        <meta property="og:title" content="Insurance Services - SecureChoice" />
-        <meta property="og:description" content="Comprehensive insurance solutions for auto, home, life, business, and travel coverage." />
-        <meta property="og:type" content="website" />
-        <link rel="canonical" href="/services" />
-      </Helmet>
+      <title>Insurance Services - SecureChoice Insurance | Auto, Home, Life & More</title>
+      <meta 
+        name="description" 
+        content="Explore our comprehensive insurance services including auto, home, life, commercial, and travel insurance. Compare coverage options and get personalized quotes." 
+      />
+      <meta property="og:title" content="Insurance Services - SecureChoice" />
+      <meta property="og:description" content="Comprehensive insurance solutions for auto, home, life, business, and travel coverage." />
+      <meta property="og:type" content="website" />
+      <link rel="canonical" href="/services" />
 
       {/* Enhanced Hero Section */}
       <Hero
