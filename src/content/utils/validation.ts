@@ -129,8 +129,11 @@ export function validateAllContent(
  */
 export function validateIcons(content: ServiceContent, slug: string): string[] {
   const validIcons = [
-    'Shield', 'Users', 'Heart', 'Activity', 'Award', 'Clock', 
-    'CheckCircle', 'Wallet', 'Target', 'Eye', 'DollarSign'
+    'Shield', 'ShieldCheck', 'Users', 'UserCheck', 'Heart', 'HeartHandshake', 'Activity', 
+    'Award', 'Clock', 'CheckCircle', 'Wallet', 'Target', 'Eye', 'DollarSign', 'Star',
+    'TrendingUp', 'TrendingDown', 'Phone', 'ArrowRight', 'Home', 'Plane', 'Smile',
+    'Tablets', 'Timer', 'GraduationCap', 'Umbrella', 'Building2', 'Headphones',
+    'ThumbsUp', 'FileText', 'Zap', 'PiggyBank', 'BookOpen'
   ];
   
   const missingIcons: string[] = [];

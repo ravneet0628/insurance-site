@@ -25,7 +25,7 @@ const Hero: React.FC<HeroProps> = ({
   const heightClasses = {
     sm: 'min-h-[400px] h-80 sm:h-96',
     md: 'min-h-[500px] h-96 sm:h-[500px]',
-    lg: 'min-h-[600px] h-[500px] sm:h-[600px] lg:h-[640px]',
+    lg: 'min-h-[680px] h-[500px] sm:h-[600px] lg:h-[680px]',
     xl: 'min-h-screen h-screen',
   };
 
@@ -85,7 +85,7 @@ const Hero: React.FC<HeroProps> = ({
           
           {/* Responsive subtitle with proper line height and max width */}
           <motion.p 
-            className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-100 max-w-4xl mx-auto leading-relaxed font-light break-words px-2 sm:px-0"
+            className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 max-w-4xl mx-auto leading-relaxed font-light break-words px-2 sm:px-0 opacity-90"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}

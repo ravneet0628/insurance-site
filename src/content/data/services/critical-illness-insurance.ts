@@ -28,7 +28,7 @@ export const criticalIllnessInsuranceContent: ServiceContent = {
     subtitle: 'Coverage for the conditions that matter most',
     features: [
       {
-        icon: 'Shield',
+        icon: 'AlertTriangle',
         title: 'Major Critical Illnesses',
         description: 'Comprehensive coverage for the most serious and life-changing conditions.',
         details: [
@@ -39,7 +39,7 @@ export const criticalIllnessInsuranceContent: ServiceContent = {
         ],
       },
       {
-        icon: 'Heart',
+        icon: 'Users',
         title: 'Additional Conditions',
         description: 'Extended coverage for a wide range of serious medical conditions.',
         details: [
@@ -50,7 +50,7 @@ export const criticalIllnessInsuranceContent: ServiceContent = {
         ],
       },
       {
-        icon: 'TrendingUp',
+        icon: 'Layers',
         title: 'Flexible Benefits',
         description: 'Options to customize your coverage and enhance your protection.',
         details: [

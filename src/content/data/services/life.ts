@@ -31,7 +31,7 @@ export const lifeInsuranceContent: ServiceContent = {
     subtitle: "Choose the plan that best fits your needs and budget",
     features: [
       {
-        icon: "Shield",
+        icon: "FileText",
         title: "Term Life Insurance",
         description: "Affordable coverage for a specific period, perfect for temporary needs and budget-conscious families.",
         details: [

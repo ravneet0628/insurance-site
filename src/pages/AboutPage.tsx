@@ -1,427 +1,260 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Shield, CheckCircle, Heart, Target, Eye, Users, Award, TrendingUp, Building, Handshake } from 'lucide-react';
-import { Helmet } from 'react-helmet-async';
-import Hero from '../components/Hero';
-import Card from '../components/Card';
-import CTAButton from '../components/CTAButton';
 import { useAboutPageContent } from '../content/hooks/usePageContent';
+import Hero from '../components/Hero';
+import PageContainer from '../components/PageContainer';
+import SectionHeader from '../components/SectionHeader';
+import CTASection from '../components/CTASection';
+import ContentGrid from '../components/ContentGrid';
+import IconContainer from '../components/IconContainer';
+import Card from '../components/Card';
 
 /**
- * AboutPage component - Company information, mission, vision, timeline, team, and values
- * Implements comprehensive layout improvements with contextual images and responsive design
+ * AboutPage component - Company information, mission, team, and timeline
  */
 const AboutPage: React.FC = () => {
   const content = useAboutPageContent();
+  const { hero, mission, vision, timeline, team } = content;
 
-  // Enhanced icon mapping for dynamic icons
-  const iconMap = {
-    Target,
-    Eye,
-    Shield,
-    Heart,
-    CheckCircle,
-    Users,
-    Award,
-    TrendingUp,
-    Building,
-    Handshake,
+  // Create CTA data since it's not in the content structure
+  const cta = {
+    title: "Ready to Work With Us?",
+    subtitle: "Experience the SecureChoice difference with personalized service and expert guidance.",
+    primaryButton: {
+      text: "Get Your Quote",
+      href: "/quote"
+    },
+    secondaryButton: {
+      text: "Contact Our Team",
+      href: "/contact"
+    }
   };
 
-  // Enhanced values data with better icons
-  const values = [
+  // Create reasons data from mission and vision with unique icons
+  const reasons = [
     {
-      title: 'Integrity',
-      description: 'We believe in honest, transparent communication and ethical business practices in everything we do.',
-      icon: Shield,
+      title: "Expert Guidance",
+      description: "Our licensed professionals provide personalized recommendations based on your unique needs and circumstances.",
+      icon: "ThumbsUp"
     },
     {
-      title: 'Excellence',
-      description: 'We strive for excellence in our service delivery, continuously improving to exceed expectations.',
-      icon: Award,
+      title: "Comprehensive Coverage",
+      description: "From life and travel insurance to investment planning, we offer complete protection solutions.",
+      icon: "Umbrella"
     },
     {
-      title: 'Compassion',
-      description: 'We understand that insurance decisions are personal and treat every client with empathy and care.',
-      icon: Heart,
+      title: "Competitive Rates", 
+      description: "We work with 50+ top insurers to find you the best coverage at the most competitive prices.",
+      icon: "TrendingDown"
     },
+    {
+      title: "24/7 Support",
+      description: "Round-the-clock claims support and customer service when you need assistance most.",
+      icon: "Phone"
+    }
   ];
-
-  // Enhanced team data mapped from content
-  const team = content.team.members.map(member => ({
-    name: member.name,
-    role: member.position,
-    experience: member.bio,
-    specialization: '', // Could be added to content structure if needed
-  }));
-
-  // Timeline data from content
-  const timeline = content.timeline.items.map(item => ({
-    year: item.year,
-    event: item.description
-  }));
 
   return (
     <div className="min-h-screen">
-      <Helmet>
-        <title>{content.meta.title}</title>
-        <meta name="description" content={content.meta.description} />
-        {content.meta.keywords && (
-          <meta name="keywords" content={content.meta.keywords.join(', ')} />
-        )}
-        <meta property="og:title" content={content.meta.title} />
-        <meta property="og:description" content={content.meta.description} />
-        <meta property="og:type" content="website" />
-      </Helmet>
-
-      {/* Enhanced Hero Section */}
+      {/* Hero Section */}
       <Hero
-        title={content.hero.title}
-        subtitle={content.hero.subtitle}
-        bgImg={content.hero.backgroundImage}
+        title={hero.title}
+        subtitle={hero.subtitle}
+        bgImg={hero.backgroundImage}
+        ctaText={hero.primaryCTA.text}
+        ctaLink={hero.primaryCTA.link}
         height="md"
-        ctaText={content.hero.primaryCTA.text}
-        ctaLink={content.hero.primaryCTA.link}
+        overlay="heavy"
       />
 
-      {/* Mission & Vision - Enhanced Layout */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section Header */}
+      {/* Mission & Vision Section */}
+      <PageContainer className="py-16 lg:py-24">
+        <div className="grid md:grid-cols-2 gap-12 lg:gap-16">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100"
           >
-            <div className="flex items-center justify-center mb-4">
-              <div className="h-1 w-12 bg-primary mr-4"></div>
-              <span className="text-primary font-semibold uppercase tracking-wider text-sm">Our Purpose</span>
-              <div className="h-1 w-12 bg-primary ml-4"></div>
+            <div className="flex items-center mb-6">
+              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900">{mission.title}</h3>
             </div>
-            <h2 className="text-4xl md:text-5xl font-ubuntu font-bold text-neutral-text mb-6">
-              Mission & Vision
-            </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Our guiding principles that drive everything we do for our clients and community.
-            </p>
+            <p className="text-gray-600 leading-relaxed">{mission.content}</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Mission Card */}
-            <motion.div
-              initial={{ opacity: 0, x: -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <Card className="h-full p-8 hover:shadow-xl transition-all duration-500 border-l-4 border-primary">
-                <div className="flex items-start mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-br from-primary to-blue-600 rounded-2xl flex items-center justify-center mr-6 flex-shrink-0">
-                    {React.createElement(iconMap[content.mission.icon as keyof typeof iconMap] || Target, {
-                      className: "w-8 h-8 text-white"
-                    })}
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-ubuntu font-bold text-neutral-text mb-2">{content.mission.title}</h3>
-                    <div className="w-12 h-1 bg-primary"></div>
-                  </div>
-                </div>
-                <p className="text-gray-600 leading-relaxed text-lg">
-                  {content.mission.content}
-                </p>
-              </Card>
-            </motion.div>
-
-            {/* Vision Card */}
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <Card className="h-full p-8 hover:shadow-xl transition-all duration-500 border-l-4 border-blue-600">
-                <div className="flex items-start mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mr-6 flex-shrink-0">
-                    {React.createElement(iconMap[content.vision.icon as keyof typeof iconMap] || Eye, {
-                      className: "w-8 h-8 text-white"
-                    })}
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-ubuntu font-bold text-neutral-text mb-2">{content.vision.title}</h3>
-                    <div className="w-12 h-1 bg-blue-600"></div>
-                  </div>
-                </div>
-                <p className="text-gray-600 leading-relaxed text-lg">
-                  {content.vision.content}
-                </p>
-              </Card>
-            </motion.div>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100"
+          >
+            <div className="flex items-center mb-6">
+              <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
+                <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900">{vision.title}</h3>
+            </div>
+            <p className="text-gray-600 leading-relaxed">{vision.content}</p>
+          </motion.div>
         </div>
-      </section>
+      </PageContainer>
 
-      {/* Company Timeline - Enhanced Design */}
-      <section className="py-20 bg-white relative overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute top-20 left-10 w-32 h-32 bg-primary/5 rounded-full"></div>
-        <div className="absolute bottom-20 right-10 w-40 h-40 bg-blue-100 rounded-full"></div>
-        
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <div className="flex items-center justify-center mb-4">
-              <TrendingUp className="w-6 h-6 text-primary mr-2" />
-              <span className="text-primary font-semibold uppercase tracking-wider text-sm">Our Journey</span>
-              <TrendingUp className="w-6 h-6 text-primary ml-2" />
-            </div>
-            <h2 className="text-4xl md:text-5xl font-ubuntu font-bold text-neutral-text mb-6">
-              {content.timeline.title}
-            </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              From humble beginnings to becoming a trusted insurance partner for thousands of Canadians.
-            </p>
-          </motion.div>
-
-          {/* Enhanced Timeline */}
+      {/* Timeline Section */}
+      <section className="py-16 lg:py-20 bg-gray-50">
+        <PageContainer>
+          <SectionHeader
+            title={timeline.title}
+            subtitle="Two decades of growth, innovation, and service excellence"
+            textAlign="center"
+            className="mb-16"
+          />
+          
           <div className="relative">
-            {/* Timeline Line */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-primary to-blue-600 hidden md:block"></div>
+            {/* Timeline line */}
+            <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-0.5 bg-blue-200"></div>
             
             <div className="space-y-12">
-              {timeline.map((item, index) => (
+              {timeline.items.map((item: any, index: number) => (
                 <motion.div
                   key={item.year}
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, delay: index * 0.2 }}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className={`flex items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} flex-col md:space-x-8`}
+                  className={`relative flex items-center ${
+                    index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+                  }`}
                 >
-                  {/* Content Card */}
-                  <div className={`flex-1 ${index % 2 === 0 ? 'md:text-right md:pr-8' : 'md:text-left md:pl-8'} mb-4 md:mb-0`}>
-                    <Card className="p-6 hover:shadow-lg transition-all duration-300">
-                      <div className={`inline-flex items-center px-4 py-2 bg-gradient-to-r from-primary to-blue-600 text-white rounded-full font-ubuntu font-bold text-sm mb-4 ${index % 2 === 0 ? 'md:ml-auto' : ''}`}>
-                        <Building className="w-4 h-4 mr-2" />
-                        {item.year}
+                  {/* Timeline dot */}
+                  <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 w-4 h-4 bg-blue-600 rounded-full border-4 border-white shadow-lg z-10"></div>
+                  
+                  {/* Content */}
+                  <div className={`ml-12 md:ml-0 md:w-1/2 ${
+                    index % 2 === 0 ? 'md:pr-12' : 'md:pl-12'
+                  }`}>
+                    <div className="bg-white p-6 rounded-lg shadow-md">
+                      <div className="flex items-center mb-3">
+                        <span className="text-2xl font-bold text-blue-600 mr-3">{item.year}</span>
+                        <h4 className="text-lg font-semibold text-gray-900">{item.title}</h4>
                       </div>
-                      <p className="text-gray-700 leading-relaxed">{item.event}</p>
-                    </Card>
+                      <p className="text-gray-600">{item.description}</p>
+                    </div>
                   </div>
-
-                  {/* Timeline Dot */}
-                  <div className="w-6 h-6 bg-gradient-to-br from-primary to-blue-600 rounded-full border-4 border-white shadow-lg flex-shrink-0 relative z-10 hidden md:block">
-                    <div className="absolute inset-1 bg-white rounded-full"></div>
-                  </div>
-
-                  {/* Spacer for mobile */}
-                  <div className="flex-1 hidden md:block"></div>
                 </motion.div>
               ))}
             </div>
           </div>
-        </div>
+        </PageContainer>
       </section>
 
-      {/* Team Section - Enhanced with Better Images */}
-      <section className="py-20 bg-gradient-to-br from-neutral-bg to-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Team Hero Image - Better Context */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="mb-16"
-          >
-            <div className="relative h-80 rounded-3xl overflow-hidden shadow-2xl">
-              <img 
-                src="/images/modern-office-team.jpg" 
-                alt="SecureChoice Insurance professional team collaboration and expertise"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-blue-600/80 flex items-center justify-center">
-                <div className="text-center text-white max-w-4xl px-8">
-                  <h2 className="text-4xl md:text-5xl font-ubuntu font-bold mb-4">Our Expert Team</h2>
-                  <p className="text-xl md:text-2xl font-light">Dedicated professionals working for your peace of mind</p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-          
-          {/* Team Section Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <div className="flex items-center justify-center mb-4">
-              <Users className="w-6 h-6 text-primary mr-2" />
-              <span className="text-primary font-semibold uppercase tracking-wider text-sm">Our People</span>
-              <Users className="w-6 h-6 text-primary ml-2" />
-            </div>
-            <h2 className="text-4xl md:text-5xl font-ubuntu font-bold text-neutral-text mb-6">
-              {content.team.title}
-            </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              {content.team.subtitle}
-            </p>
-          </motion.div>
-
-          {/* Enhanced Team Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {team.map((member, index) => (
-              <motion.div
-                key={member.name}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: index * 0.15 }}
-                viewport={{ once: true }}
-                className="group"
-              >
-                <Card className="text-center h-full p-8 hover:shadow-xl transition-all duration-500 group-hover:-translate-y-2">
-                  {/* Enhanced Avatar */}
-                  <div className="relative mb-6">
-                    <div className="w-24 h-24 bg-gradient-to-br from-primary via-blue-600 to-purple-600 rounded-full mx-auto flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <Users className="w-12 h-12 text-white" />
-                    </div>
-                    <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 rounded-full border-4 border-white flex items-center justify-center">
-                      <CheckCircle className="w-4 h-4 text-white" />
-                    </div>
-                  </div>
-                  
-                  <h3 className="text-xl font-ubuntu font-bold text-neutral-text mb-2">
-                    {member.name}
-                  </h3>
-                  <p className="text-primary font-semibold mb-3">{member.role}</p>
-                  <p className="text-sm text-gray-600 mb-2 leading-relaxed">{member.experience}</p>
-                  {member.specialization && (
-                    <p className="text-xs text-gray-500 italic">{member.specialization}</p>
-                  )}
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Values Section - Enhanced Design */}
-      <section className="py-20 bg-white relative overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary rounded-full"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-blue-600 rounded-full"></div>
-        </div>
+      {/* Team Section */}
+      <PageContainer className="py-16 lg:py-24">
+        <SectionHeader
+          title={team.title}
+          subtitle={team.subtitle}
+          textAlign="center"
+          className="mb-16"
+        />
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <div className="flex items-center justify-center mb-4">
-              <Award className="w-6 h-6 text-primary mr-2" />
-              <span className="text-primary font-semibold uppercase tracking-wider text-sm">Our Values</span>
-              <Award className="w-6 h-6 text-primary ml-2" />
-            </div>
-            <h2 className="text-4xl md:text-5xl font-ubuntu font-bold text-neutral-text mb-6">
-              What Drives Us
-            </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              The core principles that guide everything we do and shape our commitment to excellence.
-            </p>
-          </motion.div>
+        <ContentGrid columns={{ sm: 1, md: 2, lg: 4 }} gap="lg">
+          {team.members.map((member: any, index: number) => (
+            <motion.div
+              key={member.name}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="bg-white rounded-lg shadow-lg overflow-hidden"
+            >
+              <div className="aspect-square bg-gray-200 flex items-center justify-center">
+                <svg className="w-16 h-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+              </div>
+              <div className="p-6">
+                <h4 className="text-lg font-semibold text-gray-900 mb-1">{member.name}</h4>
+                <p className="text-blue-600 font-medium mb-3">{member.position}</p>
+                <p className="text-gray-600 text-sm">{member.bio}</p>
+              </div>
+            </motion.div>
+          ))}
+        </ContentGrid>
+      </PageContainer>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {values.map((value, index) => (
+      {/* Why Choose Us Section */}
+      <section className="py-16 lg:py-20 bg-gradient-to-br from-blue-50 to-indigo-100">
+        <PageContainer>
+          <SectionHeader
+            title="Why Choose SecureChoice?"
+            subtitle="Experience the difference of working with true insurance professionals"
+            textAlign="center"
+            className="mb-16"
+          />
+          
+          <ContentGrid columns={{ sm: 1, md: 2 }} gap="lg">
+            {reasons.map((reason, index) => (
               <motion.div
-                key={value.title}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: index * 0.2 }}
+                key={reason.title}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="group"
               >
-                <Card className="text-center h-full p-8 hover:shadow-xl transition-all duration-500 group-hover:-translate-y-2 relative overflow-hidden">
-                  {/* Background Gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-transparent to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <Card className="h-full p-6 card-hover bg-white border border-gray-100 relative overflow-hidden">
+                  {/* Background pattern */}
+                  <div className="absolute top-0 right-0 w-20 h-20 bg-primary/5 rounded-full -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500"></div>
                   
-                  <div className="relative z-10">
-                    {/* Enhanced Icon */}
-                    <div className="flex justify-center mb-6">
-                      <div className="w-20 h-20 bg-gradient-to-br from-primary/10 to-blue-100 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <value.icon className="w-10 h-10 text-primary" />
-                      </div>
-                    </div>
-                    
-                    <h3 className="text-2xl font-ubuntu font-bold text-neutral-text mb-6">
-                      {value.title}
+                  {/* Icon section */}
+                  <div className="relative z-10 mb-4">
+                    <IconContainer 
+                      icon={reason.icon}
+                      variant="gradient"
+                      size="md"
+                      className="hover-scale"
+                    />
+                  </div>
+
+                  {/* Content */}
+                  <div className="relative z-10 flex-1 flex flex-col">
+                    <h3 className="text-xl font-ubuntu font-bold text-neutral-text mb-3 leading-tight">
+                      {reason.title}
                     </h3>
-                    <p className="text-gray-600 leading-relaxed">
-                      {value.description}
+                    
+                    <p className="text-gray-600 leading-relaxed flex-1">
+                      {reason.description}
                     </p>
                   </div>
                 </Card>
               </motion.div>
             ))}
-          </div>
-        </div>
+          </ContentGrid>
+        </PageContainer>
       </section>
 
-      {/* Call to Action Section */}
-      <section className="py-20 gradient-cta relative overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <img 
-            src="/images/client-meeting.jpg"
-            alt="Professional client consultation and advisory meeting"
-            className="w-full h-full object-cover opacity-15"
-          />
-        </div>
-        <div className="absolute inset-0 gradient-cta-light"></div>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-4xl font-ubuntu font-bold text-white mb-6 drop-shadow-lg">
-              Ready to Experience the SecureChoice Difference?
-            </h2>
-            <p className="text-xl text-blue-50 mb-8 max-w-2xl mx-auto drop-shadow-md">
-              Join thousands of satisfied clients who trust us with their insurance needs. Let's build your protection plan together.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <CTAButton
-                to="/quote"
-                variant="light"
-                size="lg"
-              >
-                Get Started Today
-              </CTAButton>
-              <CTAButton
-                to="/contact"
-                variant="light-outline"
-                size="lg"
-              >
-                <Handshake className="w-5 h-5 mr-2" />
-                Meet Our Team
-              </CTAButton>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      {/* CTA Section */}
+      <CTASection
+        title={cta.title}
+        subtitle={cta.subtitle}
+        primaryCTA={{
+          text: cta.primaryButton.text,
+          href: cta.primaryButton.href,
+        }}
+        secondaryCTA={{
+          text: cta.secondaryButton.text,
+          href: cta.secondaryButton.href,
+        }}
+        backgroundImage="/images/professional-consultation.jpg"
+      />
     </div>
   );
 };

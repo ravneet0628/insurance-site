@@ -28,7 +28,7 @@ export const rrspContent: ServiceContent = {
     subtitle: 'Take advantage of Canada\'s most powerful retirement savings tool',
     features: [
       {
-        icon: 'DollarSign',
+        icon: 'Star',
         title: 'Tax Benefits',
         description: 'Immediate tax deductions and long-term tax-deferred growth.',
         details: [
@@ -39,7 +39,7 @@ export const rrspContent: ServiceContent = {
         ],
       },
       {
-        icon: 'TrendingUp',
+        icon: 'Target',
         title: 'Investment Growth',
         description: 'Build wealth through compound growth over decades.',
         details: [

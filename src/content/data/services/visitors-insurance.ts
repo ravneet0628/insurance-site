@@ -28,7 +28,7 @@ export const visitorsInsuranceContent: ServiceContent = {
     subtitle: 'Coverage options for every type of traveler',
     features: [
       {
-        icon: 'Shield',
+        icon: 'Zap',
         title: 'Emergency Medical Coverage',
         description: 'Comprehensive coverage for unexpected medical emergencies and treatments.',
         details: [
@@ -39,7 +39,7 @@ export const visitorsInsuranceContent: ServiceContent = {
         ],
       },
       {
-        icon: 'Heart',
+        icon: 'Eye',
         title: 'Additional Health Benefits',
         description: 'Extended coverage for dental, vision, and paramedical services.',
         details: [
@@ -50,7 +50,7 @@ export const visitorsInsuranceContent: ServiceContent = {
         ],
       },
       {
-        icon: 'Plane',
+        icon: 'ArrowRight',
         title: 'Travel Benefits',
         description: 'Protection for travel-related emergencies and disruptions.',
         details: [

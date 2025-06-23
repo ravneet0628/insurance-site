@@ -1,11 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Shield, Users, Heart, Activity, Award, Clock, CheckCircle, Wallet, Star, TrendingUp, Phone, ArrowRight } from 'lucide-react';
+import { Shield, Users, Heart, Activity, Award, Clock, CheckCircle, Wallet, Star, TrendingUp, Phone, ArrowRight, ShieldCheck, Plane, HeartHandshake, UserCheck, BookOpen, Tablets, PiggyBank } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import Hero from '../components/Hero';
 import Accordion from '../components/Accordion';
 import Card from '../components/Card';
 import CTAButton from '../components/CTAButton';
+import CTASection from '../components/CTASection';
 import { useServiceContent } from '../content/hooks/useServiceContent';
 import type { ServiceContent } from '../content/types/services';
 
@@ -32,20 +33,17 @@ const ServicesPage: React.FC = () => {
     .map(slug => ({ slug, content: useServiceContent(slug) }))
     .filter(service => service.content !== null) as { slug: string; content: ServiceContent }[];
 
-  // Enhanced icon mapping with additional icons
-  const iconMap = {
-    Shield,
-    Users,
-    Heart,
-    Activity,
-    Award,
-    Clock,
-    CheckCircle,
-    Wallet,
-    Star,
-    TrendingUp,
-    Phone,
-    ArrowRight,
+  // Service-specific icon mapping matching HomePage
+  const serviceIconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+    'super-visa-insurance': ShieldCheck,
+    'visitors-insurance': Plane,
+    'life-insurance': HeartHandshake,
+    'disability-insurance': UserCheck,
+    'critical-illness-insurance': Heart,
+    'resp': BookOpen,
+    'rrsp': Star,
+    'drug-dental-insurance': Tablets,
+    'tfsa': PiggyBank
   };
 
   // Transform the content management data to enhanced accordion format
@@ -54,7 +52,7 @@ const ServicesPage: React.FC = () => {
     title: service.content.meta.title.split(' | ')[0] || service.content.meta.title,
     description: service.content.hero.subtitle,
     features: service.content.features.features.slice(0, 4).map((feature: any) => feature.description),
-    icon: iconMap[service.content.features.features[0]?.icon as keyof typeof iconMap] || Shield,
+    icon: serviceIconMap[service.slug] || Shield,
     slug: service.slug,
     price: service.content.overview.highlights?.[0] || 'Contact for pricing',
     category: service.slug.includes('visa') || service.slug.includes('visitors') ? 'Travel' : 
@@ -62,7 +60,7 @@ const ServicesPage: React.FC = () => {
               'Investment'
   }));
 
-  // Enhanced benefits data
+  // Enhanced benefits data with unique icons
   const benefits = [
     {
       title: 'Expert Guidance',
@@ -79,7 +77,7 @@ const ServicesPage: React.FC = () => {
     {
       title: '24/7 Support',
       description: 'Round-the-clock claims support and customer service whenever you need assistance, 365 days a year.',
-      icon: Clock,
+      icon: Phone,
       stats: '24/7 Availability'
     },
   ];
@@ -358,50 +356,20 @@ const ServicesPage: React.FC = () => {
       </section>
 
       {/* Call to Action Section */}
-      <section className="py-20 gradient-cta relative overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <img 
-            src="/images/business-growth.jpg"
-            alt="Business growth and financial security"
-            className="w-full h-full object-cover opacity-15"
-          />
-        </div>
-        <div className="absolute inset-0 gradient-cta-light"></div>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-4xl font-ubuntu font-bold text-white mb-6 drop-shadow-lg">
-              Ready to Get Protected?
-            </h2>
-            <p className="text-xl text-blue-50 mb-8 max-w-3xl mx-auto drop-shadow-md">
-              Don't wait until it's too late. Get a personalized insurance quote today and secure your family's future with confidence.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <CTAButton 
-                to="/quote" 
-                size="lg"
-                className="bg-white text-primary hover:bg-gray-100 shadow-lg"
-              >
-                Get Free Quote
-              </CTAButton>
-              <CTAButton 
-                to="/contact" 
-                variant="outline" 
-                size="lg"
-                className="border-white text-white hover:bg-white hover:text-primary"
-              >
-                <Phone className="w-5 h-5 mr-2" />
-                Speak to Expert
-              </CTAButton>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <CTASection
+        title="Ready to Get Protected?"
+        subtitle="Don't wait until it's too late. Get a personalized insurance quote today and secure your family's future with confidence."
+        backgroundImage="/images/business-growth.jpg"
+        primaryCTA={{
+          text: "Get Free Quote",
+          to: "/quote"
+        }}
+        secondaryCTA={{
+          text: "Speak to Expert",
+          to: "/contact",
+          icon: Phone
+        }}
+      />
     </div>
   );
 };

@@ -39,7 +39,7 @@ export const superVisaInsuranceContent: ServiceContent = {
         ],
       },
       {
-        icon: 'Heart',
+        icon: 'Activity',
         title: 'Additional Health Benefits',
         description: 'Extended coverage beyond basic requirements for complete protection.',
         details: [
