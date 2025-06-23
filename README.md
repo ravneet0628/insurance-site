@@ -2,6 +2,8 @@
 
 A modern, responsive insurance broker website built with React, TypeScript, Tailwind CSS, and Vite.
 
+<!-- Updated to React 19 with native meta tags support - no more react-helmet-async! -->
+
 ## 🚀 Features
 
 - **Modern Design**: Clean, professional design with custom brand colors and typography
@@ -108,7 +110,6 @@ The site can be deployed to any static hosting service:
 - Netlify
 - GitHub Pages
 - AWS S3 + CloudFront
-
 
 ## 🧪 Testing
 
