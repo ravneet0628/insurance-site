@@ -26,12 +26,12 @@ export const homePageContent: HomePageContent = {
       {
         id: 'super-visa-insurance',
         title: 'Super Visa Insurance',
-        description: 'Mandatory medical insurance for parents and grandparents visiting Canada on a Super Visa. Comprehensive coverage with competitive rates.',
-        icon: 'Shield',
+        description: 'Mandatory medical insurance for parents and grandparents visiting Canada on a Super Visa with a minimum coverage of $100,000.',
+        icon: 'ShieldCheck',
         features: [
           'Minimum $100,000 coverage required',
           'Valid for multiple entries',
-          'Coverage for pre-existing conditions available',
+          'Pre-existing conditions accepted',
           'Emergency medical and hospitalization'
         ],
         link: '/services/super-visa-insurance'
@@ -40,7 +40,7 @@ export const homePageContent: HomePageContent = {
         id: 'visitors-insurance',
         title: 'Visitors Insurance',
         description: 'Essential travel medical insurance for visitors to Canada. Protect yourself from unexpected medical emergencies during your stay.',
-        icon: 'Heart',
+        icon: 'Plane',
         features: [
           'Emergency medical coverage',
           'Prescription drugs coverage',
@@ -53,7 +53,7 @@ export const homePageContent: HomePageContent = {
         id: 'life-insurance',
         title: 'Life Insurance',
         description: 'Secure your family\'s financial future with comprehensive life insurance coverage. Term and permanent life insurance options available.',
-        icon: 'Users',
+        icon: 'HeartHandshake',
         features: [
           'Term and whole life options',
           'Affordable premium rates',
@@ -66,7 +66,7 @@ export const homePageContent: HomePageContent = {
         id: 'disability-insurance',
         title: 'Disability Insurance',
         description: 'Protect your income with disability insurance. Short-term and long-term coverage to maintain your lifestyle if you can\'t work.',
-        icon: 'Activity',
+        icon: 'UserCheck',
         features: [
           'Income replacement up to 85%',
           'Short and long-term options',
@@ -79,7 +79,7 @@ export const homePageContent: HomePageContent = {
         id: 'critical-illness-insurance',
         title: 'Critical Illness Insurance',
         description: 'Financial protection when facing serious illness. Lump sum payment to help with medical costs and lifestyle adjustments.',
-        icon: 'Shield',
+        icon: 'Heart',
         features: [
           'Lump sum tax-free benefit',
           'Coverage for 25+ conditions',
@@ -92,7 +92,7 @@ export const homePageContent: HomePageContent = {
         id: 'investment-planning',
         title: 'Investment & Savings',
         description: 'Build your financial future with RESP, RRSP, and TFSA solutions. Expert guidance for education savings and retirement planning.',
-        icon: 'TrendingUp',
+        icon: 'PiggyBank',
         features: [
           'RESP education savings',
           'RRSP retirement planning',
@@ -115,12 +115,12 @@ export const homePageContent: HomePageContent = {
       {
         title: '50+ Insurance Partners',
         description: 'We work with Canada\'s top insurance companies to find you the best coverage at the most competitive rates.',
-        icon: 'Wallet'
+        icon: 'Building2'
       },
       {
         title: '24/7 Claims Support',
         description: 'Round-the-clock assistance when you need it most. Our claims support team is always here to help.',
-        icon: 'Clock'
+        icon: 'Headphones'
       },
       {
         title: '98% Customer Satisfaction',

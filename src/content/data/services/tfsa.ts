@@ -39,7 +39,7 @@ export const tfsaContent: ServiceContent = {
         ],
       },
       {
-        icon: 'TrendingUp',
+        icon: 'BarChart',
         title: 'Investment Options',
         description: 'Choose from a wide range of qualified investments to grow your money.',
         details: [

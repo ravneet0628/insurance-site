@@ -28,7 +28,7 @@ export const disabilityInsuranceContent: ServiceContent = {
     subtitle: 'Choose the coverage that fits your needs and occupation',
     features: [
       {
-        icon: 'Shield',
+        icon: 'CheckCircle',
         title: 'Income Replacement',
         description: 'Protect your ability to earn income when you cannot work due to disability.',
         details: [

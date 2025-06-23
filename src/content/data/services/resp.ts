@@ -28,7 +28,7 @@ export const respContent: ServiceContent = {
     subtitle: 'Take advantage of government incentives and investment growth',
     features: [
       {
-        icon: 'Award',
+        icon: 'GraduationCap',
         title: 'Government Grants & Bonds',
         description: 'Receive substantial government contributions to boost your savings.',
         details: [
@@ -50,7 +50,7 @@ export const respContent: ServiceContent = {
         ],
       },
       {
-        icon: 'Users',
+        icon: 'BookOpen',
         title: 'Flexible Family Options',
         description: 'Plans designed to work for families of all sizes and situations.',
         details: [

@@ -6,6 +6,7 @@ import { useServiceContent } from '../content/hooks/useServiceContent';
 
 import ScrollToTop from './ScrollToTop';
 import CTAButton from './CTAButton';
+import CTASection from './CTASection';
 import Card from './Card';
 import * as Icons from 'lucide-react';
 
@@ -387,52 +388,20 @@ const ServicePage: React.FC = () => {
         </section>
 
         {/* Enhanced CTA Section */}
-        <section className="py-20 gradient-cta relative overflow-hidden">
-          {/* Background Image */}
-          <div className="absolute inset-0">
-            <img 
-              src="/images/financial-planning.jpg"
-              alt="Financial planning and insurance consultation"
-              className="w-full h-full object-cover opacity-15"
-            />
-          </div>
-          <div className="absolute inset-0 gradient-cta-light"></div>
-          
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-3xl md:text-4xl font-ubuntu font-bold text-white mb-6 drop-shadow-lg">
-                {content.cta.title}
-              </h2>
-              <p className="text-xl text-blue-50 mb-8 max-w-3xl mx-auto leading-relaxed drop-shadow-md">
-                {content.cta.subtitle}
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <CTAButton 
-                  to={content.cta.buttonLink}
-                  size="lg"
-                  className="bg-white text-primary hover:bg-gray-100 shadow-lg"
-                >
-                  {content.cta.buttonText}
-                </CTAButton>
-                <CTAButton 
-                  to="/contact"
-                  variant="outline"
-                  size="lg"
-                  className="border-white text-white hover:bg-white hover:text-primary"
-                >
-                  <Icons.MessageCircle className="w-5 h-5 mr-2" />
-                  Ask Questions
-                </CTAButton>
-              </div>
-            </motion.div>
-          </div>
-        </section>
+        <CTASection
+          title={content.cta.title}
+          subtitle={content.cta.subtitle}
+          backgroundImage="/images/financial-planning.jpg"
+          primaryCTA={{
+            text: content.cta.buttonText,
+            to: content.cta.buttonLink
+          }}
+          secondaryCTA={{
+            text: "Ask Questions",
+            to: "/contact",
+            icon: Icons.MessageCircle
+          }}
+        />
       </main>
 
       
