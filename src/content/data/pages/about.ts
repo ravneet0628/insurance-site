@@ -20,13 +20,13 @@ export const aboutPageContent: AboutPageContent = {
   mission: {
     title: "Our Mission",
     content: "To provide comprehensive, affordable insurance solutions that give our clients peace of mind and financial security. We are committed to building lasting relationships through exceptional service, expert guidance, and unwavering support when you need it most.",
-    icon: "Target"
+    icon: "Compass"
   },
 
   vision: {
     title: "Our Vision", 
     content: "To be Canada's most trusted insurance brokerage, known for our personalized approach, innovative solutions, and commitment to protecting families and businesses. We envision a future where everyone has access to the right insurance coverage at the right price.",
-    icon: "Eye"
+    icon: "Focus"
   },
 
   timeline: {

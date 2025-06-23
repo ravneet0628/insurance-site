@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Shield, Users, Heart, Activity, Award, Clock, CheckCircle, Wallet, Star, TrendingUp, Phone, ArrowRight, ShieldCheck, Plane, HeartHandshake, UserCheck, BookOpen, Tablets, PiggyBank } from 'lucide-react';
+import { Shield, Heart, Award, CheckCircle, Star, TrendingUp, Phone, ArrowRight, ShieldCheck, Plane, HeartHandshake, UserCheck, BookOpen, Tablets, PiggyBank } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import Hero from '../components/Hero';
 import Accordion from '../components/Accordion';

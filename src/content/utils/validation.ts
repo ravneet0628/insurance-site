@@ -133,7 +133,9 @@ export function validateIcons(content: ServiceContent, slug: string): string[] {
     'Award', 'Clock', 'CheckCircle', 'Wallet', 'Target', 'Eye', 'DollarSign', 'Star',
     'TrendingUp', 'TrendingDown', 'Phone', 'ArrowRight', 'Home', 'Plane', 'Smile',
     'Tablets', 'Timer', 'GraduationCap', 'Umbrella', 'Building2', 'Headphones',
-    'ThumbsUp', 'FileText', 'Zap', 'PiggyBank', 'BookOpen'
+    'ThumbsUp', 'FileText', 'Zap', 'PiggyBank', 'BookOpen', 'AlertTriangle', 'Layers',
+    'BarChart', 'LineChart', 'ArrowUpRight', 'Building', 'Glasses', 'Search', 'Focus',
+    'Settings', 'MapPin', 'BadgePercent', 'Compass'
   ];
   
   const missingIcons: string[] = [];

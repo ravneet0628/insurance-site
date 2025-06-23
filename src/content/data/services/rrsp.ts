@@ -28,7 +28,7 @@ export const rrspContent: ServiceContent = {
     subtitle: 'Take advantage of Canada\'s most powerful retirement savings tool',
     features: [
       {
-        icon: 'Star',
+        icon: 'BadgePercent',
         title: 'Tax Benefits',
         description: 'Immediate tax deductions and long-term tax-deferred growth.',
         details: [
@@ -50,7 +50,7 @@ export const rrspContent: ServiceContent = {
         ],
       },
       {
-        icon: 'Home',
+        icon: 'Building',
         title: 'Special Programs',
         description: 'Access your RRSP for major life events without penalties.',
         details: [

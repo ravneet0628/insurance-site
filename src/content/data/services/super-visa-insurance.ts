@@ -50,7 +50,7 @@ export const superVisaInsuranceContent: ServiceContent = {
         ],
       },
       {
-        icon: 'Plane',
+        icon: 'MapPin',
         title: 'Travel Protection',
         description: 'Coverage for travel-related emergencies and unexpected situations.',
         details: [

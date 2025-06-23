@@ -35,7 +35,17 @@ import {
   BookOpen,
   AlertTriangle,
   Layers,
-  BarChart
+  BarChart,
+  LineChart,
+  ArrowUpRight,
+  Building,
+  Glasses,
+  Search,
+  Focus,
+  Settings,
+  MapPin,
+  BadgePercent,
+  Compass
 } from 'lucide-react';
 
 interface IconContainerProps {
@@ -120,7 +130,38 @@ const iconMap = {
   FileText,
   
   // Performance & Energy
-  Zap
+  Zap,
+  
+  // Critical & Warning
+  AlertTriangle,
+  
+  // Structure & Layers
+  Layers,
+  
+  // Analytics & Charts
+  BarChart,
+  LineChart,
+  
+  // Navigation & Movement
+  ArrowUpRight,
+  
+  // Buildings & Structures
+  Building,
+  
+  // Vision & Search
+  Glasses,
+  Search,
+  Focus,
+  
+  // Settings & Configuration
+  Settings,
+  
+  // Location & Navigation
+  MapPin,
+  Compass,
+  
+  // Badges & Percentages
+  BadgePercent
 } as const;
 
 /**
