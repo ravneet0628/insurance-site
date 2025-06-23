@@ -1,7 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Helmet } from 'react-helmet-async';
 import { useServiceContent } from '../content/hooks/useServiceContent';
 
 import ScrollToTop from './ScrollToTop';
@@ -79,19 +78,17 @@ const ServicePage: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Helmet>
-        <title>{content.meta.title}</title>
-        <meta name="description" content={content.meta.description} />
-        {content.meta.keywords && (
-          <meta name="keywords" content={content.meta.keywords.join(', ')} />
-        )}
-        {content.meta.ogImage && (
-          <meta property="og:image" content={content.meta.ogImage} />
-        )}
-        <meta property="og:title" content={content.meta.title} />
-        <meta property="og:description" content={content.meta.description} />
-        <meta property="og:type" content="website" />
-      </Helmet>
+      <title>{content.meta.title}</title>
+      <meta name="description" content={content.meta.description} />
+      {content.meta.keywords && (
+        <meta name="keywords" content={content.meta.keywords.join(', ')} />
+      )}
+      {content.meta.ogImage && (
+        <meta property="og:image" content={content.meta.ogImage} />
+      )}
+      <meta property="og:title" content={content.meta.title} />
+      <meta property="og:description" content={content.meta.description} />
+      <meta property="og:type" content="website" />
 
       
       
