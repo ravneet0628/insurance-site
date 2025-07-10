@@ -56,7 +56,7 @@ const ContactPage: React.FC = () => {
     setIsSubmitting(true);
     try {
       const response = await submitContact(data as ContactFormData);
-      
+
       if (response.success) {
         toast.success(response.message, {
           duration: 5000,
@@ -100,9 +100,21 @@ const ContactPage: React.FC = () => {
       icon: Mail,
       title: 'Email Addresses',
       details: [
-        { label: 'General Inquiries', value: 'info@securechoice.com', href: 'mailto:info@securechoice.com' },
-        { label: 'Quotes', value: 'quotes@securechoice.com', href: 'mailto:quotes@securechoice.com' },
-        { label: 'Claims', value: 'claims@securechoice.com', href: 'mailto:claims@securechoice.com' },
+        {
+          label: 'General Inquiries',
+          value: 'info@securechoice.com',
+          href: 'mailto:info@securechoice.com',
+        },
+        {
+          label: 'Quotes',
+          value: 'quotes@securechoice.com',
+          href: 'mailto:quotes@securechoice.com',
+        },
+        {
+          label: 'Claims',
+          value: 'claims@securechoice.com',
+          href: 'mailto:claims@securechoice.com',
+        },
       ],
     },
     {
@@ -120,47 +132,46 @@ const ContactPage: React.FC = () => {
   return (
     <>
       <title>Contact Us - SecureChoice Insurance | Get in Touch</title>
-      <meta 
-        name="description" 
-        content="Contact SecureChoice Insurance in Toronto. Get quotes, file claims, or ask questions. Office location, phone numbers, email, and business hours." 
+      <meta
+        name="description"
+        content="Contact SecureChoice Insurance in Toronto. Get quotes, file claims, or ask questions. Office location, phone numbers, email, and business hours."
       />
       <meta property="og:title" content="Contact SecureChoice Insurance" />
-      <meta property="og:description" content="Get in touch with our Toronto office for insurance quotes, claims, and expert advice." />
+      <meta
+        property="og:description"
+        content="Get in touch with our Toronto office for insurance quotes, claims, and expert advice."
+      />
       <link rel="canonical" href="/contact" />
-      
+
       {/* Local SEO Schema */}
       <script type="application/ld+json">
         {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "InsuranceAgency",
-          "name": "SecureChoice Insurance",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "123 Insurance Street",
-            "addressLocality": "Toronto",
-            "addressRegion": "ON",
-            "postalCode": "M5V 3A8",
-            "addressCountry": "CA"
+          '@context': 'https://schema.org',
+          '@type': 'InsuranceAgency',
+          name: 'SecureChoice Insurance',
+          address: {
+            '@type': 'PostalAddress',
+            streetAddress: '123 Insurance Street',
+            addressLocality: 'Toronto',
+            addressRegion: 'ON',
+            postalCode: 'M5V 3A8',
+            addressCountry: 'CA',
           },
-          "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 43.6532,
-            "longitude": -79.3832
+          geo: {
+            '@type': 'GeoCoordinates',
+            latitude: 43.6532,
+            longitude: -79.3832,
           },
-          "telephone": "+1-123-456-7890",
-          "email": "info@securechoice.com",
-          "url": "https://securechoice.com",
-          "openingHours": [
-            "Mo-Fr 08:00-18:00",
-            "Sa 09:00-16:00"
-          ]
+          telephone: '+1-123-456-7890',
+          email: 'info@securechoice.com',
+          url: 'https://securechoice.com',
+          openingHours: ['Mo-Fr 08:00-18:00', 'Sa 09:00-16:00'],
         })}
       </script>
 
-
       {/* Contact Information Grid */}
-              <section className="section-spacing-sm bg-white">
-          <div className="page-container">
+      <section className="section-spacing-sm bg-white">
+        <div className="page-container">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -251,10 +262,7 @@ const ContactPage: React.FC = () => {
                         <br />
                         Toronto, ON M5V 3A8
                         <br />
-                        <a
-                          href="tel:+1234567890"
-                          className="text-primary hover:text-primary/80"
-                        >
+                        <a href="tel:+1234567890" className="text-primary hover:text-primary/80">
                           (123) 456-7890
                         </a>
                       </div>
@@ -288,7 +296,10 @@ const ContactPage: React.FC = () => {
 
                   <div>
                     <label htmlFor="name" className="form-label">
-                      Name <span className="text-accent" aria-label="required">*</span>
+                      Name{' '}
+                      <span className="text-accent" aria-label="required">
+                        *
+                      </span>
                     </label>
                     <input
                       {...register('name')}
@@ -305,9 +316,12 @@ const ContactPage: React.FC = () => {
                   </div>
 
                   <div>
-                                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                    Email Address <span className="text-accent" aria-label="required">*</span>
-                  </label>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                      Email Address{' '}
+                      <span className="text-accent" aria-label="required">
+                        *
+                      </span>
+                    </label>
                     <input
                       {...register('email')}
                       type="email"
@@ -323,9 +337,15 @@ const ContactPage: React.FC = () => {
                   </div>
 
                   <div>
-                                      <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                    Message <span className="text-accent" aria-label="required">*</span>
-                  </label>
+                    <label
+                      htmlFor="message"
+                      className="block text-sm font-medium text-gray-700 mb-2"
+                    >
+                      Message{' '}
+                      <span className="text-accent" aria-label="required">
+                        *
+                      </span>
+                    </label>
                     <textarea
                       {...register('message')}
                       id="message"
@@ -340,11 +360,7 @@ const ContactPage: React.FC = () => {
                     )}
                   </div>
 
-                  <CTAButton
-                    type="submit"
-                    disabled={!isValid || isSubmitting}
-                    className="w-full"
-                  >
+                  <CTAButton type="submit" disabled={!isValid || isSubmitting} className="w-full">
                     {isSubmitting ? (
                       <>
                         <Loader2 className="w-4 h-4 mr-2 animate-spin" />
@@ -382,9 +398,7 @@ const ContactPage: React.FC = () => {
               <p className="text-gray-600 mb-6">
                 Thank you for contacting us. We'll get back to you within 24 hours.
               </p>
-              <CTAButton onClick={() => setShowModal(false)}>
-                Close
-              </CTAButton>
+              <CTAButton onClick={() => setShowModal(false)}>Close</CTAButton>
             </div>
           </motion.div>
         </div>
@@ -395,4 +409,4 @@ const ContactPage: React.FC = () => {
   );
 };
 
-export default ContactPage; 
+export default ContactPage;

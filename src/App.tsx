@@ -5,9 +5,7 @@ import ScrollToTopOnRouteChange from './components/ScrollToTopOnRouteChange';
 
 // Lazy load pages for better performance
 const HomePage = React.lazy(() => import('./pages/HomePage'));
-const AboutPage = React.lazy(() => import('./pages/AboutPage'));
-const ServicesPage = React.lazy(() => import('./pages/ServicesPage'));
-const QuotePage = React.lazy(() => import('./pages/QuotePage'));
+const ResourcesPage = React.lazy(() => import('./pages/ResourcesPage'));
 const ContactPage = React.lazy(() => import('./pages/ContactPage'));
 const NotFoundPage = React.lazy(() => import('./pages/NotFoundPage'));
 
@@ -32,14 +30,11 @@ function App() {
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<HomePage />} />
-              <Route path="about" element={<AboutPage />} />
-              <Route path="services" element={<ServicesPage />} />
-              
-              {/* New content-managed service pages */}
+              <Route path="resources" element={<ResourcesPage />} />
+
+              {/* Content-managed service pages */}
               <Route path="services/:serviceSlug" element={<ServicePage />} />
-              
-              {/* All service pages now use the content management system via ServicePage component */}
-              <Route path="quote" element={<QuotePage />} />
+
               <Route path="contact" element={<ContactPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Route>

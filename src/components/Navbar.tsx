@@ -8,24 +8,24 @@ const Navbar: React.FC = () => {
 
   const navigation = [
     { name: 'Home', href: '/' },
-    { name: 'About', href: '/about' },
-    { name: 'Services', href: '/services' },
-    { name: 'Quote', href: '/quote' },
+    { name: 'Resources', href: '/resources' },
     { name: 'Contact', href: '/contact' },
   ];
 
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <nav className="bg-white shadow-lg sticky top-0 z-50" role="navigation" aria-label="Main Navigation">
+    <nav
+      className="bg-white shadow-lg sticky top-0 z-50"
+      role="navigation"
+      aria-label="Main Navigation"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
             <Link to="/" className="flex-shrink-0" aria-label="Go to homepage">
-              <span className="text-2xl font-ubuntu font-bold text-primary">
-                SecureChoice
-              </span>
+              <span className="text-2xl font-ubuntu font-bold text-primary">SecureChoice</span>
             </Link>
           </div>
 
@@ -36,9 +36,7 @@ const Navbar: React.FC = () => {
                 key={item.name}
                 to={item.href}
                 className={`px-3 py-2 text-sm font-medium transition-colors duration-200 relative ${
-                  isActive(item.href)
-                    ? 'text-primary'
-                    : 'text-neutral-text hover:text-primary'
+                  isActive(item.href) ? 'text-primary' : 'text-neutral-text hover:text-primary'
                 }`}
                 aria-current={isActive(item.href) ? 'page' : undefined}
                 aria-label={item.name}

@@ -2,22 +2,22 @@
 export type * from './types';
 
 // Hooks
-export { 
+export {
   useHomePageContent,
-  useAboutPageContent, 
+  useAboutPageContent,
   useContactPageContent,
-  usePageContent
+  usePageContent,
 } from './hooks/usePageContent';
 
 export {
   useServiceContent,
   getAvailableServices,
-  hasServiceContent
+  hasServiceContent,
 } from './hooks/useServiceContent';
 
 // Content Data
 export { homePageContent } from './data/pages/home';
-export { aboutPageContent } from './data/pages/about'; 
+export { aboutPageContent } from './data/pages/about';
 export { contactPageContent } from './data/pages/contact';
 
 // Service Content (optional exports for advanced usage)
@@ -28,7 +28,7 @@ export { disabilityInsuranceContent } from './data/services/disability-insurance
 export { criticalIllnessInsuranceContent } from './data/services/critical-illness-insurance';
 export { respContent } from './data/services/resp';
 export { rrspContent } from './data/services/rrsp';
-export { drugDentalInsuranceContent } from './data/services/drug-dental-insurance';
+
 export { tfsaContent } from './data/services/tfsa';
 
 // Utilities (Advanced Features)
@@ -37,12 +37,12 @@ export {
   validatePageContent,
   validateAllContent,
   validateIcons,
-  logContentValidation
+  logContentValidation,
 } from './utils/validation';
 
 export {
   generateServicePreview,
   generatePagePreview,
   generateContentAnalytics,
-  logContentPreview
-} from './utils/preview'; 
+  logContentPreview,
+} from './utils/preview';

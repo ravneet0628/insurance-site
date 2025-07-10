@@ -29,126 +29,136 @@ interface ContentGridProps {
  * High-performance ContentGrid component
  * Provides responsive grid layouts with optimized animations
  */
-const ContentGrid: React.FC<ContentGridProps> = React.memo(({
-  children,
-  columns = { sm: 1, md: 2, lg: 3, xl: 3 },
-  gap = 'lg',
-  stagger = true,
-  animationDelay = 0,
-  className = '',
-  minHeight,
-  align = 'stretch'
-}) => {
-  // Memoize grid column classes
-  const columnClasses = React.useMemo(() => {
-    const classes = ['grid'];
-    
-    if (columns.sm) classes.push(`grid-cols-${columns.sm}`);
-    if (columns.md) classes.push(`md:grid-cols-${columns.md}`);
-    if (columns.lg) classes.push(`lg:grid-cols-${columns.lg}`);
-    if (columns.xl) classes.push(`xl:grid-cols-${columns.xl}`);
-    
-    return classes.join(' ');
-  }, [columns]);
+const ContentGrid: React.FC<ContentGridProps> = React.memo(
+  ({
+    children,
+    columns = { sm: 1, md: 2, lg: 3, xl: 3 },
+    gap = 'lg',
+    stagger = true,
+    animationDelay = 0,
+    className = '',
+    minHeight,
+    align = 'stretch',
+  }) => {
+    // Memoize grid column classes
+    const columnClasses = React.useMemo(() => {
+      const classes = ['grid'];
 
-  // Memoize gap classes
-  const gapClasses = React.useMemo(() => ({
-    sm: 'gap-4',
-    md: 'gap-6',
-    lg: 'gap-8',
-    xl: 'gap-12'
-  }), []);
+      if (columns.sm) classes.push(`grid-cols-${columns.sm}`);
+      if (columns.md) classes.push(`md:grid-cols-${columns.md}`);
+      if (columns.lg) classes.push(`lg:grid-cols-${columns.lg}`);
+      if (columns.xl) classes.push(`xl:grid-cols-${columns.xl}`);
 
-  // Memoize alignment classes
-  const alignClasses = React.useMemo(() => ({
-    start: 'items-start',
-    center: 'items-center',
-    end: 'items-end',
-    stretch: 'items-stretch'
-  }), []);
+      return classes.join(' ');
+    }, [columns]);
 
-  // Animation variants for grid container
-  const containerVariants = React.useMemo(() => ({
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        duration: 0.3,
-        when: "beforeChildren",
-        staggerChildren: stagger ? 0.1 : 0,
-        delayChildren: animationDelay
-      }
-    }
-  }), [stagger, animationDelay]);
+    // Memoize gap classes
+    const gapClasses = React.useMemo(
+      () => ({
+        sm: 'gap-4',
+        md: 'gap-6',
+        lg: 'gap-8',
+        xl: 'gap-12',
+      }),
+      []
+    );
 
-  // Animation variants for grid items
-  const itemVariants = React.useMemo(() => ({
-    hidden: { 
-      opacity: 0, 
-      y: 30,
-      scale: 0.95
-    },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      scale: 1
-    }
-  }), []);
+    // Memoize alignment classes
+    const alignClasses = React.useMemo(
+      () => ({
+        start: 'items-start',
+        center: 'items-center',
+        end: 'items-end',
+        stretch: 'items-stretch',
+      }),
+      []
+    );
 
-  const itemTransition = {
-    duration: 0.5,
-    ease: [0.4, 0, 0.2, 1] as const
-  };
+    // Animation variants for grid container
+    const containerVariants = React.useMemo(
+      () => ({
+        hidden: { opacity: 0 },
+        visible: {
+          opacity: 1,
+          transition: {
+            duration: 0.3,
+            when: 'beforeChildren',
+            staggerChildren: stagger ? 0.1 : 0,
+            delayChildren: animationDelay,
+          },
+        },
+      }),
+      [stagger, animationDelay]
+    );
 
-  // Process children to add animation variants if stagger is enabled
-  const processedChildren = React.useMemo(() => {
-    if (!stagger) return children;
+    // Animation variants for grid items
+    const itemVariants = React.useMemo(
+      () => ({
+        hidden: {
+          opacity: 0,
+          y: 30,
+          scale: 0.95,
+        },
+        visible: {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+        },
+      }),
+      []
+    );
 
-    return React.Children.map(children, (child, index) => {
-      if (React.isValidElement(child)) {
-        return (
-          <motion.div
-            key={`grid-item-${index}`}
-            variants={itemVariants}
-            transition={itemTransition}
-            className={minHeight ? `min-h-[${minHeight}]` : ''}
-          >
-            {child}
-          </motion.div>
-        );
-      }
-      return child;
-    });
-  }, [children, stagger, itemVariants, minHeight]);
+    // Process children to add animation variants if stagger is enabled
+    const processedChildren = React.useMemo(() => {
+      if (!stagger) return children;
 
-  const gridClasses = `
+      const itemTransition = {
+        duration: 0.5,
+        ease: [0.4, 0, 0.2, 1] as const,
+      };
+
+      return React.Children.map(children, (child, index) => {
+        if (React.isValidElement(child)) {
+          return (
+            <motion.div
+              key={`grid-item-${index}`}
+              variants={itemVariants}
+              transition={itemTransition}
+              className={minHeight ? `min-h-[${minHeight}]` : ''}
+            >
+              {child}
+            </motion.div>
+          );
+        }
+        return child;
+      });
+    }, [children, stagger, itemVariants, minHeight]);
+
+    const gridClasses = `
     ${columnClasses} 
     ${gapClasses[gap]} 
     ${alignClasses[align]} 
     ${className}
   `.trim();
 
-  if (stagger) {
-    return (
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-50px" }}
-        className={gridClasses}
-      >
-        {processedChildren}
-      </motion.div>
-    );
-  }
+    if (stagger) {
+      return (
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-50px' }}
+          className={gridClasses}
+        >
+          {processedChildren}
+        </motion.div>
+      );
+    }
 
-  return (
-    <div className={gridClasses}>
-      {children}
-    </div>
-  );
-});
+    return <div className={gridClasses}>{children}</div>;
+  }
+);
 
 ContentGrid.displayName = 'ContentGrid';
 
-export default ContentGrid; 
+export default ContentGrid;

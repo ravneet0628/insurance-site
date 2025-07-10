@@ -17,10 +17,10 @@ describe('Navbar Component', () => {
         <Navbar />
       </RouterWrapper>
     );
-    
+
     const logoLink = screen.getByRole('link', { name: /go to homepage/i });
     expect(logoLink).toBeInTheDocument();
-    
+
     const brandName = screen.getByText('SecureChoice');
     expect(brandName).toBeInTheDocument();
   });
@@ -31,12 +31,10 @@ describe('Navbar Component', () => {
         <Navbar />
       </RouterWrapper>
     );
-    
-    expect(screen.getByRole('link', { name: 'Home' })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'About' })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Services' })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Quote' })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Contact' })).toBeInTheDocument();
+
+    expect(screen.getAllByRole('link', { name: 'Home' })).toHaveLength(2); // Desktop and mobile
+    expect(screen.getAllByRole('link', { name: 'Resources' })).toHaveLength(2); // Desktop and mobile
+    expect(screen.getAllByRole('link', { name: 'Contact' })).toHaveLength(2); // Desktop and mobile
   });
 
   it('has correct href attributes for navigation links', () => {
@@ -45,12 +43,21 @@ describe('Navbar Component', () => {
         <Navbar />
       </RouterWrapper>
     );
-    
-    expect(screen.getByRole('link', { name: 'Home' })).toHaveAttribute('href', '/');
-    expect(screen.getByRole('link', { name: 'About' })).toHaveAttribute('href', '/about');
-    expect(screen.getByRole('link', { name: 'Services' })).toHaveAttribute('href', '/services');
-    expect(screen.getByRole('link', { name: 'Quote' })).toHaveAttribute('href', '/quote');
-    expect(screen.getByRole('link', { name: 'Contact' })).toHaveAttribute('href', '/contact');
+
+    const homeLinks = screen.getAllByRole('link', { name: 'Home' });
+    homeLinks.forEach((link) => {
+      expect(link).toHaveAttribute('href', '/');
+    });
+
+    const resourcesLinks = screen.getAllByRole('link', { name: 'Resources' });
+    resourcesLinks.forEach((link) => {
+      expect(link).toHaveAttribute('href', '/resources');
+    });
+
+    const contactLinks = screen.getAllByRole('link', { name: 'Contact' });
+    contactLinks.forEach((link) => {
+      expect(link).toHaveAttribute('href', '/contact');
+    });
   });
 
   it('renders contact information links', () => {
@@ -59,13 +66,15 @@ describe('Navbar Component', () => {
         <Navbar />
       </RouterWrapper>
     );
-    
+
     const phoneLink = screen.getByRole('link', { name: /call securechoice insurance/i });
     expect(phoneLink).toBeInTheDocument();
     expect(phoneLink).toHaveAttribute('href', 'tel:+1234567890');
-    
-    const emailLink = screen.getByRole('link', { name: 'info@securechoice.com' });
-    expect(emailLink).toBeInTheDocument();
-    expect(emailLink).toHaveAttribute('href', 'mailto:info@securechoice.com');
+
+    const emailLinks = screen.getAllByRole('link', { name: 'info@securechoice.com' });
+    expect(emailLinks).toHaveLength(2); // Desktop and mobile
+    emailLinks.forEach((link) => {
+      expect(link).toHaveAttribute('href', 'mailto:info@securechoice.com');
+    });
   });
-}); 
+});

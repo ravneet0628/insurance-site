@@ -29,17 +29,20 @@ A modern, responsive insurance broker website built with React, TypeScript, Tail
 ## 📦 Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone <repository-url>
    cd insurance-site
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Start development server**
+
    ```bash
    npm run dev
    ```
@@ -60,12 +63,14 @@ A modern, responsive insurance broker website built with React, TypeScript, Tail
 ## 🎨 Design System
 
 ### Colors
+
 - **Primary**: `#1e2a78` (Navy blue)
 - **Accent**: `#e11d48` (Rose)
 - **Neutral Text**: `#374151`
 - **Neutral Background**: `#f9fafb`
 
 ### Typography
+
 - **Headings**: Ubuntu font family, bold weight
 - **Body**: Open Sans font family, normal weight
 - **Fluid sizing**: Custom clamp() utilities for responsive text
@@ -82,12 +87,14 @@ A modern, responsive insurance broker website built with React, TypeScript, Tail
 ## 🧩 Components
 
 ### Layout Components
+
 - `Layout.tsx` - Main layout wrapper with header, footer, and scroll-to-top
 - `Navbar.tsx` - Responsive navigation with mobile menu
 - `Footer.tsx` - Comprehensive footer with links and contact info
 - `ScrollToTop.tsx` - Floating action button for smooth scroll to top
 
 ### UI Components
+
 - `Hero.tsx` - Configurable hero section with background images
 - `Card.tsx` - Reusable card component with hover effects
 - `CTAButton.tsx` - Call-to-action button with multiple variants
@@ -106,6 +113,7 @@ A modern, responsive insurance broker website built with React, TypeScript, Tail
 ### Other Platforms
 
 The site can be deployed to any static hosting service:
+
 - Vercel
 - Netlify
 - GitHub Pages
@@ -131,4 +139,3 @@ npm run test:ui     # Run tests with UI
 ## 📄 License
 
 This project is licensed under the MIT License.
-

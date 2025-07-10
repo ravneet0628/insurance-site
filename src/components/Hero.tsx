@@ -60,11 +60,14 @@ const Hero: React.FC<HeroProps> = ({
       {/* Enhanced overlay stack with proper z-indexing */}
       <div className="absolute inset-0 bg-black/10 z-10"></div>
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/20 z-20"></div>
-      
+
       {/* Decorative elements - hidden on small screens to prevent content overlap */}
       <div className="absolute top-4 right-4 sm:top-10 sm:right-10 w-16 h-16 sm:w-32 sm:h-32 bg-white/5 rounded-full animate-pulse hidden sm:block z-0"></div>
-      <div className="absolute bottom-16 left-4 sm:bottom-20 sm:left-10 w-12 h-12 sm:w-20 sm:h-20 bg-white/5 rounded-full animate-pulse hidden sm:block z-0" style={{ animationDelay: '1s' }}></div>
-      
+      <div
+        className="absolute bottom-16 left-4 sm:bottom-20 sm:left-10 w-12 h-12 sm:w-20 sm:h-20 bg-white/5 rounded-full animate-pulse hidden sm:block z-0"
+        style={{ animationDelay: '1s' }}
+      ></div>
+
       {/* Main content container with proper z-index and responsive spacing */}
       <div className="relative z-30 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex-1 flex flex-col justify-center">
         <motion.div
@@ -74,7 +77,7 @@ const Hero: React.FC<HeroProps> = ({
           className="w-full space-y-6 sm:space-y-8 lg:space-y-10"
         >
           {/* Responsive heading with fluid sizing to prevent overflow */}
-          <motion.h1 
+          <motion.h1
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-ubuntu font-bold leading-tight sm:leading-tight md:leading-tight break-words"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -82,9 +85,9 @@ const Hero: React.FC<HeroProps> = ({
           >
             {title}
           </motion.h1>
-          
+
           {/* Responsive subtitle with proper line height and max width */}
-          <motion.p 
+          <motion.p
             className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 max-w-4xl mx-auto leading-relaxed font-light break-words px-2 sm:px-0 opacity-90"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -92,7 +95,7 @@ const Hero: React.FC<HeroProps> = ({
           >
             {subtitle}
           </motion.p>
-          
+
           {/* CTA buttons with improved responsive layout */}
           {hasCtaButton && (
             <motion.div
@@ -109,7 +112,7 @@ const Hero: React.FC<HeroProps> = ({
               >
                 {ctaText}
               </CTAButton>
-              
+
               <CTAButton
                 to="/contact"
                 size="lg"
@@ -122,7 +125,7 @@ const Hero: React.FC<HeroProps> = ({
           )}
         </motion.div>
       </div>
-      
+
       {/* Scroll indicator with conditional rendering based on height and proper spacing */}
       {height !== 'sm' && (
         <motion.div

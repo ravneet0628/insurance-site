@@ -13,15 +13,16 @@ const Footer: React.FC = () => {
           <div className="space-y-4">
             <h3 className="text-xl font-ubuntu font-bold">SecureChoice</h3>
             <p className="text-gray-300 text-sm leading-relaxed">
-              Your trusted insurance broker providing comprehensive coverage solutions 
-              for auto, home, and life insurance since 2010.
+              Your trusted insurance broker providing comprehensive coverage solutions for auto,
+              home, and life insurance since 2010.
             </p>
             <div className="flex space-x-4">
               <a
                 href="https://facebook.com/securechoiceinsurance"
                 className="text-gray-300 hover:text-white transition-colors"
                 aria-label="Facebook"
-                target="_blank" rel="noopener noreferrer"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <Facebook className="w-5 h-5" />
               </a>
@@ -29,7 +30,8 @@ const Footer: React.FC = () => {
                 href="https://twitter.com/securechoiceca"
                 className="text-gray-300 hover:text-white transition-colors"
                 aria-label="Twitter"
-                target="_blank" rel="noopener noreferrer"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <Twitter className="w-5 h-5" />
               </a>
@@ -37,7 +39,8 @@ const Footer: React.FC = () => {
                 href="https://linkedin.com/company/securechoiceinsurance"
                 className="text-gray-300 hover:text-white transition-colors"
                 aria-label="LinkedIn"
-                target="_blank" rel="noopener noreferrer"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <Linkedin className="w-5 h-5" />
               </a>
@@ -45,7 +48,8 @@ const Footer: React.FC = () => {
                 href="https://instagram.com/securechoiceinsurance"
                 className="text-gray-300 hover:text-white transition-colors"
                 aria-label="Instagram"
-                target="_blank" rel="noopener noreferrer"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <Instagram className="w-5 h-5" />
               </a>
@@ -57,35 +61,17 @@ const Footer: React.FC = () => {
             <h4 className="text-lg font-ubuntu font-semibold">Quick Links</h4>
             <ul className="space-y-2">
               <li>
-                <Link
-                  to="/"
-                  className="text-gray-300 hover:text-white transition-colors text-sm"
-                >
+                <Link to="/" className="text-gray-300 hover:text-white transition-colors text-sm">
                   Home
                 </Link>
               </li>
+
               <li>
                 <Link
-                  to="/about"
+                  to="/resources"
                   className="text-gray-300 hover:text-white transition-colors text-sm"
                 >
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/services"
-                  className="text-gray-300 hover:text-white transition-colors text-sm"
-                >
-                  Our Services
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/quote"
-                  className="text-gray-300 hover:text-white transition-colors text-sm"
-                >
-                  Get a Quote
+                  Resources
                 </Link>
               </li>
               <li>
@@ -101,27 +87,11 @@ const Footer: React.FC = () => {
 
           {/* Services */}
           <div className="space-y-4">
-            <h4 className="text-lg font-ubuntu font-semibold">Insurance Types</h4>
+            <h4 className="text-lg font-ubuntu font-semibold">Our Services</h4>
             <ul className="space-y-2">
               <li>
                 <Link
-                  to="/auto-insurance"
-                  className="text-gray-300 hover:text-white transition-colors text-sm"
-                >
-                  Auto Insurance
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/home-insurance"
-                  className="text-gray-300 hover:text-white transition-colors text-sm"
-                >
-                  Home Insurance
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/life-insurance"
+                  to="/services/life-insurance"
                   className="text-gray-300 hover:text-white transition-colors text-sm"
                 >
                   Life Insurance
@@ -129,18 +99,34 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <Link
-                  to="/business-insurance"
+                  to="/services/super-visa-insurance"
                   className="text-gray-300 hover:text-white transition-colors text-sm"
                 >
-                  Business Insurance
+                  Super Visa Insurance
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/travel-insurance"
+                  to="/services/visitors-insurance"
                   className="text-gray-300 hover:text-white transition-colors text-sm"
                 >
-                  Travel Insurance
+                  Visitors Insurance
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/services/disability-insurance"
+                  className="text-gray-300 hover:text-white transition-colors text-sm"
+                >
+                  Disability Insurance
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/services/critical-illness-insurance"
+                  className="text-gray-300 hover:text-white transition-colors text-sm"
+                >
+                  Critical Illness Insurance
                 </Link>
               </li>
             </ul>
@@ -153,8 +139,10 @@ const Footer: React.FC = () => {
               <div className="flex items-start space-x-3">
                 <MapPin className="w-5 h-5 text-gray-300 mt-0.5 flex-shrink-0" />
                 <span className="text-gray-300 text-sm">
-                  123 Insurance Street<br />
-                  Toronto, ON M5V 3A8<br />
+                  123 Insurance Street
+                  <br />
+                  Toronto, ON M5V 3A8
+                  <br />
                   Canada
                 </span>
               </div>
@@ -186,26 +174,7 @@ const Footer: React.FC = () => {
             <p className="text-gray-300 text-sm">
               © {currentYear} SecureChoice Insurance. All rights reserved.
             </p>
-            <div className="flex space-x-6">
-              <Link
-                to="/privacy-policy"
-                className="text-gray-300 hover:text-white transition-colors text-sm"
-              >
-                Privacy Policy
-              </Link>
-              <Link
-                to="/terms-of-service"
-                className="text-gray-300 hover:text-white transition-colors text-sm"
-              >
-                Terms of Service
-              </Link>
-              <Link
-                to="/cookie-policy"
-                className="text-gray-300 hover:text-white transition-colors text-sm"
-              >
-                Cookie Policy
-              </Link>
-            </div>
+            <div className="text-gray-300 text-sm">Licensed Insurance Broker - Serving Canada</div>
           </div>
         </div>
       </div>

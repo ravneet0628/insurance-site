@@ -7,15 +7,10 @@ interface CardProps {
   padding?: 'sm' | 'md' | 'lg';
 }
 
-const Card: React.FC<CardProps> = ({
-  children,
-  className = '',
-  hover = true,
-  padding = 'md',
-}) => {
+const Card: React.FC<CardProps> = ({ children, className = '', hover = true, padding = 'md' }) => {
   const baseClasses = 'bg-white rounded-lg shadow-md transition-all duration-300';
   const hoverClasses = hover ? 'hover:shadow-lg hover:scale-105' : '';
-  
+
   const paddingClasses = {
     sm: 'p-4',
     md: 'p-6',
@@ -24,11 +19,7 @@ const Card: React.FC<CardProps> = ({
 
   const classes = `${baseClasses} ${hoverClasses} ${paddingClasses[padding]} ${className}`;
 
-  return (
-    <div className={classes}>
-      {children}
-    </div>
-  );
+  return <div className={classes}>{children}</div>;
 };
 
-export default Card; 
+export default Card;

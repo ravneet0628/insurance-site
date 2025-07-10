@@ -37,4 +37,4 @@ export function usePageContent(pageSlug: 'home' | 'about' | 'contact') {
 
 export function getAvailablePages(): string[] {
   return Object.keys(pageContentMap);
-} 
+}

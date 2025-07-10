@@ -11,4 +11,4 @@ const ScrollToTopOnRouteChange = () => {
   return null;
 };
 
-export default ScrollToTopOnRouteChange; 
+export default ScrollToTopOnRouteChange;

@@ -25,7 +25,7 @@ export function generateServicePreview(content: ServiceContent, slug: string): C
     description: content.meta.description,
     lastModified: new Date().toISOString(),
     wordCount,
-    seoScore
+    seoScore,
   };
 }
 
@@ -46,7 +46,7 @@ export function generatePagePreview(
     description: content.meta.description,
     lastModified: new Date().toISOString(),
     wordCount,
-    seoScore
+    seoScore,
   };
 }
 
@@ -55,20 +55,20 @@ export function generatePagePreview(
  */
 function calculateWordCount(content: ServiceContent): number {
   let words = 0;
-  
+
   words += content.meta.title.split(' ').length;
   words += content.meta.description.split(' ').length;
   words += content.hero.title.split(' ').length;
   words += content.hero.subtitle.split(' ').length;
   words += content.overview.content.split(' ').length;
   words += content.details.content.split(' ').length;
-  
+
   // Count feature words
-  content.features.features.forEach(feature => {
+  content.features.features.forEach((feature) => {
     words += feature.title.split(' ').length;
     words += feature.description.split(' ').length;
     if (feature.details) {
-      feature.details.forEach(detail => {
+      feature.details.forEach((detail) => {
         words += detail.split(' ').length;
       });
     }
@@ -80,9 +80,11 @@ function calculateWordCount(content: ServiceContent): number {
 /**
  * Calculates approximate word count for page content
  */
-function calculatePageWordCount(content: HomePageContent | AboutPageContent | ContactPageContent): number {
+function calculatePageWordCount(
+  content: HomePageContent | AboutPageContent | ContactPageContent
+): number {
   let words = 0;
-  
+
   words += content.meta.title.split(' ').length;
   words += content.meta.description.split(' ').length;
   words += content.hero.title.split(' ').length;
@@ -93,14 +95,14 @@ function calculatePageWordCount(content: HomePageContent | AboutPageContent | Co
     // Home page
     const homeContent = content as HomePageContent;
     words += homeContent.about.description.split(' ').length;
-    homeContent.services.cards.forEach(card => {
+    homeContent.services.cards.forEach((card) => {
       words += card.title.split(' ').length;
       words += card.description.split(' ').length;
     });
   }
-  
+
   if ('mission' in content) {
-    // About page  
+    // About page
     const aboutContent = content as AboutPageContent;
     words += aboutContent.mission.content.split(' ').length;
     words += aboutContent.vision.content.split(' ').length;
@@ -114,7 +116,7 @@ function calculatePageWordCount(content: HomePageContent | AboutPageContent | Co
  */
 function calculateSEOScore(content: ServiceContent): number {
   let score = 0;
-  
+
   // Meta title (20 points)
   if (content.meta.title) {
     score += 10;
@@ -122,7 +124,7 @@ function calculateSEOScore(content: ServiceContent): number {
       score += 10;
     }
   }
-  
+
   // Meta description (20 points)
   if (content.meta.description) {
     score += 10;
@@ -130,22 +132,22 @@ function calculateSEOScore(content: ServiceContent): number {
       score += 10;
     }
   }
-  
+
   // Keywords (10 points)
   if (content.meta.keywords && content.meta.keywords.length > 0) {
     score += 10;
   }
-  
+
   // Hero content (20 points)
   if (content.hero.title && content.hero.subtitle) {
     score += 20;
   }
-  
+
   // Features (15 points)
   if (content.features.features && content.features.features.length >= 3) {
     score += 15;
   }
-  
+
   // CTA (15 points)
   if (content.cta.title && content.cta.buttonText && content.cta.buttonLink) {
     score += 15;
@@ -157,9 +159,11 @@ function calculateSEOScore(content: ServiceContent): number {
 /**
  * Calculates basic SEO score for page content
  */
-function calculatePageSEOScore(content: HomePageContent | AboutPageContent | ContactPageContent): number {
+function calculatePageSEOScore(
+  content: HomePageContent | AboutPageContent | ContactPageContent
+): number {
   let score = 0;
-  
+
   // Meta title (25 points)
   if (content.meta.title) {
     score += 15;
@@ -167,7 +171,7 @@ function calculatePageSEOScore(content: HomePageContent | AboutPageContent | Con
       score += 10;
     }
   }
-  
+
   // Meta description (25 points)
   if (content.meta.description) {
     score += 15;
@@ -175,12 +179,12 @@ function calculatePageSEOScore(content: HomePageContent | AboutPageContent | Con
       score += 10;
     }
   }
-  
+
   // Keywords (20 points)
   if (content.meta.keywords && content.meta.keywords.length > 0) {
     score += 20;
   }
-  
+
   // Hero content (30 points)
   if (content.hero.title && content.hero.subtitle) {
     score += 30;
@@ -202,30 +206,34 @@ export function generateContentAnalytics(
   contentByType: Record<string, number>;
 } {
   const allPreviews: ContentPreview[] = [];
-  
+
   // Generate service previews
   Object.entries(serviceContents).forEach(([slug, content]) => {
     allPreviews.push(generateServicePreview(content, slug));
   });
-  
-  // Generate page previews  
+
+  // Generate page previews
   Object.entries(pageContents).forEach(([slug, content]) => {
     allPreviews.push(generatePagePreview(content, slug));
   });
 
   const totalWords = allPreviews.reduce((sum, preview) => sum + preview.wordCount, 0);
-  const averageSEOScore = allPreviews.reduce((sum, preview) => sum + preview.seoScore, 0) / allPreviews.length;
-  
-  const contentByType = allPreviews.reduce((acc, preview) => {
-    acc[preview.type] = (acc[preview.type] || 0) + 1;
-    return acc;
-  }, {} as Record<string, number>);
+  const averageSEOScore =
+    allPreviews.reduce((sum, preview) => sum + preview.seoScore, 0) / allPreviews.length;
+
+  const contentByType = allPreviews.reduce(
+    (acc, preview) => {
+      acc[preview.type] = (acc[preview.type] || 0) + 1;
+      return acc;
+    },
+    {} as Record<string, number>
+  );
 
   return {
     totalContent: allPreviews.length,
     totalWords,
     averageSEOScore: Math.round(averageSEOScore),
-    contentByType
+    contentByType,
   };
 }
 
@@ -243,4 +251,4 @@ export function logContentPreview(preview: ContentPreview): void {
     console.log(`Last Modified: ${preview.lastModified}`);
     console.groupEnd();
   }
-} 
+}

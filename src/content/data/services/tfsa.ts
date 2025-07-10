@@ -3,24 +3,33 @@ import type { ServiceContent } from '../../types/services';
 export const tfsaContent: ServiceContent = {
   meta: {
     title: 'TFSA | Tax-Free Savings Account for Flexible Growth',
-    description: 'Tax-Free Savings Account for flexible, tax-free growth on your savings. Ideal for short-term and long-term financial goals with no tax on withdrawals.',
-    keywords: ['TFSA', 'tax-free savings account', 'tax-free growth', 'flexible savings', 'investment account'],
+    description:
+      'Tax-Free Savings Account for flexible, tax-free growth on your savings. Ideal for short-term and long-term financial goals with no tax on withdrawals.',
+    keywords: [
+      'TFSA',
+      'tax-free savings account',
+      'tax-free growth',
+      'flexible savings',
+      'investment account',
+    ],
   },
   hero: {
     title: 'TFSA - Tax-Free Savings Account',
-    subtitle: 'Achieve your financial goals with completely tax-free growth and withdrawals. The most flexible savings and investment account available to Canadians.',
+    subtitle:
+      'Achieve your financial goals with completely tax-free growth and withdrawals. The most flexible savings and investment account available to Canadians.',
     backgroundImage: '/images/office-building.jpg',
     ctaText: 'Open TFSA Account',
-    ctaLink: '/quote',
+    ctaLink: '/contact',
   },
   overview: {
     title: 'Ultimate Savings Flexibility',
-    content: 'A Tax-Free Savings Account (TFSA) offers the ultimate in savings flexibility with completely tax-free growth and withdrawals. Whether you\'re saving for a vacation, emergency fund, or long-term goals, your TFSA grows without any tax implications.',
+    content:
+      "A Tax-Free Savings Account (TFSA) offers the ultimate in savings flexibility with completely tax-free growth and withdrawals. Whether you're saving for a vacation, emergency fund, or long-term goals, your TFSA grows without any tax implications.",
     highlights: [
       'Completely tax-free growth and withdrawals',
       'Flexible contributions and withdrawals anytime',
       'Wide range of investment options available',
-      'No age limit for contributions'
+      'No age limit for contributions',
     ],
   },
   features: {
@@ -35,7 +44,7 @@ export const tfsaContent: ServiceContent = {
           'No tax on investment growth',
           'No tax on withdrawals',
           'Contribution room is never lost',
-          'Re-contribute withdrawn amounts next year'
+          'Re-contribute withdrawn amounts next year',
         ],
       },
       {
@@ -46,7 +55,7 @@ export const tfsaContent: ServiceContent = {
           'High-interest savings accounts',
           'Guaranteed Investment Certificates (GICs)',
           'Mutual funds and ETFs',
-          'Individual stocks and bonds'
+          'Individual stocks and bonds',
         ],
       },
       {
@@ -57,14 +66,15 @@ export const tfsaContent: ServiceContent = {
           'Withdraw funds anytime for any purpose',
           'No minimum withdrawal requirements',
           'Use for short-term or long-term goals',
-          'Ideal for emergency funds'
+          'Ideal for emergency funds',
         ],
       },
     ],
   },
   details: {
     title: 'TFSA Benefits & Strategies',
-    content: 'Maximize your TFSA benefits with strategic planning and understanding of contribution limits and investment options.',
+    content:
+      'Maximize your TFSA benefits with strategic planning and understanding of contribution limits and investment options.',
     items: [
       {
         title: 'Contribution Room & Limits',
@@ -73,7 +83,7 @@ export const tfsaContent: ServiceContent = {
           'Annual contribution limit (currently $7,000)',
           'Unused room carries forward indefinitely',
           'Re-contribute withdrawn amounts next calendar year',
-          'No income restrictions on contributions'
+          'No income restrictions on contributions',
         ],
       },
       {
@@ -83,7 +93,7 @@ export const tfsaContent: ServiceContent = {
           'Emergency fund savings',
           'Short-term savings goals',
           'Tax-free retirement income',
-          'Supplement to RRSP savings'
+          'Supplement to RRSP savings',
         ],
       },
       {
@@ -93,16 +103,17 @@ export const tfsaContent: ServiceContent = {
           'Designate beneficiaries for tax-free transfer',
           'No impact on Old Age Security or Guaranteed Income Supplement',
           'Spouse can inherit contribution room',
-          'No required withdrawals at any age'
+          'No required withdrawals at any age',
         ],
       },
     ],
   },
   cta: {
     title: 'Start Growing Your Money Tax-Free',
-    subtitle: 'Every dollar you don\'t save in a TFSA is a dollar that could be growing completely tax-free. Open your account today.',
+    subtitle:
+      "Every dollar you don't save in a TFSA is a dollar that could be growing completely tax-free. Open your account today.",
     buttonText: 'Open TFSA Today',
-    buttonLink: '/quote',
+    buttonLink: '/contact',
     backgroundImage: '/images/office-building.jpg',
   },
-}; 
+};

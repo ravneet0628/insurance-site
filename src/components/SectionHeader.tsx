@@ -38,7 +38,7 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
   className = '',
   titleSize = 'lg',
   subtitleMaxWidth = '3xl',
-  animationDelay = 0
+  animationDelay = 0,
 }) => {
   // Use alignment prop if provided, otherwise textAlign, default to center
   const actualAlignment = alignment || textAlign || 'center';
@@ -47,7 +47,7 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
     sm: 'text-2xl md:text-3xl',
     md: 'text-3xl md:text-4xl',
     lg: 'text-4xl md:text-5xl',
-    xl: 'text-5xl md:text-6xl'
+    xl: 'text-5xl md:text-6xl',
   };
 
   const maxWidthClasses = {
@@ -57,19 +57,19 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
     xl: 'max-w-xl',
     '2xl': 'max-w-2xl',
     '3xl': 'max-w-3xl',
-    '4xl': 'max-w-4xl'
+    '4xl': 'max-w-4xl',
   };
 
   const alignmentClasses = {
     left: 'text-left',
     center: 'text-center',
-    right: 'text-right'
+    right: 'text-right',
   };
 
   const justifyClasses = {
     left: 'justify-start',
     center: 'justify-center',
-    right: 'justify-end'
+    right: 'justify-end',
   };
 
   return (
@@ -100,17 +100,21 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
           </>
         )}
       </div>
-      
+
       {/* Main Title */}
-      <h2 className={`${titleSizeClasses[titleSize]} font-ubuntu font-bold text-neutral-text mb-6 leading-tight`}>
+      <h2
+        className={`${titleSizeClasses[titleSize]} font-ubuntu font-bold text-neutral-text mb-6 leading-tight`}
+      >
         {title}
       </h2>
-      
+
       {/* Optional Subtitle */}
       {subtitle && (
-        <p className={`text-lg text-gray-600 leading-relaxed ${
-          actualAlignment === 'center' ? `mx-auto ${maxWidthClasses[subtitleMaxWidth]}` : ''
-        }`}>
+        <p
+          className={`text-lg text-gray-600 leading-relaxed ${
+            actualAlignment === 'center' ? `mx-auto ${maxWidthClasses[subtitleMaxWidth]}` : ''
+          }`}
+        >
           {subtitle}
         </p>
       )}
@@ -118,4 +122,4 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
   );
 };
 
-export default SectionHeader; 
+export default SectionHeader;

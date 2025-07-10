@@ -9,8 +9,9 @@ import { disabilityInsuranceContent } from '../data/services/disability-insuranc
 import { criticalIllnessInsuranceContent } from '../data/services/critical-illness-insurance';
 import { respContent } from '../data/services/resp';
 import { rrspContent } from '../data/services/rrsp';
-import { drugDentalInsuranceContent } from '../data/services/drug-dental-insurance';
+
 import { tfsaContent } from '../data/services/tfsa';
+import { fhsaContent } from '../data/services/fhsa';
 
 const serviceContentMap: Record<string, ServiceContent> = {
   'life-insurance': lifeInsuranceContent,
@@ -18,21 +19,24 @@ const serviceContentMap: Record<string, ServiceContent> = {
   'visitors-insurance': visitorsInsuranceContent,
   'disability-insurance': disabilityInsuranceContent,
   'critical-illness-insurance': criticalIllnessInsuranceContent,
-  'resp': respContent,
-  'rrsp': rrspContent,
-  'drug-dental-insurance': drugDentalInsuranceContent,
-  'tfsa': tfsaContent,
+  resp: respContent,
+  rrsp: rrspContent,
+  tfsa: tfsaContent,
+  fhsa: fhsaContent,
 };
 
 export function useServiceContent(serviceSlug: string): ServiceContent | null {
   return useMemo(() => {
     const content = serviceContentMap[serviceSlug];
-    
+
     if (!content) {
-      console.warn(`No content found for service: ${serviceSlug}. Available services:`, Object.keys(serviceContentMap));
+      console.warn(
+        `No content found for service: ${serviceSlug}. Available services:`,
+        Object.keys(serviceContentMap)
+      );
       return null;
     }
-    
+
     return content;
   }, [serviceSlug]);
 }
@@ -43,4 +47,4 @@ export function getAvailableServices(): string[] {
 
 export function hasServiceContent(serviceSlug: string): boolean {
   return serviceSlug in serviceContentMap;
-} 
+}

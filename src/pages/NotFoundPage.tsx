@@ -7,7 +7,10 @@ const NotFoundPage: React.FC = () => {
   return (
     <>
       <title>Page Not Found - SecureChoice Insurance</title>
-      <meta name="description" content="The page you're looking for doesn't exist. Return to SecureChoice Insurance homepage." />
+      <meta
+        name="description"
+        content="The page you're looking for doesn't exist. Return to SecureChoice Insurance homepage."
+      />
 
       <div className="min-h-[600px] flex items-center justify-center bg-neutral-bg">
         <div className="max-w-md mx-auto text-center px-4">
@@ -17,22 +20,18 @@ const NotFoundPage: React.FC = () => {
               Page Not Found
             </h1>
             <p className="text-gray-600 mb-8">
-              Sorry, the page you're looking for doesn't exist. It might have been moved, 
-              deleted, or you entered the wrong URL.
+              Sorry, the page you're looking for doesn't exist. It might have been moved, deleted,
+              or you entered the wrong URL.
             </p>
           </div>
-          
+
           <div className="space-y-4">
             <CTAButton to="/" className="w-full">
               <Home className="w-5 h-5 mr-2" />
               Back to Home
             </CTAButton>
-            
-            <CTAButton 
-              onClick={() => window.history.back()} 
-              variant="outline" 
-              className="w-full"
-            >
+
+            <CTAButton onClick={() => window.history.back()} variant="outline" className="w-full">
               <ArrowLeft className="w-5 h-5 mr-2" />
               Go Back
             </CTAButton>
@@ -43,4 +42,4 @@ const NotFoundPage: React.FC = () => {
   );
 };
 
-export default NotFoundPage; 
+export default NotFoundPage;

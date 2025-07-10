@@ -4,7 +4,7 @@ import type {
   FeatureSection,
   OverviewSection,
   DetailSection,
-  CTASection
+  CTASection,
 } from './common';
 
 export interface ServiceContent {
@@ -22,4 +22,4 @@ export interface ServiceCardContent {
   icon: string;
   link: string;
   featured?: boolean;
-} 
+}

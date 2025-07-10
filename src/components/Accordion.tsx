@@ -92,13 +92,23 @@ const Accordion: React.FC<AccordionProps> = ({ items }) => {
                         ))}
                       </ul>
                       <div className="mt-6 pt-4 border-t border-gray-100">
-                        <Link 
+                        <Link
                           to={`/services/${item.slug}`}
                           className="inline-flex items-center text-primary hover:text-primary/80 font-medium transition-colors"
                         >
-                          Learn More 
-                          <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          Learn More
+                          <svg
+                            className="w-4 h-4 ml-1"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M9 5l7 7-7 7"
+                            />
                           </svg>
                         </Link>
                       </div>
@@ -114,4 +124,4 @@ const Accordion: React.FC<AccordionProps> = ({ items }) => {
   );
 };
 
-export default Accordion; 
+export default Accordion;

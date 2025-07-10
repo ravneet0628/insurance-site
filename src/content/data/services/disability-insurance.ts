@@ -3,24 +3,33 @@ import type { ServiceContent } from '../../types/services';
 export const disabilityInsuranceContent: ServiceContent = {
   meta: {
     title: 'Disability Insurance | Income Protection Coverage',
-    description: 'Protect your income with comprehensive disability insurance. Short and long-term coverage for illness, injury, and other disabilities that prevent you from working.',
-    keywords: ['disability insurance', 'income protection', 'short term disability', 'long term disability', 'salary protection'],
+    description:
+      'Protect your income with comprehensive disability insurance. Short and long-term coverage for illness, injury, and other disabilities that prevent you from working.',
+    keywords: [
+      'disability insurance',
+      'income protection',
+      'short term disability',
+      'long term disability',
+      'salary protection',
+    ],
   },
   hero: {
     title: 'Disability Insurance',
-    subtitle: 'Protect your most valuable asset - your ability to earn income. Get comprehensive disability coverage for when you need it most.',
+    subtitle:
+      'Protect your most valuable asset - your ability to earn income. Get comprehensive disability coverage for when you need it most.',
     backgroundImage: '/images/office-building.jpg',
     ctaText: 'Protect Your Income',
-    ctaLink: '/quote',
+    ctaLink: '/contact',
   },
   overview: {
     title: 'Why Disability Insurance is Essential',
-    content: 'Your ability to earn income is likely your most valuable asset. If an illness or injury prevents you from working, disability insurance provides essential income replacement to help you maintain your standard of living and meet your financial obligations.',
+    content:
+      'Your ability to earn income is likely your most valuable asset. If an illness or injury prevents you from working, disability insurance provides essential income replacement to help you maintain your standard of living and meet your financial obligations.',
     highlights: [
       'Replace 60-85% of your income if disabled',
       'Short-term and long-term coverage options',
       'Coverage for illness, injury, and mental health',
-      'Benefits payable to age 65 for long-term claims'
+      'Benefits payable to age 65 for long-term claims',
     ],
   },
   features: {
@@ -35,7 +44,7 @@ export const disabilityInsuranceContent: ServiceContent = {
           'Replace 60-85% of your monthly income',
           'Tax-free benefits in most cases',
           'Coverage for own occupation or any occupation',
-          'Benefits continue until recovery or age 65'
+          'Benefits continue until recovery or age 65',
         ],
       },
       {
@@ -46,7 +55,7 @@ export const disabilityInsuranceContent: ServiceContent = {
           'Short-term: Coverage up to 2 years',
           'Long-term: Coverage to age 65',
           'Elimination periods from 30 days to 2 years',
-          'Partial and residual benefits available'
+          'Partial and residual benefits available',
         ],
       },
       {
@@ -57,14 +66,15 @@ export const disabilityInsuranceContent: ServiceContent = {
           'Cost of living adjustments available',
           'Future increase options without medical exams',
           'Return to work incentives',
-          'Waiver of premium benefits included'
+          'Waiver of premium benefits included',
         ],
       },
     ],
   },
   details: {
     title: 'Types of Disabilities Covered',
-    content: 'Our disability insurance covers a wide range of conditions that can affect your ability to work, providing comprehensive protection for your income.',
+    content:
+      'Our disability insurance covers a wide range of conditions that can affect your ability to work, providing comprehensive protection for your income.',
     items: [
       {
         title: 'Illness-Related Disability',
@@ -73,7 +83,7 @@ export const disabilityInsuranceContent: ServiceContent = {
           'Cancer and other serious illnesses',
           'Heart disease and cardiovascular conditions',
           'Mental health conditions and stress disorders',
-          'Chronic diseases and progressive conditions'
+          'Chronic diseases and progressive conditions',
         ],
       },
       {
@@ -83,7 +93,7 @@ export const disabilityInsuranceContent: ServiceContent = {
           'Work-related and non-work-related injuries',
           'Motor vehicle accidents',
           'Sports and recreational injuries',
-          'Home and workplace accidents'
+          'Home and workplace accidents',
         ],
       },
       {
@@ -93,16 +103,17 @@ export const disabilityInsuranceContent: ServiceContent = {
           'Proportional benefits for reduced income',
           'Return to work transition benefits',
           'Rehabilitation and retraining support',
-          'Workplace accommodation assistance'
+          'Workplace accommodation assistance',
         ],
       },
     ],
   },
   cta: {
-    title: 'Don\'t Risk Your Financial Future',
-    subtitle: 'Statistics show you\'re more likely to become disabled than to die during your working years. Protect your income today.',
+    title: "Don't Risk Your Financial Future",
+    subtitle:
+      "Statistics show you're more likely to become disabled than to die during your working years. Protect your income today.",
     buttonText: 'Get Disability Quote',
-    buttonLink: '/quote',
+    buttonLink: '/contact',
     backgroundImage: '/images/office-building.jpg',
   },
-}; 
+};

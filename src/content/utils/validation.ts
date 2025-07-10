@@ -23,15 +23,21 @@ export function validateServiceContent(content: ServiceContent, slug: string): V
 
   // Content quality checks
   if (content.meta?.title && content.meta.title.length > 60) {
-    warnings.push(`${slug}: Meta title is long (${content.meta.title.length} chars). Consider keeping under 60 chars for SEO.`);
+    warnings.push(
+      `${slug}: Meta title is long (${content.meta.title.length} chars). Consider keeping under 60 chars for SEO.`
+    );
   }
-  
+
   if (content.meta?.description && content.meta.description.length > 160) {
-    warnings.push(`${slug}: Meta description is long (${content.meta.description.length} chars). Consider keeping under 160 chars for SEO.`);
+    warnings.push(
+      `${slug}: Meta description is long (${content.meta.description.length} chars). Consider keeping under 160 chars for SEO.`
+    );
   }
 
   if (content.features?.features && content.features.features.length > 4) {
-    warnings.push(`${slug}: Has ${content.features.features.length} features. Consider limiting to 3-4 for better UX.`);
+    warnings.push(
+      `${slug}: Has ${content.features.features.length} features. Consider limiting to 3-4 for better UX.`
+    );
   }
 
   // Check for missing CTA
@@ -42,7 +48,7 @@ export function validateServiceContent(content: ServiceContent, slug: string): V
   return {
     isValid: errors.length === 0,
     errors,
-    warnings
+    warnings,
   };
 }
 
@@ -50,7 +56,7 @@ export function validateServiceContent(content: ServiceContent, slug: string): V
  * Validates page content structure
  */
 export function validatePageContent(
-  content: HomePageContent | AboutPageContent | ContactPageContent, 
+  content: HomePageContent | AboutPageContent | ContactPageContent,
   pageType: string
 ): ValidationResult {
   const errors: string[] = [];
@@ -68,7 +74,9 @@ export function validatePageContent(
       errors.push(`${pageType}: Missing service cards`);
     }
     if (homeContent.services?.cards && homeContent.services.cards.length !== 9) {
-      warnings.push(`${pageType}: Has ${homeContent.services.cards.length} service cards. Expected 9.`);
+      warnings.push(
+        `${pageType}: Has ${homeContent.services.cards.length} service cards. Expected 9.`
+      );
     }
   }
 
@@ -89,7 +97,7 @@ export function validatePageContent(
   return {
     isValid: errors.length === 0,
     errors,
-    warnings
+    warnings,
   };
 }
 
@@ -120,7 +128,7 @@ export function validateAllContent(
   return {
     isValid: allErrors.length === 0,
     errors: allErrors,
-    warnings: allWarnings
+    warnings: allWarnings,
   };
 }
 
@@ -129,17 +137,56 @@ export function validateAllContent(
  */
 export function validateIcons(content: ServiceContent, slug: string): string[] {
   const validIcons = [
-    'Shield', 'ShieldCheck', 'Users', 'UserCheck', 'Heart', 'HeartHandshake', 'Activity', 
-    'Award', 'Clock', 'CheckCircle', 'Wallet', 'Target', 'Eye', 'DollarSign', 'Star',
-    'TrendingUp', 'TrendingDown', 'Phone', 'ArrowRight', 'Home', 'Plane', 'Smile',
-    'Tablets', 'Timer', 'GraduationCap', 'Umbrella', 'Building2', 'Headphones',
-    'ThumbsUp', 'FileText', 'Zap', 'PiggyBank', 'BookOpen', 'AlertTriangle', 'Layers',
-    'BarChart', 'LineChart', 'ArrowUpRight', 'Building', 'Glasses', 'Search', 'Focus',
-    'Settings', 'MapPin', 'BadgePercent', 'Compass'
+    'Shield',
+    'ShieldCheck',
+    'Users',
+    'UserCheck',
+    'Heart',
+    'HeartHandshake',
+    'Activity',
+    'Award',
+    'Clock',
+    'CheckCircle',
+    'Wallet',
+    'Target',
+    'Eye',
+    'DollarSign',
+    'Star',
+    'TrendingUp',
+    'TrendingDown',
+    'Phone',
+    'ArrowRight',
+    'Home',
+    'Plane',
+    'Smile',
+    'Tablets',
+    'Timer',
+    'GraduationCap',
+    'Umbrella',
+    'Building2',
+    'Headphones',
+    'ThumbsUp',
+    'FileText',
+    'Zap',
+    'PiggyBank',
+    'BookOpen',
+    'AlertTriangle',
+    'Layers',
+    'BarChart',
+    'LineChart',
+    'ArrowUpRight',
+    'Building',
+    'Glasses',
+    'Search',
+    'Focus',
+    'Settings',
+    'MapPin',
+    'BadgePercent',
+    'Compass',
   ];
-  
+
   const missingIcons: string[] = [];
-  
+
   content.features?.features?.forEach((feature, index) => {
     if (feature.icon && !validIcons.includes(feature.icon)) {
       missingIcons.push(`${slug}: Feature ${index + 1} uses invalid icon "${feature.icon}"`);
@@ -155,13 +202,15 @@ export function validateIcons(content: ServiceContent, slug: string): string[] {
 export function logContentValidation(): void {
   if (import.meta.env.DEV) {
     console.group('🔍 Content Management System Validation');
-    
+
     // This would need to import actual content files
     // For now, just log that validation is available
     console.log('✅ Content validation utilities loaded');
-    console.log('💡 Use validateServiceContent() and validatePageContent() to check content integrity');
+    console.log(
+      '💡 Use validateServiceContent() and validatePageContent() to check content integrity'
+    );
     console.log('🎯 Run validateAllContent() for comprehensive validation');
-    
+
     console.groupEnd();
   }
-} 
+}

@@ -48,4 +48,4 @@ export interface CTASection {
   buttonText: string;
   buttonLink: string;
   backgroundImage?: string;
-} 
+}

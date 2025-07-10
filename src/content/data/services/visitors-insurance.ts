@@ -3,24 +3,33 @@ import type { ServiceContent } from '../../types/services';
 export const visitorsInsuranceContent: ServiceContent = {
   meta: {
     title: 'Visitors Insurance | Travel Medical Coverage for Canada',
-    description: 'Comprehensive visitors insurance for international travelers to Canada and Canadians traveling abroad. Emergency medical coverage, trip protection, and more.',
-    keywords: ['visitors insurance', 'travel medical insurance', 'canada travel insurance', 'international visitors', 'emergency medical coverage'],
+    description:
+      'Comprehensive visitors insurance for international travelers to Canada and Canadians traveling abroad. Emergency medical coverage, trip protection, and more.',
+    keywords: [
+      'visitors insurance',
+      'travel medical insurance',
+      'canada travel insurance',
+      'international visitors',
+      'emergency medical coverage',
+    ],
   },
   hero: {
     title: 'Visitors Insurance',
-    subtitle: 'Comprehensive travel medical insurance for visitors to Canada and Canadians traveling abroad. Protect yourself from unexpected medical emergencies.',
+    subtitle:
+      'Comprehensive travel medical insurance for visitors to Canada and Canadians traveling abroad. Protect yourself from unexpected medical emergencies.',
     backgroundImage: '/images/hero-bg.jpg',
     ctaText: 'Get Travel Quote',
-    ctaLink: '/quote',
+    ctaLink: '/contact',
   },
   overview: {
     title: 'Essential Protection for International Travel',
-    content: 'Visitors Insurance provides crucial medical coverage for unexpected health emergencies during international travel. Whether you\'re visiting Canada or traveling abroad, our comprehensive plans protect you from high medical costs and ensure access to quality healthcare.',
+    content:
+      "Visitors Insurance provides crucial medical coverage for unexpected health emergencies during international travel. Whether you're visiting Canada or traveling abroad, our comprehensive plans protect you from high medical costs and ensure access to quality healthcare.",
     highlights: [
       'Emergency medical coverage up to $5,000,000',
       'Coverage for pre-existing conditions (stable)',
       'Trip interruption and cancellation benefits',
-      '24/7 worldwide emergency assistance'
+      '24/7 worldwide emergency assistance',
     ],
   },
   features: {
@@ -35,7 +44,7 @@ export const visitorsInsuranceContent: ServiceContent = {
           'Hospital and physician expenses',
           'Emergency surgery and treatments',
           'Prescription medications',
-          'Medical equipment and supplies'
+          'Medical equipment and supplies',
         ],
       },
       {
@@ -46,7 +55,7 @@ export const visitorsInsuranceContent: ServiceContent = {
           'Emergency dental coverage up to $3,000',
           'Vision care for eye injuries',
           'Physiotherapy and chiropractic care',
-          'Ambulance and emergency transportation'
+          'Ambulance and emergency transportation',
         ],
       },
       {
@@ -57,14 +66,15 @@ export const visitorsInsuranceContent: ServiceContent = {
           'Trip interruption coverage',
           'Emergency evacuation and repatriation',
           'Accommodation for family members',
-          'Return of mortal remains coverage'
+          'Return of mortal remains coverage',
         ],
       },
     ],
   },
   details: {
     title: 'Who Needs Visitors Insurance?',
-    content: 'Visitors Insurance is essential for anyone traveling internationally, whether visiting Canada or traveling abroad from Canada.',
+    content:
+      'Visitors Insurance is essential for anyone traveling internationally, whether visiting Canada or traveling abroad from Canada.',
     items: [
       {
         title: 'International Visitors to Canada',
@@ -73,7 +83,7 @@ export const visitorsInsuranceContent: ServiceContent = {
           'Coverage not provided by home country insurance',
           'Protection against Canadian healthcare costs',
           'Peace of mind during extended visits',
-          'Required for some visa applications'
+          'Required for some visa applications',
         ],
       },
       {
@@ -83,7 +93,7 @@ export const visitorsInsuranceContent: ServiceContent = {
           'Coverage beyond provincial health plans',
           'Protection in countries with expensive healthcare',
           'Emergency evacuation back to Canada',
-          'Coverage for trip cancellation and interruption'
+          'Coverage for trip cancellation and interruption',
         ],
       },
       {
@@ -93,16 +103,17 @@ export const visitorsInsuranceContent: ServiceContent = {
           'Bridge coverage until provincial health begins',
           'Protection for temporary workers',
           'Coverage for international students',
-          'Family coverage options available'
+          'Family coverage options available',
         ],
       },
     ],
   },
   cta: {
     title: 'Travel with Confidence',
-    subtitle: 'Don\'t let unexpected medical emergencies ruin your trip. Get comprehensive visitors insurance coverage today.',
+    subtitle:
+      "Don't let unexpected medical emergencies ruin your trip. Get comprehensive visitors insurance coverage today.",
     buttonText: 'Get Travel Insurance Quote',
-    buttonLink: '/quote',
+    buttonLink: '/contact',
     backgroundImage: '/images/hero-bg.jpg',
   },
-}; 
+};
