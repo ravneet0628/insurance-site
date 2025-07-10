@@ -17,7 +17,7 @@ const Hero: React.FC<HeroProps> = ({
   subtitle,
   bgImg,
   ctaText = 'Get Started',
-  ctaLink = '/quote',
+  ctaLink = '/contact',
   height = 'lg',
   overlay = 'medium',
 }) => {
@@ -96,30 +96,21 @@ const Hero: React.FC<HeroProps> = ({
             {subtitle}
           </motion.p>
 
-          {/* CTA buttons with improved responsive layout */}
+          {/* Single CTA button - removed redundant second button */}
           {hasCtaButton && (
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center w-full max-w-lg mx-auto px-4 sm:px-0"
+              className="flex justify-center items-center w-full max-w-lg mx-auto px-4 sm:px-0"
             >
               <CTAButton
                 to={ctaLink}
                 size="lg"
                 variant="light"
-                className="w-full sm:w-auto sm:min-w-[180px] lg:min-w-[200px]"
+                className="w-full sm:w-auto sm:min-w-[200px] lg:min-w-[220px]"
               >
                 {ctaText}
-              </CTAButton>
-
-              <CTAButton
-                to="/contact"
-                size="lg"
-                variant="light-outline"
-                className="w-full sm:w-auto sm:min-w-[180px] lg:min-w-[200px]"
-              >
-                Ask Questions
               </CTAButton>
             </motion.div>
           )}

@@ -8,7 +8,7 @@ interface AnimatedSectionProps {
   variant?: 'fadeUp' | 'fadeIn' | 'slideLeft' | 'slideRight' | 'scaleIn' | 'none';
   /** Animation delay */
   delay?: number;
-  /** Animation duration */
+  /** Animation duration - reduced default for better performance */
   duration?: number;
   /** Custom className */
   className?: string;
@@ -17,15 +17,15 @@ interface AnimatedSectionProps {
 }
 
 /**
- * Simplified AnimatedSection component with performance optimizations
+ * Optimized AnimatedSection component with reduced animations for better performance
  */
 const AnimatedSection: React.FC<AnimatedSectionProps> = React.memo(
-  ({ children, variant = 'fadeUp', delay = 0, duration = 0.6, className = '', as = 'div' }) => {
-    // Memoize animation variants
+  ({ children, variant = 'fadeUp', delay = 0, duration = 0.4, className = '', as = 'div' }) => {
+    // Memoize animation variants with simplified animations
     const variants = React.useMemo(() => {
       const baseVariants = {
         fadeUp: {
-          hidden: { opacity: 0, y: 30 },
+          hidden: { opacity: 0, y: 20 }, // Reduced distance
           visible: { opacity: 1, y: 0 },
         },
         fadeIn: {
@@ -33,15 +33,15 @@ const AnimatedSection: React.FC<AnimatedSectionProps> = React.memo(
           visible: { opacity: 1 },
         },
         slideLeft: {
-          hidden: { opacity: 0, x: -50 },
+          hidden: { opacity: 0, x: -30 }, // Reduced distance
           visible: { opacity: 1, x: 0 },
         },
         slideRight: {
-          hidden: { opacity: 0, x: 50 },
+          hidden: { opacity: 0, x: 30 }, // Reduced distance
           visible: { opacity: 1, x: 0 },
         },
         scaleIn: {
-          hidden: { opacity: 0, scale: 0.8 },
+          hidden: { opacity: 0, scale: 0.95 }, // Less dramatic scale
           visible: { opacity: 1, scale: 1 },
         },
         none: {
@@ -53,7 +53,7 @@ const AnimatedSection: React.FC<AnimatedSectionProps> = React.memo(
       return baseVariants[variant];
     }, [variant]);
 
-    // Early return for 'none' variant
+    // Early return for 'none' variant to skip animation entirely
     if (variant === 'none') {
       return as === 'section' ? (
         <section className={className}>{children}</section>
@@ -65,7 +65,7 @@ const AnimatedSection: React.FC<AnimatedSectionProps> = React.memo(
     const transition = {
       duration,
       delay,
-      ease: [0.4, 0, 0.2, 1] as const,
+      ease: [0.25, 0.46, 0.45, 0.94] as const, // Smoother easing
     };
 
     return as === 'section' ? (
@@ -73,7 +73,7 @@ const AnimatedSection: React.FC<AnimatedSectionProps> = React.memo(
         variants={variants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: '-50px' }}
+        viewport={{ once: true, margin: '-100px' }} // Larger margin for earlier trigger
         transition={transition}
         className={className}
       >
@@ -84,7 +84,7 @@ const AnimatedSection: React.FC<AnimatedSectionProps> = React.memo(
         variants={variants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: '-50px' }}
+        viewport={{ once: true, margin: '-100px' }} // Larger margin for earlier trigger
         transition={transition}
         className={className}
       >

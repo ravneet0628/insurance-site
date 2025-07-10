@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { useHomePageContent, useAboutPageContent } from '../content/hooks/usePageContent';
+import { useHomePageContent } from '../content/hooks/usePageContent';
 import Hero from '../components/Hero';
 import PageContainer from '../components/PageContainer';
 import SectionHeader from '../components/SectionHeader';
@@ -14,9 +14,7 @@ import type { HomeServiceCard } from '../content/types/pages';
  */
 const HomePage: React.FC = () => {
   const content = useHomePageContent();
-  const aboutContent = useAboutPageContent();
   const { hero, services, about } = content;
-  const { mission, vision } = aboutContent;
 
   // Use about section for CTA data
   const cta = {
@@ -32,6 +30,22 @@ const HomePage: React.FC = () => {
       href: '/resources',
     },
   };
+
+  // Partner companies with logos
+  const partners = [
+    { name: 'Manulife', logo: 'https://www.manulife.ca/etc/designs/manulife-ca/img/logo.svg' },
+    { name: 'Sun Life', logo: 'https://www.sunlife.ca/etc/designs/sunlife-external/img/sl-logo-en.svg' },
+    { name: 'Canada Life', logo: 'https://www.canadalife.com/content/dam/canadalife/images/logos/canada-life-logo.png' },
+    { name: 'RBC Insurance', logo: 'https://www.rbcinsurance.com/etc/designs/personal-insurance/img/common/logos/rbc-insurance.svg' },
+    { name: 'Desjardins', logo: 'https://www.desjardins.com/ressources/images/logo-desjardins.svg' },
+    { name: 'BMO Insurance', logo: 'https://www.bmo.com/etc/designs/bmo/images/logos/bmo-logo-en.svg' },
+    { name: 'TD Insurance', logo: 'https://www.tdinsurance.com/etc/designs/meloche-monnex/images/logos/td-insurance-logo-en.svg' },
+    { name: 'Scotiabank', logo: 'https://www.scotiabank.com/etc/designs/scotiabank/images/logos/scotiabank-logo.svg' },
+    { name: 'Intact Insurance', logo: 'https://www.intact.ca/etc/designs/intact-financial-corp/public/img/logos/intact-logo.svg' },
+    { name: 'Aviva', logo: 'https://www.avivacanada.com/etc/designs/aviva-ca/img/logos/aviva-logo.svg' },
+    { name: 'Industrial Alliance', logo: 'https://ia.ca/etc/designs/ia-redesign/img/logo-ia-en.svg' },
+    { name: 'Wawanesa', logo: 'https://www.wawanesa.com/etc/designs/wawanesa/img/logos/wawanesa-logo.svg' },
+  ];
 
   return (
     <div className="min-h-screen">
@@ -55,97 +69,24 @@ const HomePage: React.FC = () => {
           className="mb-16"
         />
 
-        <ContentGrid columns={{ sm: 1, md: 2, lg: 3 }} gap="lg">
-          {services.cards.map((service: HomeServiceCard, index: number) => (
-            <motion.div
+        {/* Remove stagger animations for better performance */}
+        <ContentGrid columns={{ sm: 1, md: 2, lg: 3 }} gap="lg" stagger={false}>
+          {services.cards.map((service: HomeServiceCard) => (
+            <ServiceCard
               key={service.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-            >
-              <ServiceCard
-                title={service.title}
-                description={service.description}
-                icon={service.icon}
-                features={service.features}
-                link={service.link}
-                variant="default"
-              />
-            </motion.div>
+              title={service.title}
+              description={service.description}
+              icon={service.icon}
+              features={service.features}
+              link={service.link}
+              variant="default"
+            />
           ))}
         </ContentGrid>
       </PageContainer>
 
-      {/* Mission & Vision Section */}
-      <PageContainer className="py-16 lg:py-24">
-        <div className="grid md:grid-cols-2 gap-12 lg:gap-16">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100"
-          >
-            <div className="flex items-center mb-6">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
-                <svg
-                  className="w-6 h-6 text-blue-600"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900">{mission.title}</h3>
-            </div>
-            <p className="text-gray-600 leading-relaxed">{mission.content}</p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100"
-          >
-            <div className="flex items-center mb-6">
-              <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
-                <svg
-                  className="w-6 h-6 text-purple-600"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900">{vision.title}</h3>
-            </div>
-            <p className="text-gray-600 leading-relaxed">{vision.content}</p>
-          </motion.div>
-        </div>
-      </PageContainer>
-
-      {/* About Preview Section */}
-      <section className="py-16 lg:py-20 bg-gray-50">
+      {/* About Section */}
+      <section className="py-16 lg:py-24 bg-gray-50">
         <PageContainer>
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <motion.div
@@ -163,19 +104,13 @@ const HomePage: React.FC = () => {
 
               <p className="text-lg text-gray-600 leading-relaxed mb-8">{about.description}</p>
 
+              {/* Simplified feature list without stagger animation */}
               <div className="space-y-3 mb-8">
-                {about.features.map((feature: string, index: number) => (
-                  <motion.div
-                    key={feature}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                    className="flex items-center space-x-3"
-                  >
+                {about.features.map((feature: string) => (
+                  <div key={feature} className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-blue-600 rounded-full flex-shrink-0"></div>
                     <span className="text-gray-700">{feature}</span>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
 
@@ -289,8 +224,8 @@ const HomePage: React.FC = () => {
         </PageContainer>
       </section>
 
-      {/* Partners Banner */}
-      <section className="py-12 bg-white border-t border-gray-200">
+      {/* Enhanced Partners Banner with Moving Slideshow */}
+      <section className="py-12 bg-white border-t border-gray-200 overflow-hidden">
         <PageContainer>
           <div className="text-center mb-8">
             <h3 className="text-lg font-ubuntu font-semibold text-gray-900 mb-2">
@@ -301,28 +236,52 @@ const HomePage: React.FC = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-6 justify-items-center">
-            {[
-              'Manulife',
-              'Sun Life',
-              'Canada Life',
-              'RBC Insurance',
-              'Desjardins',
-              'BMO Insurance',
-              'TD Insurance',
-              'Scotiabank',
-              'Intact Insurance',
-              'Aviva',
-            ]
-              .slice(0, 10)
-              .map((partner) => (
+          {/* Animated Logo Slideshow */}
+          <div className="relative overflow-hidden">
+            <div className="flex space-x-8 animate-slide-left">
+              {/* First set of logos */}
+              {partners.map((partner, index) => (
                 <div
-                  key={partner}
-                  className="w-24 h-16 flex items-center justify-center bg-gray-50 rounded-lg p-3 hover:bg-gray-100 transition-colors"
+                  key={`first-${index}`}
+                  className="flex-shrink-0 w-32 h-20 flex items-center justify-center bg-white rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300 p-4"
                 >
-                  <span className="text-xs font-medium text-gray-600 text-center">{partner}</span>
+                  <img
+                    src={partner.logo}
+                    alt={`${partner.name} logo`}
+                    className="max-w-full max-h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+                    onError={(e) => {
+                      // Fallback to text if logo fails to load
+                      e.currentTarget.style.display = 'none';
+                      e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                    }}
+                  />
+                  <span className="hidden text-xs font-medium text-gray-600 text-center">
+                    {partner.name}
+                  </span>
                 </div>
               ))}
+              {/* Duplicate set for seamless loop */}
+              {partners.map((partner, index) => (
+                <div
+                  key={`second-${index}`}
+                  className="flex-shrink-0 w-32 h-20 flex items-center justify-center bg-white rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300 p-4"
+                >
+                  <img
+                    src={partner.logo}
+                    alt={`${partner.name} logo`}
+                    className="max-w-full max-h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+                    onError={(e) => {
+                      // Fallback to text if logo fails to load
+                      e.currentTarget.style.display = 'none';
+                      e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                    }}
+                  />
+                  <span className="hidden text-xs font-medium text-gray-600 text-center">
+                    {partner.name}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         </PageContainer>
       </section>

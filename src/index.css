@@ -451,6 +451,25 @@
   }
 }
 
+/* Partners slideshow animation */
+@keyframes slide-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-slide-left {
+  animation: slide-left 30s linear infinite;
+}
+
+/* Pause animation on hover for better UX */
+.animate-slide-left:hover {
+  animation-play-state: paused;
+}
+
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -460,6 +479,10 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  
+  .animate-slide-left {
+    animation: none !important;
   }
 }
 

@@ -13,7 +13,7 @@ interface ContentGridProps {
   };
   /** Gap between grid items */
   gap?: 'sm' | 'md' | 'lg' | 'xl';
-  /** Enable staggered animations */
+  /** Enable staggered animations - now defaults to false for better performance */
   stagger?: boolean;
   /** Animation delay */
   animationDelay?: number;
@@ -26,15 +26,15 @@ interface ContentGridProps {
 }
 
 /**
- * High-performance ContentGrid component
- * Provides responsive grid layouts with optimized animations
+ * Optimized ContentGrid component for better performance
+ * Provides responsive grid layouts with minimal animations by default
  */
 const ContentGrid: React.FC<ContentGridProps> = React.memo(
   ({
     children,
     columns = { sm: 1, md: 2, lg: 3, xl: 3 },
     gap = 'lg',
-    stagger = true,
+    stagger = false, // Changed default to false for better performance
     animationDelay = 0,
     className = '',
     minHeight,
@@ -74,16 +74,16 @@ const ContentGrid: React.FC<ContentGridProps> = React.memo(
       []
     );
 
-    // Animation variants for grid container
+    // Simplified animation variants for better performance
     const containerVariants = React.useMemo(
       () => ({
         hidden: { opacity: 0 },
         visible: {
           opacity: 1,
           transition: {
-            duration: 0.3,
+            duration: 0.4, // Slightly faster
             when: 'beforeChildren',
-            staggerChildren: stagger ? 0.1 : 0,
+            staggerChildren: stagger ? 0.08 : 0, // Reduced stagger delay
             delayChildren: animationDelay,
           },
         },
@@ -91,29 +91,27 @@ const ContentGrid: React.FC<ContentGridProps> = React.memo(
       [stagger, animationDelay]
     );
 
-    // Animation variants for grid items
+    // Simplified item variants to reduce complexity
     const itemVariants = React.useMemo(
       () => ({
         hidden: {
           opacity: 0,
-          y: 30,
-          scale: 0.95,
+          y: 20, // Reduced from 30
         },
         visible: {
           opacity: 1,
           y: 0,
-          scale: 1,
         },
       }),
       []
     );
 
-    // Process children to add animation variants if stagger is enabled
+    // Process children only if stagger is needed
     const processedChildren = React.useMemo(() => {
       if (!stagger) return children;
 
       const itemTransition = {
-        duration: 0.5,
+        duration: 0.4, // Faster animation
         ease: [0.4, 0, 0.2, 1] as const,
       };
 
@@ -141,13 +139,14 @@ const ContentGrid: React.FC<ContentGridProps> = React.memo(
     ${className}
   `.trim();
 
+    // Only use motion components when stagger is explicitly enabled
     if (stagger) {
       return (
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: '-50px' }}
+          viewport={{ once: true, margin: '-20px' }} // Reduced margin for earlier trigger
           className={gridClasses}
         >
           {processedChildren}
@@ -155,6 +154,7 @@ const ContentGrid: React.FC<ContentGridProps> = React.memo(
       );
     }
 
+    // Default to regular div for best performance
     return <div className={gridClasses}>{children}</div>;
   }
 );
