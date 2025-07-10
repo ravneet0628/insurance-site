@@ -57,7 +57,7 @@ const HomePage: React.FC = () => {
         ctaText={hero.primaryCTA.text}
         ctaLink={hero.primaryCTA.link}
         height="lg"
-        overlay="heavy"
+        overlay="light"
       />
 
       {/* Services & Investment Solutions Section */}
