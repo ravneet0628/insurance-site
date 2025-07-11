@@ -416,13 +416,12 @@ const ServicePage: React.FC = () => {
           subtitle={content.cta.subtitle}
           backgroundImage="/images/financial-planning.jpg"
           primaryCTA={{
-            text: content.cta.buttonText,
-            to: content.cta.buttonLink,
+            text: 'Contact Us',
+            to: '/contact',
           }}
           secondaryCTA={{
-            text: 'Ask Questions',
-            to: '/contact',
-            icon: Icons.MessageCircle,
+            text: 'Learn More',
+            to: '/resources',
           }}
         />
       </main>

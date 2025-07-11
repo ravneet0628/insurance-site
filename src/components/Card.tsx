@@ -9,7 +9,7 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ children, className = '', hover = true, padding = 'md' }) => {
   const baseClasses = 'bg-white rounded-lg shadow-md transition-all duration-300';
-  const hoverClasses = hover ? 'hover:shadow-lg hover:scale-105' : '';
+  const hoverClasses = hover ? 'hover:shadow-xl' : '';
 
   const paddingClasses = {
     sm: 'p-4',

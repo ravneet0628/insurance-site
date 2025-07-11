@@ -54,14 +54,14 @@ const HomePage: React.FC = () => {
         title={hero.title}
         subtitle={hero.subtitle}
         bgImg={hero.backgroundImage}
-        ctaText={hero.primaryCTA.text}
-        ctaLink={hero.primaryCTA.link}
+        primaryCTA={{ text: 'Contact Us', link: '/contact' }}
+        secondaryCTA={{ text: 'View Services', scrollTo: 'services-section' }}
         height="lg"
         overlay="light"
       />
 
       {/* Services & Investment Solutions Section */}
-      <PageContainer className="py-16 lg:py-24">
+      <PageContainer id="services-section" className="py-16 lg:py-24">
         <SectionHeader
           title={services.title}
           subtitle={services.subtitle}
@@ -183,7 +183,10 @@ const HomePage: React.FC = () => {
                   {/* Contact Info */}
                   <div className="mt-6 pt-6 border-t border-gray-200 w-full">
                     <div className="flex items-center justify-center space-x-4 text-sm text-gray-500">
-                      <div className="flex items-center">
+                      <motion.div
+                        className="flex items-center"
+                        whileHover={{ scale: 1.05, color: '#2563eb' }}
+                      >
                         <svg
                           className="w-4 h-4 mr-1"
                           fill="none"
@@ -198,8 +201,11 @@ const HomePage: React.FC = () => {
                           />
                         </svg>
                         Licensed Professional
-                      </div>
-                      <div className="flex items-center">
+                      </motion.div>
+                      <motion.div
+                        className="flex items-center"
+                        whileHover={{ scale: 1.05, color: '#2563eb' }}
+                      >
                         <svg
                           className="w-4 h-4 mr-1"
                           fill="none"
@@ -214,7 +220,7 @@ const HomePage: React.FC = () => {
                           />
                         </svg>
                         Certified Advisor
-                      </div>
+                      </motion.div>
                     </div>
                   </div>
                 </div>
@@ -248,7 +254,7 @@ const HomePage: React.FC = () => {
                   <img
                     src={partner.logo}
                     alt={`${partner.name} logo`}
-                    className="max-w-full max-h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+                    className="max-w-full max-h-full object-contain transition-all duration-300"
                     onError={(e) => {
                       // Fallback to text if logo fails to load
                       e.currentTarget.style.display = 'none';
@@ -269,7 +275,7 @@ const HomePage: React.FC = () => {
                   <img
                     src={partner.logo}
                     alt={`${partner.name} logo`}
-                    className="max-w-full max-h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+                    className="max-w-full max-h-full object-contain transition-all duration-300"
                     onError={(e) => {
                       // Fallback to text if logo fails to load
                       e.currentTarget.style.display = 'none';

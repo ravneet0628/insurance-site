@@ -49,9 +49,9 @@ const ServiceCard: React.FC<ServiceCardProps> = React.memo(
     className = '',
   }) => {
     const variantClasses = {
-      default: 'h-[420px]',
-      featured: 'h-[450px] border-2 border-primary/20',
-      compact: 'h-[320px]',
+      default: '',
+      featured: 'border-2 border-primary/20',
+      compact: '',
     };
 
     const iconSizes = {
@@ -95,7 +95,7 @@ const ServiceCard: React.FC<ServiceCardProps> = React.memo(
             <h3 className="text-card-title mb-4 leading-tight">{title}</h3>
 
             <div className="flex-1">
-              <p className="text-body content-spacing-sm h-16 overflow-hidden text-ellipsis">
+              <p className="text-body content-spacing-sm line-clamp-3">
                 {description}
               </p>
             </div>

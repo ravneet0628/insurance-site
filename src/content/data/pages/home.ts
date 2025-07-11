@@ -141,7 +141,7 @@ export const homePageContent: HomePageContent = {
         title: 'TFSA',
         description:
           'Tax-free savings account for flexible savings and investment growth with no tax on withdrawals.',
-        icon: 'Star',
+        icon: 'ArrowUpRight',
         features: [
           'Tax-free growth',
           'Flexible withdrawals',

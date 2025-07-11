@@ -18,6 +18,8 @@ interface PageContainerProps {
   as?: 'main' | 'section' | 'article' | 'div';
   /** Accessibility label */
   'aria-label'?: string;
+  /** The id of the container */
+  id?: string;
 }
 
 /**
@@ -34,6 +36,7 @@ const PageContainer: React.FC<PageContainerProps> = React.memo(
     className = '',
     as: Component = 'main',
     'aria-label': ariaLabel,
+    id,
   }) => {
     // Memoize max width classes
     const maxWidthClasses = React.useMemo(
@@ -116,6 +119,7 @@ const PageContainer: React.FC<PageContainerProps> = React.memo(
           <Component
             className={containerClasses.replace(backgroundClasses[background], '')}
             aria-label={ariaLabel}
+            id={id}
           >
             {children}
           </Component>
@@ -124,7 +128,7 @@ const PageContainer: React.FC<PageContainerProps> = React.memo(
     }
 
     return (
-      <Component className={containerClasses} aria-label={ariaLabel}>
+      <Component className={containerClasses} aria-label={ariaLabel} id={id}>
         {children}
       </Component>
     );

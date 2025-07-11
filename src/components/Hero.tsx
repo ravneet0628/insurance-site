@@ -1,13 +1,20 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import CTAButton from './CTAButton';
+import { ChevronDown } from 'lucide-react';
+
+interface CTAProps {
+  text: string;
+  link?: string;
+  scrollTo?: string;
+}
 
 interface HeroProps {
   title: string;
   subtitle: string;
   bgImg?: string;
-  ctaText?: string;
-  ctaLink?: string;
+  primaryCTA?: CTAProps;
+  secondaryCTA?: CTAProps;
   height?: 'sm' | 'md' | 'lg' | 'xl';
   overlay?: 'light' | 'medium' | 'heavy';
 }
@@ -16,8 +23,8 @@ const Hero: React.FC<HeroProps> = ({
   title,
   subtitle,
   bgImg,
-  ctaText = 'Get Started',
-  ctaLink = '/contact',
+  primaryCTA,
+  secondaryCTA,
   height = 'lg',
   overlay = 'medium',
 }) => {
@@ -48,8 +55,16 @@ const Hero: React.FC<HeroProps> = ({
         background: 'linear-gradient(135deg,rgb(97, 107, 172) 0%, #2563eb 50%, #1e40af 100%)',
       };
 
-  // Check if we have CTA buttons for better layout logic
-  const hasCtaButton = ctaText && ctaLink;
+  // Check if we have any CTA buttons for layout logic
+  const hasCtaButtons = primaryCTA || secondaryCTA;
+
+  // Function to handle scroll-to-section
+  const handleScroll = (elementId: string) => {
+    const element = document.getElementById(elementId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   return (
     <section
@@ -96,45 +111,61 @@ const Hero: React.FC<HeroProps> = ({
             {subtitle}
           </motion.p>
 
-          {/* Single CTA button - removed redundant second button */}
-          {hasCtaButton && (
+          {/* CTA buttons container */}
+          {hasCtaButtons && (
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="flex justify-center items-center w-full max-w-lg mx-auto px-4 sm:px-0"
+              className="flex flex-col sm:flex-row justify-center items-center gap-4 w-full max-w-lg mx-auto px-4 sm:px-0"
             >
-              <CTAButton
-                to={ctaLink}
-                size="lg"
-                variant="light"
-                className="w-full sm:w-auto sm:min-w-[200px] lg:min-w-[220px]"
-              >
-                {ctaText}
-              </CTAButton>
+              {primaryCTA && (
+                <CTAButton
+                  to={primaryCTA.link}
+                  onClick={primaryCTA.scrollTo ? () => handleScroll(primaryCTA.scrollTo!) : undefined}
+                  size="lg"
+                  variant="light"
+                  className="w-full sm:w-auto sm:min-w-[200px] lg:min-w-[220px]"
+                >
+                  {primaryCTA.text}
+                </CTAButton>
+              )}
+              {secondaryCTA && (
+                <CTAButton
+                  to={secondaryCTA.link}
+                  onClick={
+                    secondaryCTA.scrollTo ? () => handleScroll(secondaryCTA.scrollTo!) : undefined
+                  }
+                  size="lg"
+                  variant="primary"
+                  className="w-full sm:w-auto sm:min-w-[200px] lg:min-w-[220px] "
+                >
+                  {secondaryCTA.text}
+                </CTAButton>
+              )}
             </motion.div>
           )}
         </motion.div>
       </div>
 
-      {/* Scroll indicator with conditional rendering based on height and proper spacing */}
+      {/* Animated Chevron Scroll Indicator */}
       {height !== 'sm' && (
         <motion.div
-          className="absolute bottom-4 sm:bottom-6 lg:bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-30"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.2 }}
+          className="absolute bottom-6 sm:bottom-8 lg:bottom-10 left-1/2 -translate-x-1/2 z-30"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.2 }}
         >
-          <div className="w-5 h-8 sm:w-6 sm:h-10 border-2 border-white/60 rounded-full flex justify-center relative">
-            <motion.div
-              className="w-0.5 h-2 sm:w-1 sm:h-3 bg-white rounded-full mt-1.5 sm:mt-2"
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-            />
-          </div>
-          <p className="text-white/70 text-xs mt-1.5 sm:mt-2 font-medium text-center hidden sm:block">
-            Scroll Down
-          </p>
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+          >
+            <ChevronDown className="w-8 h-8 sm:w-10 sm:h-10 text-white/70" />
+          </motion.div>
         </motion.div>
       )}
     </section>

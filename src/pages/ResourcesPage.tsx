@@ -393,7 +393,6 @@ const ResourcesPage: React.FC = () => {
       setTimeout(() => {
         printWindow.focus();
         printWindow.print();
-        printWindow.close();
       }, 500);
       
     } catch (error) {
@@ -522,9 +521,9 @@ const ResourcesPage: React.FC = () => {
         title="Resources & Tools"
         subtitle="Access our financial needs analysis calculator, helpful links, and expert resources to make informed decisions about your insurance and financial planning."
         bgImg="/images/business-growth.jpg"
-        ctaText="Contact Our Experts"
-        ctaLink="#fna-calculator"
-        height="md"
+        primaryCTA={{ text: 'FNA Calculator', scrollTo: 'fna-calculator' }}
+        secondaryCTA={{ text: 'View Resources', scrollTo: 'useful-links' }}
+        height="lg"
         overlay="medium"
       />
 
@@ -933,7 +932,7 @@ const ResourcesPage: React.FC = () => {
       </section>
 
       {/* Useful Links Section */}
-      <section className="py-16 lg:py-24 bg-gray-50">
+      <section id="useful-links" className="py-16 lg:py-24 bg-gray-50">
         <PageContainer>
           <SectionHeader
             title="Useful Links & Resources"
