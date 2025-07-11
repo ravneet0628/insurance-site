@@ -7,7 +7,70 @@ import SectionHeader from '../components/SectionHeader';
 import ServiceCard from '../components/ServiceCard';
 import CTASection from '../components/CTASection';
 import ContentGrid from '../components/ContentGrid';
-import type { HomeServiceCard } from '../content/types/pages';
+import { allServicesContent } from '../content/data/services';
+
+const serviceDetailsMap: { [key: string]: { icon: string; features: string[] } } = {
+  'super-visa-insurance': {
+    icon: 'ShieldCheck',
+    features: [
+      'Minimum $100,000 coverage required',
+      'Valid for multiple entries',
+      'Pre-existing conditions accepted',
+    ],
+  },
+  'visitors-insurance': {
+    icon: 'Plane',
+    features: [
+      'Emergency medical coverage',
+      'Prescription drugs coverage',
+      'Trip interruption protection',
+    ],
+  },
+  'life-insurance': {
+    icon: 'HeartHandshake',
+    features: ['Term and whole life options', 'Affordable premium rates', 'Tax-free death benefit'],
+  },
+  'disability-insurance': {
+    icon: 'UserCheck',
+    features: [
+      'Income replacement up to 85%',
+      'Short and long-term options',
+      'Own occupation coverage',
+    ],
+  },
+  'critical-illness-insurance': {
+    icon: 'Heart',
+    features: [
+      'Lump sum tax-free benefit',
+      'Coverage for 25+ conditions',
+      'Return of premium options',
+    ],
+  },
+  resp: {
+    icon: 'BookOpen',
+    features: [
+      'Government grants up to $7,200',
+      '20% Canada Education Savings Grant',
+      'Tax-deferred growth',
+    ],
+  },
+  rrsp: {
+    icon: 'PiggyBank',
+    features: ['Immediate tax deductions', 'Tax-deferred growth', 'Retirement income planning'],
+  },
+  tfsa: {
+    icon: 'ArrowUpRight',
+    features: ['Tax-free growth', 'Flexible withdrawals', 'No minimum age requirement'],
+  },
+  fhsa: {
+    icon: 'Home',
+    features: [
+      'Tax deductible contributions',
+      'Tax-free withdrawals for home',
+      'Up to $40,000 contribution room',
+    ],
+  },
+};
 
 /**
  * HomePage component - Main landing page with hero, services, stats, and features
@@ -33,18 +96,14 @@ const HomePage: React.FC = () => {
 
   // Partner companies with logos
   const partners = [
-    { name: 'Manulife', logo: 'https://www.manulife.ca/etc/designs/manulife-ca/img/logo.svg' },
-    { name: 'Sun Life', logo: 'https://www.sunlife.ca/etc/designs/sunlife-external/img/sl-logo-en.svg' },
-    { name: 'Canada Life', logo: 'https://www.canadalife.com/content/dam/canadalife/images/logos/canada-life-logo.png' },
-    { name: 'RBC Insurance', logo: 'https://www.rbcinsurance.com/etc/designs/personal-insurance/img/common/logos/rbc-insurance.svg' },
-    { name: 'Desjardins', logo: 'https://www.desjardins.com/ressources/images/logo-desjardins.svg' },
-    { name: 'BMO Insurance', logo: 'https://www.bmo.com/etc/designs/bmo/images/logos/bmo-logo-en.svg' },
-    { name: 'TD Insurance', logo: 'https://www.tdinsurance.com/etc/designs/meloche-monnex/images/logos/td-insurance-logo-en.svg' },
-    { name: 'Scotiabank', logo: 'https://www.scotiabank.com/etc/designs/scotiabank/images/logos/scotiabank-logo.svg' },
-    { name: 'Intact Insurance', logo: 'https://www.intact.ca/etc/designs/intact-financial-corp/public/img/logos/intact-logo.svg' },
-    { name: 'Aviva', logo: 'https://www.avivacanada.com/etc/designs/aviva-ca/img/logos/aviva-logo.svg' },
-    { name: 'Industrial Alliance', logo: 'https://ia.ca/etc/designs/ia-redesign/img/logo-ia-en.svg' },
-    { name: 'Wawanesa', logo: 'https://www.wawanesa.com/etc/designs/wawanesa/img/logos/wawanesa-logo.svg' },
+    { name: 'Manulife', logo: '/images/partners/manulife.png' },
+    { name: 'Sun Life', logo: '/images/partners/sunlife.png' },
+    { name: 'Canada Life', logo: '/images/partners/canadalife.png' },
+    { name: 'Desjardins', logo: '/images/partners/desjardins.png' },
+    { name: 'BMO Insurance', logo: '/images/partners/bmo.gif' },
+    { name: 'Industrial Alliance', logo: '/images/partners/ia.gif' },
+    { name: 'Equitable Life', logo: '/images/partners/equitable.png' },
+    { name: 'Foresters Financial', logo: '/images/partners/foresters.svg' },
   ];
 
   return (
@@ -71,17 +130,20 @@ const HomePage: React.FC = () => {
 
         {/* Remove stagger animations for better performance */}
         <ContentGrid columns={{ sm: 1, md: 2, lg: 3 }} gap="lg" stagger={false}>
-          {services.cards.map((service: HomeServiceCard) => (
-            <ServiceCard
-              key={service.id}
-              title={service.title}
-              description={service.description}
-              icon={service.icon}
-              features={service.features}
-              link={service.link}
-              variant="default"
-            />
-          ))}
+          {allServicesContent.map(service => {
+            const details = serviceDetailsMap[service.slug];
+            return (
+              <ServiceCard
+                key={service.slug}
+                title={service.hero.title}
+                description={service.overview?.highlights?.[0] ?? ''}
+                icon={details?.icon ?? 'ShieldCheck'}
+                features={details?.features ?? []}
+                link={`/services/${service.slug}`}
+                variant="default"
+              />
+            );
+          })}
         </ContentGrid>
       </PageContainer>
 
@@ -108,7 +170,7 @@ const HomePage: React.FC = () => {
               <div className="space-y-3 mb-8">
                 {about.features.map((feature: string) => (
                   <div key={feature} className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-blue-600 rounded-full flex-shrink-0"></div>
+                    <div className="w-2 h-2 bg-primary rounded-full flex-shrink-0"></div>
                     <span className="text-gray-700">{feature}</span>
                   </div>
                 ))}
@@ -122,7 +184,7 @@ const HomePage: React.FC = () => {
               >
                 <a
                   href={about.cta.link}
-                  className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-200"
+                  className="inline-flex items-center px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-200"
                 >
                   {about.cta.text}
                   <svg
@@ -248,43 +310,27 @@ const HomePage: React.FC = () => {
               {/* First set of logos */}
               {partners.map((partner, index) => (
                 <div
-                  key={`first-${index}`}
-                  className="flex-shrink-0 w-32 h-20 flex items-center justify-center bg-white rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300 p-4"
+                  key={index}
+                  className="flex-shrink-0 w-36 h-16 flex items-center justify-center"
                 >
                   <img
                     src={partner.logo}
                     alt={`${partner.name} logo`}
-                    className="max-w-full max-h-full object-contain transition-all duration-300"
-                    onError={(e) => {
-                      // Fallback to text if logo fails to load
-                      e.currentTarget.style.display = 'none';
-                      e.currentTarget.nextElementSibling?.classList.remove('hidden');
-                    }}
+                    className="max-h-12 max-w-full object-contain"
                   />
-                  <span className="hidden text-xs font-medium text-gray-600 text-center">
-                    {partner.name}
-                  </span>
                 </div>
               ))}
-              {/* Duplicate set for seamless loop */}
+              {/* Duplicated set for seamless animation */}
               {partners.map((partner, index) => (
                 <div
-                  key={`second-${index}`}
-                  className="flex-shrink-0 w-32 h-20 flex items-center justify-center bg-white rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300 p-4"
+                  key={`clone-${index}`}
+                  className="flex-shrink-0 w-36 h-16 flex items-center justify-center"
                 >
                   <img
                     src={partner.logo}
                     alt={`${partner.name} logo`}
-                    className="max-w-full max-h-full object-contain transition-all duration-300"
-                    onError={(e) => {
-                      // Fallback to text if logo fails to load
-                      e.currentTarget.style.display = 'none';
-                      e.currentTarget.nextElementSibling?.classList.remove('hidden');
-                    }}
+                    className="max-h-12 max-w-full object-contain"
                   />
-                  <span className="hidden text-xs font-medium text-gray-600 text-center">
-                    {partner.name}
-                  </span>
                 </div>
               ))}
             </div>

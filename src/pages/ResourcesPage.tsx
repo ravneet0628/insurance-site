@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   Calculator,
   ExternalLink,
@@ -27,6 +27,8 @@ import Card from '../components/Card';
  * ResourcesPage component - Financial tools and helpful resources
  */
 const ResourcesPage: React.FC = () => {
+  const resultsRef = useRef<HTMLDivElement>(null);
+
   // Client Details
   const [clientDetails, setClientDetails] = useState({
     name: '',
@@ -71,6 +73,12 @@ const ResourcesPage: React.FC = () => {
     totalC: number;
     lifeInsuranceNeed: number;
   } | null>(null);
+
+  useEffect(() => {
+    if (fnaResult && resultsRef.current) {
+      resultsRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }, [fnaResult]);
 
   const handleFnaCalculation = () => {
     // Calculate Section A Total
@@ -860,7 +868,7 @@ const ResourcesPage: React.FC = () => {
 
                 {/* Results Section - Now positioned after buttons for better UX */}
                 {fnaResult && (
-                  <div id="fna-results" className="bg-white border border-gray-200 rounded-lg p-6 mt-8">
+                  <div ref={resultsRef} id="fna-results" className="bg-white border border-gray-200 rounded-lg p-6 mt-8">
                     <h4 className="text-lg font-ubuntu font-bold text-gray-900 mb-4">
                       Your Financial Needs Analysis
                     </h4>
