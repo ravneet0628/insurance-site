@@ -2,12 +2,7 @@
 export type * from './types';
 
 // Hooks
-export {
-  useHomePageContent,
-  useAboutPageContent,
-  useContactPageContent,
-  usePageContent,
-} from './hooks/usePageContent';
+export { useHomePageContent, useContactPageContent, usePageContent } from './hooks/usePageContent';
 
 export {
   useServiceContent,
@@ -17,7 +12,6 @@ export {
 
 // Content Data
 export { homePageContent } from './data/pages/home';
-export { aboutPageContent } from './data/pages/about';
 export { contactPageContent } from './data/pages/contact';
 
 // Service Content (optional exports for advanced usage)
@@ -31,18 +25,4 @@ export { rrspContent } from './data/services/rrsp';
 
 export { tfsaContent } from './data/services/tfsa';
 
-// Utilities (Advanced Features)
-export {
-  validateServiceContent,
-  validatePageContent,
-  validateAllContent,
-  validateIcons,
-  logContentValidation,
-} from './utils/validation';
-
-export {
-  generateServicePreview,
-  generatePagePreview,
-  generateContentAnalytics,
-  logContentPreview,
-} from './utils/preview';
+// All utility functions have been removed for simplicity

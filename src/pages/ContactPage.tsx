@@ -10,6 +10,7 @@ import { MapPin, Phone, Mail, Clock, Send, Loader2 } from 'lucide-react';
 import Card from '../components/Card';
 import CTAButton from '../components/CTAButton';
 import { submitContact, type ContactFormData } from '../utils/api';
+import { useContactPageContent } from '../content/hooks/usePageContent';
 import 'leaflet/dist/leaflet.css';
 
 // Fix for leaflet default markers
@@ -38,6 +39,9 @@ type ContactForm = z.infer<typeof contactFormSchema>;
 const ContactPage: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  
+  // Get content from CMS
+  const content = useContactPageContent();
 
   const {
     register,
@@ -49,8 +53,8 @@ const ContactPage: React.FC = () => {
     mode: 'onChange',
   });
 
-  // Office coordinates: Toronto area
-  const officePosition: [number, number] = [43.6532, -79.3832];
+  // Office coordinates from CMS
+  const officePosition: [number, number] = content.contactInfo.office.coordinates;
 
   const onSubmit = async (data: ContactForm) => {
     setIsSubmitting(true);
@@ -81,66 +85,36 @@ const ContactPage: React.FC = () => {
     }
   };
 
+  // Build contact info from CMS data
   const contactInfo = [
     {
       icon: MapPin,
-      title: 'Office Address',
-      details: ['123 Insurance Street', 'Toronto, ON M5V 3A8', 'Canada'],
+      title: content.contactInfo.office.title,
+      details: content.contactInfo.office.address,
     },
     {
       icon: Phone,
-      title: 'Phone Numbers',
-      details: [
-        { label: 'Main Office', value: '(123) 456-7890', href: 'tel:+1234567890' },
-        { label: 'Claims', value: '(123) 456-7891', href: 'tel:+1234567891' },
-        { label: 'Emergency', value: '(123) 456-7892', href: 'tel:+1234567892' },
-      ],
+      title: content.contactInfo.phone.title,
+      details: content.contactInfo.phone.numbers,
     },
     {
       icon: Mail,
-      title: 'Email Addresses',
-      details: [
-        {
-          label: 'General Inquiries',
-          value: 'info@securechoice.com',
-          href: 'mailto:info@securechoice.com',
-        },
-        {
-          label: 'Quotes',
-          value: 'quotes@securechoice.com',
-          href: 'mailto:quotes@securechoice.com',
-        },
-        {
-          label: 'Claims',
-          value: 'claims@securechoice.com',
-          href: 'mailto:claims@securechoice.com',
-        },
-      ],
+      title: content.contactInfo.email.title,
+      details: content.contactInfo.email.addresses,
     },
     {
       icon: Clock,
-      title: 'Business Hours',
-      details: [
-        'Monday - Friday: 8:00 AM - 6:00 PM',
-        'Saturday: 9:00 AM - 4:00 PM',
-        'Sunday: Closed',
-        'Emergency Claims: 24/7',
-      ],
+      title: content.contactInfo.hours.title,
+      details: content.contactInfo.hours.schedule,
     },
   ];
 
   return (
     <>
-      <title>Contact Us - SecureChoice Insurance | Get in Touch</title>
-      <meta
-        name="description"
-        content="Contact SecureChoice Insurance in Toronto. Get quotes, file claims, or ask questions. Office location, phone numbers, email, and business hours."
-      />
-      <meta property="og:title" content="Contact SecureChoice Insurance" />
-      <meta
-        property="og:description"
-        content="Get in touch with our Toronto office for insurance quotes, claims, and expert advice."
-      />
+      <title>{content.meta.title}</title>
+      <meta name="description" content={content.meta.description} />
+      <meta property="og:title" content={content.meta.title} />
+      <meta property="og:description" content={content.meta.description} />
       <link rel="canonical" href="/contact" />
 
       {/* Local SEO Schema */}
@@ -151,19 +125,19 @@ const ContactPage: React.FC = () => {
           name: 'SecureChoice Insurance',
           address: {
             '@type': 'PostalAddress',
-            streetAddress: '123 Insurance Street',
+            streetAddress: content.contactInfo.office.address[0],
             addressLocality: 'Toronto',
-            addressRegion: 'ON',
-            postalCode: 'M5V 3A8',
+            addressRegion: 'ON', 
+            postalCode: content.contactInfo.office.address[1]?.split(' ')[2] || 'M5V 3A8',
             addressCountry: 'CA',
           },
           geo: {
             '@type': 'GeoCoordinates',
-            latitude: 43.6532,
-            longitude: -79.3832,
+            latitude: content.contactInfo.office.coordinates[0],
+            longitude: content.contactInfo.office.coordinates[1],
           },
-          telephone: '+1-123-456-7890',
-          email: 'info@securechoice.com',
+          telephone: content.contactInfo.phone.numbers[0]?.href?.replace('tel:', ''),
+          email: content.contactInfo.email.addresses[0]?.href?.replace('mailto:', ''),
           url: 'https://securechoice.com',
           openingHours: ['Mo-Fr 08:00-18:00', 'Sa 09:00-16:00'],
         })}
@@ -180,10 +154,10 @@ const ContactPage: React.FC = () => {
             className="text-center heading-spacing-sm"
           >
             <h2 className="text-clamp-2xl font-ubuntu font-bold text-neutral-text mb-4">
-              Get In Touch
+              {content.contactInfo.title}
             </h2>
             <p className="text-clamp-base text-gray-600 max-w-2xl mx-auto">
-              Multiple ways to reach us. Choose what works best for you.
+              {content.contactInfo.subtitle}
             </p>
           </motion.div>
 
@@ -258,12 +232,17 @@ const ContactPage: React.FC = () => {
                       <div className="text-center">
                         <strong>SecureChoice Insurance</strong>
                         <br />
-                        123 Insurance Street
-                        <br />
-                        Toronto, ON M5V 3A8
-                        <br />
-                        <a href="tel:+1234567890" className="text-primary hover:text-primary/80">
-                          (123) 456-7890
+                        {content.contactInfo.office.address.map((line, index) => (
+                          <span key={index}>
+                            {line}
+                            <br />
+                          </span>
+                        ))}
+                        <a 
+                          href={content.contactInfo.phone.numbers[0]?.href} 
+                          className="text-primary hover:text-primary/80"
+                        >
+                          {content.contactInfo.phone.numbers[0]?.value}
                         </a>
                       </div>
                     </Popup>
@@ -281,7 +260,7 @@ const ContactPage: React.FC = () => {
             >
               <Card>
                 <h3 className="text-xl font-ubuntu font-bold text-neutral-text mb-6">
-                  Send us a Message
+                  {content.form.title}
                 </h3>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                   {/* Honeypot field - hidden from users */}
@@ -296,10 +275,12 @@ const ContactPage: React.FC = () => {
 
                   <div>
                     <label htmlFor="name" className="form-label">
-                      Name{' '}
-                      <span className="text-accent" aria-label="required">
-                        *
-                      </span>
+                      {content.form.fields.name.label}{' '}
+                      {content.form.fields.name.required && (
+                        <span className="text-accent" aria-label="required">
+                          *
+                        </span>
+                      )}
                     </label>
                     <input
                       {...register('name')}
@@ -308,7 +289,7 @@ const ContactPage: React.FC = () => {
                       className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors ${
                         errors.name ? 'border-red-500' : 'border-gray-300'
                       }`}
-                      placeholder="Enter your full name"
+                      placeholder={content.form.fields.name.placeholder}
                     />
                     {errors.name && (
                       <p className="mt-1 text-sm text-red-500">{errors.name.message}</p>
@@ -317,10 +298,12 @@ const ContactPage: React.FC = () => {
 
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                      Email Address{' '}
-                      <span className="text-accent" aria-label="required">
-                        *
-                      </span>
+                      {content.form.fields.email.label}{' '}
+                      {content.form.fields.email.required && (
+                        <span className="text-accent" aria-label="required">
+                          *
+                        </span>
+                      )}
                     </label>
                     <input
                       {...register('email')}
@@ -329,7 +312,7 @@ const ContactPage: React.FC = () => {
                       className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors ${
                         errors.email ? 'border-red-500' : 'border-gray-300'
                       }`}
-                      placeholder="Enter your email address"
+                      placeholder={content.form.fields.email.placeholder}
                     />
                     {errors.email && (
                       <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
@@ -341,10 +324,12 @@ const ContactPage: React.FC = () => {
                       htmlFor="message"
                       className="block text-sm font-medium text-gray-700 mb-2"
                     >
-                      Message{' '}
-                      <span className="text-accent" aria-label="required">
-                        *
-                      </span>
+                      {content.form.fields.message.label}{' '}
+                      {content.form.fields.message.required && (
+                        <span className="text-accent" aria-label="required">
+                          *
+                        </span>
+                      )}
                     </label>
                     <textarea
                       {...register('message')}
@@ -353,7 +338,7 @@ const ContactPage: React.FC = () => {
                       className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors ${
                         errors.message ? 'border-red-500' : 'border-gray-300'
                       }`}
-                      placeholder="Tell us how we can help you..."
+                      placeholder={content.form.fields.message.placeholder}
                     />
                     {errors.message && (
                       <p className="mt-1 text-sm text-red-500">{errors.message.message}</p>
@@ -396,7 +381,7 @@ const ContactPage: React.FC = () => {
                 Message Sent Successfully!
               </h3>
               <p className="text-gray-600 mb-6">
-                Thank you for contacting us. We'll get back to you within 24 hours.
+                {content.form.successMessage}
               </p>
               <CTAButton onClick={() => setShowModal(false)}>Close</CTAButton>
             </div>
