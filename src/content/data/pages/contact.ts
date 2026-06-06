@@ -2,22 +2,23 @@ import type { ContactPageContent } from '../../types/pages';
 
 export const contactPageContent: ContactPageContent = {
   meta: {
-    title: 'Contact Us - SecureChoice Insurance | Get in Touch',
+    title: 'Contact Us - Top Trust Insurance | Get in Touch',
     description:
-      'Contact SecureChoice Insurance in Toronto. Get quotes, file claims, or ask questions. Office location, phone numbers, email, and business hours.',
+      'Contact licensed insurance advisor Sukhveer Singh at Top Trust Insurance. Get quotes, ask questions, or discuss life, travel, and investment planning.',
     keywords: [
-      'contact SecureChoice',
-      'insurance office Toronto',
+      'contact Top Trust',
+      'Sukhveer Singh advisor',
+      'insurance advisor Ontario',
+      'Top Trust Insurance',
       'insurance quotes',
-      'claims contact',
       'insurance help',
     ],
   },
 
   hero: {
-    title: 'Contact SecureChoice',
+    title: 'Contact Top Trust',
     subtitle:
-      "We're here to help with all your insurance needs. Get in touch with our experienced team today.",
+      "We're here to help with all your insurance and financial security needs. Reach out to advisor Sukhveer Singh today.",
     backgroundImage: '/images/office-building.jpg',
     primaryCTA: {
       text: 'Our Services',
@@ -27,59 +28,38 @@ export const contactPageContent: ContactPageContent = {
 
   contactInfo: {
     title: 'Get In Touch',
-    subtitle: 'Multiple ways to reach us. Choose what works best for you.',
+    subtitle: 'Reach out to us directly via phone or email.',
     office: {
-      title: 'Office Address',
-      address: ['123 Insurance Street', 'Toronto, ON M5V 3A8', 'Canada'],
-      coordinates: [43.6532, -79.3832],
+      title: 'Office',
+      address: [],
+      coordinates: [0, 0],
     },
     phone: {
-      title: 'Phone Numbers',
+      title: 'Phone',
       numbers: [
         {
-          label: 'Main Office',
-          value: '(123) 456-7890',
-          href: 'tel:+1234567890',
-        },
-        {
-          label: 'Claims',
-          value: '(123) 456-7891',
-          href: 'tel:+1234567891',
-        },
-        {
-          label: 'Emergency',
-          value: '(123) 456-7892',
-          href: 'tel:+1234567892',
+          label: 'Sukhveer Singh',
+          value: '(905) 961-0050',
+          href: 'tel:9059610050',
         },
       ],
     },
     email: {
-      title: 'Email Addresses',
+      title: 'Email',
       addresses: [
         {
-          label: 'General Inquiries',
-          value: 'info@securechoice.com',
-          href: 'mailto:info@securechoice.com',
-        },
-        {
-          label: 'Quotes',
-          value: 'quotes@securechoice.com',
-          href: 'mailto:quotes@securechoice.com',
-        },
-        {
-          label: 'Claims',
-          value: 'claims@securechoice.com',
-          href: 'mailto:claims@securechoice.com',
+          label: 'Sukhveer Singh',
+          value: 'sukhvirsingh31@yahoo.com',
+          href: 'mailto:sukhvirsingh31@yahoo.com',
         },
       ],
     },
     hours: {
       title: 'Business Hours',
       schedule: [
-        'Monday - Friday: 8:00 AM - 6:00 PM',
-        'Saturday: 9:00 AM - 4:00 PM',
+        'Monday - Friday: 9:00 AM - 5:00 PM',
+        'Saturday: By Appointment',
         'Sunday: Closed',
-        'Emergency Claims: 24/7',
       ],
     },
   },

@@ -1,37 +1,20 @@
 import React, { useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { motion } from 'framer-motion';
 import { Toaster, toast } from 'react-hot-toast';
-import { MapPin, Phone, Mail, Clock, Send, Loader2 } from 'lucide-react';
+import { Phone, Mail, Clock, Send, Loader2 } from 'lucide-react';
 
 import Card from '../components/Card';
 import CTAButton from '../components/CTAButton';
-import { submitContact, type ContactFormData } from '../utils/api';
+import { submitContact } from '../utils/api';
 import { useContactPageContent } from '../content/hooks/usePageContent';
-import 'leaflet/dist/leaflet.css';
-
-// Fix for leaflet default markers
-import L from 'leaflet';
-import markerIcon from 'leaflet/dist/images/marker-icon.png';
-import markerShadow from 'leaflet/dist/images/marker-shadow.png';
-
-const DefaultIcon = L.icon({
-  iconUrl: markerIcon,
-  shadowUrl: markerShadow,
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-});
-
-L.Marker.prototype.options.icon = DefaultIcon;
 
 const contactFormSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   email: z.string().email('Please enter a valid email address'),
   message: z.string().min(10, 'Message must be at least 10 characters'),
-  company: z.string().optional(), // honeypot field
 });
 
 type ContactForm = z.infer<typeof contactFormSchema>;
@@ -53,13 +36,16 @@ const ContactPage: React.FC = () => {
     mode: 'onChange',
   });
 
-  // Office coordinates from CMS
-  const officePosition: [number, number] = content.contactInfo.office.coordinates;
-
   const onSubmit = async (data: ContactForm) => {
     setIsSubmitting(true);
     try {
-      const response = await submitContact(data as ContactFormData);
+      // Read hCaptcha token from DOM if present
+      const hcaptchaResponse = (document.getElementsByName('h-captcha-response')[0] as HTMLInputElement)?.value || '';
+
+      const response = await submitContact({
+        ...data,
+        'h-captcha-response': hcaptchaResponse,
+      });
 
       if (response.success) {
         toast.success(response.message, {
@@ -88,11 +74,6 @@ const ContactPage: React.FC = () => {
   // Build contact info from CMS data
   const contactInfo = [
     {
-      icon: MapPin,
-      title: content.contactInfo.office.title,
-      details: content.contactInfo.office.address,
-    },
-    {
       icon: Phone,
       title: content.contactInfo.phone.title,
       details: content.contactInfo.phone.numbers,
@@ -115,31 +96,18 @@ const ContactPage: React.FC = () => {
       <meta name="description" content={content.meta.description} />
       <meta property="og:title" content={content.meta.title} />
       <meta property="og:description" content={content.meta.description} />
-      <link rel="canonical" href="/contact" />
+      <link rel="canonical" href="https://toptrustinsurance.ca/contact" />
 
       {/* Local SEO Schema */}
       <script type="application/ld+json">
         {JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'InsuranceAgency',
-          name: 'SecureChoice Insurance',
-          address: {
-            '@type': 'PostalAddress',
-            streetAddress: content.contactInfo.office.address[0],
-            addressLocality: 'Toronto',
-            addressRegion: 'ON', 
-            postalCode: content.contactInfo.office.address[1]?.split(' ')[2] || 'M5V 3A8',
-            addressCountry: 'CA',
-          },
-          geo: {
-            '@type': 'GeoCoordinates',
-            latitude: content.contactInfo.office.coordinates[0],
-            longitude: content.contactInfo.office.coordinates[1],
-          },
-          telephone: content.contactInfo.phone.numbers[0]?.href?.replace('tel:', ''),
-          email: content.contactInfo.email.addresses[0]?.href?.replace('mailto:', ''),
-          url: 'https://securechoice.com',
-          openingHours: ['Mo-Fr 08:00-18:00', 'Sa 09:00-16:00'],
+          name: 'Top Trust Insurance',
+          telephone: content.contactInfo.phone.numbers[0]?.value,
+          email: content.contactInfo.email.addresses[0]?.value,
+          url: 'https://toptrustinsurance.ca',
+          openingHours: ['Mo-Fr 09:00-17:00'],
         })}
       </script>
 
@@ -161,7 +129,7 @@ const ContactPage: React.FC = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {contactInfo.map((info, index) => (
               <motion.div
                 key={info.title}
@@ -206,72 +174,30 @@ const ContactPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Map and Contact Form */}
+      {/* Contact Form */}
       <section className="py-16 bg-neutral-bg relative z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Map */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <div className="h-[400px] rounded-lg overflow-hidden shadow-lg">
-                <MapContainer
-                  center={officePosition}
-                  zoom={15}
-                  style={{ height: '100%', width: '100%' }}
-                >
-                  <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                  />
-                  <Marker position={officePosition}>
-                    <Popup>
-                      <div className="text-center">
-                        <strong>SecureChoice Insurance</strong>
-                        <br />
-                        {content.contactInfo.office.address.map((line, index) => (
-                          <span key={index}>
-                            {line}
-                            <br />
-                          </span>
-                        ))}
-                        <a 
-                          href={content.contactInfo.phone.numbers[0]?.href} 
-                          className="text-primary hover:text-primary/80"
-                        >
-                          {content.contactInfo.phone.numbers[0]?.value}
-                        </a>
-                      </div>
-                    </Popup>
-                  </Marker>
-                </MapContainer>
-              </div>
-            </motion.div>
-
-            {/* Contact Form */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <Card>
-                <h3 className="text-xl font-ubuntu font-bold text-neutral-text mb-6">
-                  {content.form.title}
-                </h3>
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                  {/* Honeypot field - hidden from users */}
-                  <input
-                    {...register('company')}
-                    type="text"
-                    name="company"
-                    style={{ display: 'none' }}
-                    tabIndex={-1}
-                    autoComplete="off"
-                  />
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <Card className="shadow-xl">
+              <h3 className="text-xl font-ubuntu font-bold text-neutral-text mb-6">
+                {content.form.title}
+              </h3>
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                {/* hCaptcha Widget Placeholder - To enable:
+                    1. Uncomment the script tag in index.html
+                    2. Uncomment the div below
+                */}
+                {/* 
+                <div 
+                  className="h-captcha mb-4" 
+                  data-sitekey="10000000-ffff-ffff-ffff-ffffffffffff"
+                ></div>
+                */}
 
                   <div>
                     <label htmlFor="name" className="form-label">
@@ -362,7 +288,6 @@ const ContactPage: React.FC = () => {
               </Card>
             </motion.div>
           </div>
-        </div>
       </section>
 
       {/* Success Modal */}

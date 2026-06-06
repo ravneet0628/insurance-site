@@ -25,7 +25,7 @@ const Navbar: React.FC = () => {
           {/* Logo */}
           <div className="flex items-center">
             <Link to="/" className="flex-shrink-0" aria-label="Go to homepage">
-              <span className="text-2xl font-ubuntu font-bold text-primary">SecureChoice</span>
+              <span className="text-2xl font-ubuntu font-bold text-primary">Top Trust</span>
             </Link>
           </div>
 
@@ -52,19 +52,19 @@ const Navbar: React.FC = () => {
           {/* Contact Info */}
           <div className="hidden lg:flex items-center space-x-4">
             <a
-              href="tel:+1234567890"
+              href="tel:9059610050"
               className="flex items-center text-sm text-neutral-text hover:text-primary transition-colors"
-              aria-label="Call SecureChoice Insurance"
+              aria-label="Call Top Trust Insurance"
             >
               <Phone className="w-4 h-4 mr-1" aria-hidden="true" />
-              (123) 456-7890
+              (905) 961-0050
             </a>
             <a
-              href="mailto:info@securechoice.com"
+              href="mailto:sukhvirsingh31@yahoo.com"
               className="flex items-center text-sm text-neutral-text hover:text-primary transition-colors"
             >
               <Mail className="w-4 h-4 mr-1" />
-              info@securechoice.com
+              sukhvirsingh31@yahoo.com
             </a>
           </div>
 
@@ -107,18 +107,18 @@ const Navbar: React.FC = () => {
           ))}
           <div className="pt-4 border-t">
             <a
-              href="tel:+1234567890"
+              href="tel:9059610050"
               className="flex items-center px-3 py-2 text-sm text-neutral-text hover:text-primary transition-colors"
             >
               <Phone className="w-4 h-4 mr-2" />
-              (123) 456-7890
+              (905) 961-0050
             </a>
             <a
-              href="mailto:info@securechoice.com"
+              href="mailto:sukhvirsingh31@yahoo.com"
               className="flex items-center px-3 py-2 text-sm text-neutral-text hover:text-primary transition-colors"
             >
               <Mail className="w-4 h-4 mr-2" />
-              info@securechoice.com
+              sukhvirsingh31@yahoo.com
             </a>
           </div>
         </div>

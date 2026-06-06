@@ -2,9 +2,9 @@ import type { HomePageContent } from '../../types/pages';
 
 export const homePageContent: HomePageContent = {
   meta: {
-    title: 'SecureChoice Insurance - Comprehensive Coverage for Life, Travel & Investment',
+    title: 'Top Trust Insurance - Comprehensive Coverage for Life, Travel & Investment',
     description:
-      'Protect what matters most with SecureChoice Insurance. Comprehensive life, travel, disability insurance and investment solutions. Get expert advice and competitive rates.',
+      'Protect what matters most with Top Trust Insurance. Comprehensive life, travel, disability insurance and investment solutions. Get expert advice and competitive rates.',
     keywords: [
       'insurance',
       'life insurance',
@@ -40,7 +40,7 @@ export const homePageContent: HomePageContent = {
     cards: [],
   },
   trustBadges: {
-    title: 'Why Choose SecureChoice Insurance?',
+    title: 'Why Choose Top Trust Insurance?',
     subtitle:
       'Trusted by thousands of Canadians for our expertise, reliability, and exceptional service',
     badges: [
@@ -74,7 +74,7 @@ export const homePageContent: HomePageContent = {
     title: 'Your Trusted Insurance Partner',
     subtitle: 'Professional guidance you can rely on',
     description:
-      "At SecureChoice Insurance, we understand that choosing the right insurance can be overwhelming. That's why we've dedicated ourselves to providing clear, honest advice and comprehensive coverage options tailored to your unique needs.",
+      "At Top Trust Insurance, we understand that choosing the right insurance can be overwhelming. That's why we've dedicated ourselves to providing clear, honest advice and comprehensive coverage options tailored to your unique needs.",
     image: '/images/about-team.jpg',
     features: [
       'Licensed insurance professionals',

@@ -11,7 +11,7 @@ const RouterWrapper = ({ children }: { children: React.ReactNode }) => (
 );
 
 describe('Navbar Component', () => {
-  it('renders the SecureChoice logo and brand name', () => {
+  it('renders the Top Trust logo and brand name', () => {
     render(
       <RouterWrapper>
         <Navbar />
@@ -21,7 +21,7 @@ describe('Navbar Component', () => {
     const logoLink = screen.getByRole('link', { name: /go to homepage/i });
     expect(logoLink).toBeInTheDocument();
 
-    const brandName = screen.getByText('SecureChoice');
+    const brandName = screen.getByText('Top Trust');
     expect(brandName).toBeInTheDocument();
   });
 
@@ -67,14 +67,14 @@ describe('Navbar Component', () => {
       </RouterWrapper>
     );
 
-    const phoneLink = screen.getByRole('link', { name: /call securechoice insurance/i });
+    const phoneLink = screen.getByRole('link', { name: /call top trust insurance/i });
     expect(phoneLink).toBeInTheDocument();
-    expect(phoneLink).toHaveAttribute('href', 'tel:+1234567890');
+    expect(phoneLink).toHaveAttribute('href', 'tel:9059610050');
 
-    const emailLinks = screen.getAllByRole('link', { name: 'info@securechoice.com' });
+    const emailLinks = screen.getAllByRole('link', { name: 'sukhvirsingh31@yahoo.com' });
     expect(emailLinks).toHaveLength(2); // Desktop and mobile
     emailLinks.forEach((link) => {
-      expect(link).toHaveAttribute('href', 'mailto:info@securechoice.com');
+      expect(link).toHaveAttribute('href', 'mailto:sukhvirsingh31@yahoo.com');
     });
   });
 });

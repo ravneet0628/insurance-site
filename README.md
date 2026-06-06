@@ -1,4 +1,4 @@
-# SecureChoice Insurance Website
+# Top Trust Insurance Website
 
 A modern, responsive insurance broker website built with React, TypeScript, Tailwind CSS, and Vite.
 

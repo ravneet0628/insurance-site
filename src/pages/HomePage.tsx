@@ -83,7 +83,7 @@ const HomePage: React.FC = () => {
   const cta = {
     title: 'Ready to Get Protected?',
     subtitle:
-      'Join thousands of satisfied customers who trust SecureChoice Insurance for their protection needs.',
+      'Join thousands of satisfied customers who trust Top Trust Insurance for their protection needs.',
     primaryButton: {
       text: 'Contact Us',
       href: '/contact',
@@ -211,35 +211,29 @@ const HomePage: React.FC = () => {
               viewport={{ once: true }}
               className="relative"
             >
-              <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 h-full">
-                <div className="flex flex-col items-center text-center">
-                  {/* Avatar */}
-                  <div className="w-32 h-32 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mb-6">
-                    <svg
-                      className="w-16 h-16 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                      />
-                    </svg>
+              <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 h-full relative overflow-hidden">
+                {/* Top decorative gradient bar */}
+                <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-primary to-blue-600" />
+                <div className="flex flex-col items-center text-center pt-2">
+                  {/* Stylized Emblem / Stamp instead of generic silhouette */}
+                  <div className="relative mb-6">
+                    <div className="w-24 h-24 rounded-full bg-gradient-to-tr from-primary to-blue-600 flex items-center justify-center text-white font-ubuntu font-bold text-3xl shadow-lg border-4 border-white ring-4 ring-primary/10 select-none">
+                      SS
+                    </div>
+                    <div className="absolute -bottom-1 -right-1 bg-green-500 text-white rounded-full p-1.5 shadow-md border-2 border-white flex items-center justify-center" title="Verified Advisor">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
                   </div>
 
                   {/* Bio */}
-                  <h4 className="text-2xl font-bold text-gray-900 mb-3">
-                    Expert Insurance Advisor
+                  <h4 className="text-2xl font-bold text-gray-900 mb-1">
+                    Sukhveer Singh
                   </h4>
-                  <p className="text-blue-600 font-semibold mb-4">20+ Years Experience</p>
+                  <p className="text-blue-600 font-semibold mb-4">Licensed Insurance Advisor</p>
                   <p className="text-gray-600 leading-relaxed">
-                    Our dedicated team member specializes in providing comprehensive insurance
-                    solutions tailored to your unique needs. With over two decades of experience in
-                    the Canadian insurance industry, we ensure you get the best coverage at
-                    competitive rates.
+                    Sukhveer Singh specializes in providing comprehensive insurance and financial solutions tailored to your unique needs. He works with Canada's top insurance companies to ensure you get the best coverage at competitive rates.
                   </p>
 
                   {/* Contact Info */}
