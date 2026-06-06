@@ -7,6 +7,7 @@ import SectionHeader from '../components/SectionHeader';
 import ServiceCard from '../components/ServiceCard';
 import CTASection from '../components/CTASection';
 import ContentGrid from '../components/ContentGrid';
+import SEO from '../components/SEO';
 import { allServicesContent } from '../content/data/services';
 
 const serviceDetailsMap: { [key: string]: { icon: string; features: string[] } } = {
@@ -108,6 +109,12 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title={content.meta.title}
+        description={content.meta.description}
+        keywords={content.meta.keywords}
+        canonical="https://toptrustinsurance.ca"
+      />
       {/* Hero Section */}
       <Hero
         title={hero.title}

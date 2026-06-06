@@ -22,6 +22,7 @@ import SectionHeader from '../components/SectionHeader';
 import CTASection from '../components/CTASection';
 import ContentGrid from '../components/ContentGrid';
 import Card from '../components/Card';
+import SEO from '../components/SEO';
 
 /**
  * ResourcesPage component - Financial tools and helpful resources
@@ -510,18 +511,12 @@ const ResourcesPage: React.FC = () => {
 
   return (
     <div className="min-h-screen">
-      <title>Resources - Top Trust Insurance | Financial Tools & Links</title>
-      <meta
-        name="description"
-        content="Access our FNA calculator, helpful links, and financial resources. Tools and information to help you make informed insurance and financial decisions."
+      <SEO
+        title="Resources - Top Trust Insurance | Financial Tools & Links"
+        description="Access our FNA calculator, helpful links, and financial resources. Tools and information to help you make informed insurance and financial decisions."
+        keywords={['FNA calculator', 'financial tools', 'insurance resources', 'Canada benefits', 'financial planning']}
+        canonical="https://toptrustinsurance.ca/resources"
       />
-      <meta property="og:title" content="Resources - Top Trust Insurance" />
-      <meta
-        property="og:description"
-        content="Financial tools and helpful resources for insurance and financial planning."
-      />
-      <meta property="og:type" content="website" />
-      <link rel="canonical" href="https://toptrustinsurance.ca/resources" />
 
       {/* Hero Section */}
       <Hero

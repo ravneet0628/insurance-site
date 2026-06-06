@@ -8,6 +8,7 @@ import { Phone, Mail, Clock, Send, Loader2 } from 'lucide-react';
 
 import Card from '../components/Card';
 import CTAButton from '../components/CTAButton';
+import SEO from '../components/SEO';
 import { submitContact } from '../utils/api';
 import { useContactPageContent } from '../content/hooks/usePageContent';
 
@@ -92,11 +93,12 @@ const ContactPage: React.FC = () => {
 
   return (
     <>
-      <title>{content.meta.title}</title>
-      <meta name="description" content={content.meta.description} />
-      <meta property="og:title" content={content.meta.title} />
-      <meta property="og:description" content={content.meta.description} />
-      <link rel="canonical" href="https://toptrustinsurance.ca/contact" />
+      <SEO
+        title={content.meta.title}
+        description={content.meta.description}
+        keywords={content.meta.keywords}
+        canonical="https://toptrustinsurance.ca/contact"
+      />
 
       {/* Local SEO Schema */}
       <script type="application/ld+json">
@@ -111,183 +113,183 @@ const ContactPage: React.FC = () => {
         })}
       </script>
 
-      {/* Contact Information Grid */}
-      <section className="section-spacing-sm bg-white">
+      {/* Contact Information & Form Grid */}
+      <section className="py-16 md:py-24 bg-gray-50">
         <div className="page-container">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-center heading-spacing-sm"
+            className="text-center mb-16"
           >
-            <h2 className="text-clamp-2xl font-ubuntu font-bold text-neutral-text mb-4">
+            <h1 className="text-clamp-3xl font-ubuntu font-bold text-neutral-text mb-4">
               {content.contactInfo.title}
-            </h2>
+            </h1>
             <p className="text-clamp-base text-gray-600 max-w-2xl mx-auto">
               {content.contactInfo.subtitle}
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {contactInfo.map((info, index) => (
-              <motion.div
-                key={info.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <Card className="text-center h-full">
-                  <div className="flex justify-center mb-4">
-                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start max-w-6xl mx-auto">
+            {/* Left Column: Contact Cards Stack */}
+            <div className="lg:col-span-5 space-y-6">
+              {contactInfo.map((info, index) => (
+                <motion.div
+                  key={info.title}
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <Card className="flex items-start p-6 hover:shadow-md transition-all duration-300">
+                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mr-4">
                       <info.icon className="w-6 h-6 text-primary" />
                     </div>
-                  </div>
-                  <h3 className="text-lg font-ubuntu font-semibold text-neutral-text mb-4">
-                    {info.title}
-                  </h3>
-                  <div className="space-y-2">
-                    {info.details.map((detail, detailIndex) => (
-                      <div key={detailIndex} className="text-sm text-gray-600">
-                        {typeof detail === 'string' ? (
-                          detail
-                        ) : (
-                          <div>
-                            <span className="text-gray-500">{detail.label}:</span>
-                            <br />
-                            <a
-                              href={detail.href}
-                              className="text-primary hover:text-primary/80 font-medium"
-                            >
-                              {detail.value}
-                            </a>
+                    <div className="flex-grow text-left">
+                      <h3 className="text-lg font-ubuntu font-bold text-neutral-text mb-2">
+                        {info.title}
+                      </h3>
+                      <div className="space-y-1">
+                        {info.details.map((detail, detailIndex) => (
+                          <div key={detailIndex} className="text-sm text-gray-600 leading-relaxed">
+                            {typeof detail === 'string' ? (
+                              detail
+                            ) : (
+                              <div>
+                                <span className="text-gray-500">{detail.label}:</span>{' '}
+                                <a
+                                  href={detail.href}
+                                  className="text-primary hover:text-primary/80 font-medium break-all"
+                                >
+                                  {detail.value}
+                                </a>
+                              </div>
+                            )}
                           </div>
-                        )}
+                        ))}
                       </div>
-                    ))}
-                  </div>
+                    </div>
+                  </Card>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Right Column: Contact Form Card */}
+            <div className="lg:col-span-7">
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+              >
+                <Card className="shadow-xl p-8 bg-white border border-gray-100">
+                  <h3 className="text-xl font-ubuntu font-bold text-neutral-text mb-6">
+                    {content.form.title}
+                  </h3>
+                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                    {/* hCaptcha Widget Placeholder - To enable:
+                        1. Uncomment the script tag in index.html
+                        2. Uncomment the div below
+                    */}
+                    {/* 
+                    <div 
+                      className="h-captcha mb-4" 
+                      data-sitekey="10000000-ffff-ffff-ffff-ffffffffffff"
+                    ></div>
+                    */}
+
+                    <div>
+                      <label htmlFor="name" className="form-label">
+                        {content.form.fields.name.label}{' '}
+                        {content.form.fields.name.required && (
+                          <span className="text-accent" aria-label="required">
+                            *
+                          </span>
+                        )}
+                      </label>
+                      <input
+                        {...register('name')}
+                        type="text"
+                        id="name"
+                        className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors ${
+                          errors.name ? 'border-red-500' : 'border-gray-300'
+                        }`}
+                        placeholder={content.form.fields.name.placeholder}
+                      />
+                      {errors.name && (
+                        <p className="mt-1 text-sm text-red-500">{errors.name.message}</p>
+                      )}
+                    </div>
+
+                    <div>
+                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                        {content.form.fields.email.label}{' '}
+                        {content.form.fields.email.required && (
+                          <span className="text-accent" aria-label="required">
+                            *
+                          </span>
+                        )}
+                      </label>
+                      <input
+                        {...register('email')}
+                        type="email"
+                        id="email"
+                        className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors ${
+                          errors.email ? 'border-red-500' : 'border-gray-300'
+                        }`}
+                        placeholder={content.form.fields.email.placeholder}
+                      />
+                      {errors.email && (
+                        <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
+                      )}
+                    </div>
+
+                    <div>
+                      <label
+                        htmlFor="message"
+                        className="block text-sm font-medium text-gray-700 mb-2"
+                      >
+                        {content.form.fields.message.label}{' '}
+                        {content.form.fields.message.required && (
+                          <span className="text-accent" aria-label="required">
+                            *
+                          </span>
+                        )}
+                      </label>
+                      <textarea
+                        {...register('message')}
+                        id="message"
+                        rows={5}
+                        className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors ${
+                          errors.message ? 'border-red-500' : 'border-gray-300'
+                        }`}
+                        placeholder={content.form.fields.message.placeholder}
+                      />
+                      {errors.message && (
+                        <p className="mt-1 text-sm text-red-500">{errors.message.message}</p>
+                      )}
+                    </div>
+
+                    <CTAButton type="submit" disabled={!isValid || isSubmitting} className="w-full">
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-4 h-4 mr-2" />
+                          Send Message
+                        </>
+                      )}
+                    </CTAButton>
+                  </form>
                 </Card>
               </motion.div>
-            ))}
+            </div>
           </div>
         </div>
-      </section>
-
-      {/* Contact Form */}
-      <section className="py-16 bg-neutral-bg relative z-10">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <Card className="shadow-xl">
-              <h3 className="text-xl font-ubuntu font-bold text-neutral-text mb-6">
-                {content.form.title}
-              </h3>
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                {/* hCaptcha Widget Placeholder - To enable:
-                    1. Uncomment the script tag in index.html
-                    2. Uncomment the div below
-                */}
-                {/* 
-                <div 
-                  className="h-captcha mb-4" 
-                  data-sitekey="10000000-ffff-ffff-ffff-ffffffffffff"
-                ></div>
-                */}
-
-                  <div>
-                    <label htmlFor="name" className="form-label">
-                      {content.form.fields.name.label}{' '}
-                      {content.form.fields.name.required && (
-                        <span className="text-accent" aria-label="required">
-                          *
-                        </span>
-                      )}
-                    </label>
-                    <input
-                      {...register('name')}
-                      type="text"
-                      id="name"
-                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors ${
-                        errors.name ? 'border-red-500' : 'border-gray-300'
-                      }`}
-                      placeholder={content.form.fields.name.placeholder}
-                    />
-                    {errors.name && (
-                      <p className="mt-1 text-sm text-red-500">{errors.name.message}</p>
-                    )}
-                  </div>
-
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                      {content.form.fields.email.label}{' '}
-                      {content.form.fields.email.required && (
-                        <span className="text-accent" aria-label="required">
-                          *
-                        </span>
-                      )}
-                    </label>
-                    <input
-                      {...register('email')}
-                      type="email"
-                      id="email"
-                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors ${
-                        errors.email ? 'border-red-500' : 'border-gray-300'
-                      }`}
-                      placeholder={content.form.fields.email.placeholder}
-                    />
-                    {errors.email && (
-                      <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
-                    )}
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="message"
-                      className="block text-sm font-medium text-gray-700 mb-2"
-                    >
-                      {content.form.fields.message.label}{' '}
-                      {content.form.fields.message.required && (
-                        <span className="text-accent" aria-label="required">
-                          *
-                        </span>
-                      )}
-                    </label>
-                    <textarea
-                      {...register('message')}
-                      id="message"
-                      rows={5}
-                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors ${
-                        errors.message ? 'border-red-500' : 'border-gray-300'
-                      }`}
-                      placeholder={content.form.fields.message.placeholder}
-                    />
-                    {errors.message && (
-                      <p className="mt-1 text-sm text-red-500">{errors.message.message}</p>
-                    )}
-                  </div>
-
-                  <CTAButton type="submit" disabled={!isValid || isSubmitting} className="w-full">
-                    {isSubmitting ? (
-                      <>
-                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                        Sending...
-                      </>
-                    ) : (
-                      <>
-                        <Send className="w-4 h-4 mr-2" />
-                        Send Message
-                      </>
-                    )}
-                  </CTAButton>
-                </form>
-              </Card>
-            </motion.div>
-          </div>
       </section>
 
       {/* Success Modal */}

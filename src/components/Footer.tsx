@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Phone, Mail } from 'lucide-react';
+import Logo from './Logo';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -11,7 +12,7 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="space-y-4">
-            <h3 className="text-xl font-ubuntu font-bold">Top Trust</h3>
+            <Logo light={true} />
             <p className="text-gray-300 text-sm leading-relaxed">
               Your trusted insurance advisor providing comprehensive coverage solutions to protect what matters most.
             </p>

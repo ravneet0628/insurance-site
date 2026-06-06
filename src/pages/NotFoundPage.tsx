@@ -2,14 +2,14 @@ import React from 'react';
 
 import { Home, ArrowLeft } from 'lucide-react';
 import CTAButton from '../components/CTAButton';
+import SEO from '../components/SEO';
 
 const NotFoundPage: React.FC = () => {
   return (
     <>
-      <title>Page Not Found - Top Trust Insurance</title>
-      <meta
-        name="description"
-        content="The page you're looking for doesn't exist. Return to Top Trust Insurance homepage."
+      <SEO
+        title="Page Not Found - Top Trust Insurance"
+        description="The page you're looking for doesn't exist. Return to Top Trust Insurance homepage."
       />
 
       <div className="min-h-[600px] flex items-center justify-center bg-neutral-bg">

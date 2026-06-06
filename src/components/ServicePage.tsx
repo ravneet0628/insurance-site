@@ -7,6 +7,7 @@ import ScrollToTop from './ScrollToTop';
 import CTAButton from './CTAButton';
 import CTASection from './CTASection';
 import Card from './Card';
+import SEO from './SEO';
 import * as Icons from 'lucide-react';
 
 /**
@@ -113,13 +114,13 @@ const ServicePage: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <title>{content.meta.title}</title>
-      <meta name="description" content={content.meta.description} />
-      {content.meta.keywords && <meta name="keywords" content={content.meta.keywords.join(', ')} />}
-      {content.meta.ogImage && <meta property="og:image" content={content.meta.ogImage} />}
-      <meta property="og:title" content={content.meta.title} />
-      <meta property="og:description" content={content.meta.description} />
-      <meta property="og:type" content="website" />
+      <SEO
+        title={content.meta.title}
+        description={content.meta.description}
+        keywords={content.meta.keywords}
+        ogImage={content.meta.ogImage}
+        canonical={`https://toptrustinsurance.ca/services/${serviceSlug}`}
+      />
 
       <main className="flex-grow">
         {/* Enhanced Hero Section */}
