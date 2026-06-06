@@ -1,0 +1,454 @@
+---
+import { Icon } from 'astro-icon/components';
+import Layout from '../layouts/Layout.astro';
+import PageContainer from '../components/PageContainer.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import Card from '../components/Card.astro';
+import CTAButton from '../components/CTAButton.astro';
+import { contactPageContent } from '../content/data/pages/contact';
+
+const { meta, contactInfo, form } = contactPageContent;
+
+const contactCards = [
+  {
+    icon: 'Phone',
+    title: contactInfo.phone.title,
+    details: contactInfo.phone.numbers,
+  },
+  {
+    icon: 'Clock',
+    title: contactInfo.hours.title,
+    details: contactInfo.hours.schedule,
+  },
+];
+
+const ENCODED_EMAIL_STR = contactInfo.email.encodedEmail.join(',');
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  'itemListElement': [
+    {
+      '@type': 'ListItem',
+      'position': 1,
+      'name': 'Home',
+      'item': 'https://toptrustinsurance.ca/'
+    },
+    {
+      '@type': 'ListItem',
+      'position': 2,
+      'name': 'Contact',
+      'item': 'https://toptrustinsurance.ca/contact'
+    }
+  ]
+};
+---
+
+<Layout
+  title={meta.title}
+  description={meta.description}
+  keywords={meta.keywords}
+  canonical="https://toptrustinsurance.ca/contact"
+  schema={schema}
+>
+  {/* Local SEO Schema */}
+  <script type="application/ld+json" is:raw set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'InsuranceAgency',
+    name: 'Top Trust Insurance',
+    telephone: contactInfo.phone.numbers[0]?.value,
+    url: 'https://toptrustinsurance.ca',
+    openingHours: ['Mo-Fr 09:00-17:00'],
+  })} />
+
+  {/* Contact Information & Form Grid */}
+  <section class="py-16 md:py-24 bg-gray-50">
+    <PageContainer>
+      <div class="text-center mb-16">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-ubuntu font-bold text-neutral-text mb-4">
+          {contactInfo.title}
+        </h1>
+        <p class="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
+          {contactInfo.subtitle}
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start max-w-6xl mx-auto">
+        {/* Left Column: Contact Cards Stack */}
+        <div class="lg:col-span-5 space-y-6">
+          {
+            contactCards.map((info) => (
+              <Card class="flex items-start p-6 hover:shadow-md transition-all duration-300">
+                <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mr-4">
+                  <Icon name={`lucide:${info.icon.toLowerCase()}`} class="w-6 h-6 text-primary" />
+                </div>
+                <div class="flex-grow text-left">
+                  <h3 class="text-lg font-ubuntu font-bold text-neutral-text mb-2">
+                    {info.title}
+                  </h3>
+                  <div class="space-y-1">
+                    {info.details.map((detail) => (
+                      <div class="text-sm text-gray-600 leading-relaxed">
+                        {typeof detail === 'string' ? (
+                          detail
+                        ) : (
+                          <div>
+                            <span class="text-gray-500">{detail.label}:</span>{' '}
+                            <a
+                              href={detail.href}
+                              class="text-primary hover:text-primary/80 font-medium break-all"
+                            >
+                              {detail.value}
+                            </a>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </Card>
+            ))
+          }
+
+          {/* Email Card - rendered separately for obfuscation */}
+          <Card class="flex items-start p-6 hover:shadow-md transition-all duration-300">
+            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mr-4">
+              <Icon name="lucide:mail" class="w-6 h-6 text-primary" />
+            </div>
+            <div class="flex-grow text-left">
+              <h3 class="text-lg font-ubuntu font-bold text-neutral-text mb-2">
+                {contactInfo.email.title}
+              </h3>
+              <div class="space-y-1">
+                {
+                  contactInfo.email.addresses.map((addr) => (
+                    <div class="text-sm text-gray-600 leading-relaxed">
+                      <span class="text-gray-500">{addr.label}:</span>{' '}
+                      <span class="obfuscated-email text-primary hover:text-primary/80 font-medium break-all" data-email={ENCODED_EMAIL_STR}>Loading...</span>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+          </Card>
+        </div>
+
+        {/* Right Column: Contact Form Card */}
+        <div class="lg:col-span-7">
+          <Card class="shadow-xl p-8 bg-white border border-gray-100">
+            <h3 class="text-xl font-ubuntu font-bold text-neutral-text mb-6">
+              {form.title}
+            </h3>
+
+            {/* Error Notification Alert */}
+            <div id="form-error-alert" class="mb-6 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg hidden">
+              <p id="form-error-text" class="text-sm font-medium"></p>
+            </div>
+
+            <form id="contact-form" class="space-y-6" novalidate>
+              <div>
+                <label for="contact-name" class="block text-sm font-medium text-gray-700 mb-2">
+                  {form.fields.name.label}{' '}
+                  {form.fields.name.required && (
+                    <span class="text-accent" aria-label="required">
+                      *
+                    </span>
+                  )}
+                </label>
+                <input
+                  type="text"
+                  id="contact-name"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
+                  placeholder={form.fields.name.placeholder}
+                />
+                <p id="error-name" class="mt-1 text-sm text-red-500 hidden"></p>
+              </div>
+
+              <div>
+                <label for="contact-email" class="block text-sm font-medium text-gray-700 mb-2">
+                  {form.fields.email.label}{' '}
+                  {form.fields.email.required && (
+                    <span class="text-accent" aria-label="required">
+                      *
+                    </span>
+                  )}
+                </label>
+                <input
+                  type="email"
+                  id="contact-email"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
+                  placeholder={form.fields.email.placeholder}
+                />
+                <p id="error-email" class="mt-1 text-sm text-red-500 hidden"></p>
+              </div>
+
+              <div>
+                <label for="contact-message" class="block text-sm font-medium text-gray-700 mb-2">
+                  {form.fields.message.label}{' '}
+                  {form.fields.message.required && (
+                    <span class="text-accent" aria-label="required">
+                      *
+                    </span>
+                  )}
+                </label>
+                <textarea
+                  id="contact-message"
+                  rows={5}
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
+                  placeholder={form.fields.message.placeholder}
+                ></textarea>
+                <p id="error-message" class="mt-1 text-sm text-red-500 hidden"></p>
+              </div>
+
+              <CTAButton type="submit" id="btn-submit-contact" class="w-full">
+                <span id="submit-idle-content" class="flex items-center justify-center">
+                  <Icon name="lucide:send" class="w-4 h-4 mr-2" />
+                  Send Message
+                </span>
+                <span id="submit-loading-content" class="flex items-center justify-center hidden">
+                  <Icon name="lucide:loader-2" class="w-4 h-4 mr-2 animate-spin" />
+                  Sending...
+                </span>
+              </CTAButton>
+            </form>
+          </Card>
+        </div>
+      </div>
+    </PageContainer>
+  </section>
+
+  {/* Success Modal */}
+  <div id="success-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 hidden">
+    <div class="bg-white rounded-lg p-6 max-w-md w-full text-center shadow-xl">
+      <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <Icon name="lucide:send" class="w-8 h-8 text-green-600" />
+      </div>
+      <h3 class="text-lg font-ubuntu font-bold text-neutral-text mb-2">
+        Message Sent Successfully!
+      </h3>
+      <p class="text-gray-600 mb-6">
+        {form.successMessage}
+      </p>
+      <CTAButton id="btn-close-modal">Close</CTAButton>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  // Email Obfuscation Decode
+  document.querySelectorAll('.obfuscated-email').forEach((el) => {
+    const encodedAttr = el.getAttribute('data-email');
+    if (encodedAttr) {
+      const encoded = encodedAttr.split(',').map(Number);
+      const email = encoded.map((c) => String.fromCharCode(c)).join('');
+      el.outerHTML = `<a href="mailto:${email}" class="text-primary hover:text-primary/80 font-medium break-all">${email}</a>`;
+    }
+  });
+
+  // Form Submission & Validation Logic
+  const formEl = document.getElementById('contact-form') as HTMLFormElement | null;
+  const nameInput = document.getElementById('contact-name') as HTMLInputElement | null;
+  const emailInput = document.getElementById('contact-email') as HTMLInputElement | null;
+  const messageInput = document.getElementById('contact-message') as HTMLTextAreaElement | null;
+
+  const errorName = document.getElementById('error-name') as HTMLParagraphElement | null;
+  const errorEmail = document.getElementById('error-email') as HTMLParagraphElement | null;
+  const errorMessage = document.getElementById('error-message') as HTMLParagraphElement | null;
+
+  const errorAlert = document.getElementById('form-error-alert') as HTMLDivElement | null;
+  const errorText = document.getElementById('form-error-text') as HTMLParagraphElement | null;
+
+  const submitBtn = document.getElementById('btn-submit-contact') as HTMLButtonElement | null;
+  const idleContent = document.getElementById('submit-idle-content') as HTMLSpanElement | null;
+  const loadingContent = document.getElementById('submit-loading-content') as HTMLSpanElement | null;
+
+  const successModal = document.getElementById('success-modal') as HTMLDivElement | null;
+  const closeModalBtn = document.getElementById('btn-close-modal') as HTMLButtonElement | null;
+
+  let isSubmitting = false;
+
+  function validateEmail(email: string) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  }
+
+  function checkFormValidity() {
+    let isValid = true;
+
+    // Validate Name
+    if (nameInput) {
+      const name = nameInput.value.trim();
+      if (!name) {
+        if (errorName) {
+          errorName.textContent = 'Name is required';
+          errorName.classList.remove('hidden');
+        }
+        nameInput.classList.add('border-red-500');
+        nameInput.classList.remove('border-gray-300');
+        isValid = false;
+      } else if (name.length < 2) {
+        if (errorName) {
+          errorName.textContent = 'Name must be at least 2 characters';
+          errorName.classList.remove('hidden');
+        }
+        nameInput.classList.add('border-red-500');
+        nameInput.classList.remove('border-gray-300');
+        isValid = false;
+      } else {
+        if (errorName) errorName.classList.add('hidden');
+        nameInput.classList.remove('border-red-500');
+        nameInput.classList.add('border-gray-300');
+      }
+    }
+
+    // Validate Email
+    if (emailInput) {
+      const email = emailInput.value.trim();
+      if (!email) {
+        if (errorEmail) {
+          errorEmail.textContent = 'Email is required';
+          errorEmail.classList.remove('hidden');
+        }
+        emailInput.classList.add('border-red-500');
+        emailInput.classList.remove('border-gray-300');
+        isValid = false;
+      } else if (!validateEmail(email)) {
+        if (errorEmail) {
+          errorEmail.textContent = 'Please enter a valid email address';
+          errorEmail.classList.remove('hidden');
+        }
+        emailInput.classList.add('border-red-500');
+        emailInput.classList.remove('border-gray-300');
+        isValid = false;
+      } else {
+        if (errorEmail) errorEmail.classList.add('hidden');
+        emailInput.classList.remove('border-red-500');
+        emailInput.classList.add('border-gray-300');
+      }
+    }
+
+    // Validate Message
+    if (messageInput) {
+      const message = messageInput.value.trim();
+      if (!message) {
+        if (errorMessage) {
+          errorMessage.textContent = 'Message is required';
+          errorMessage.classList.remove('hidden');
+        }
+        messageInput.classList.add('border-red-500');
+        messageInput.classList.remove('border-gray-300');
+        isValid = false;
+      } else if (message.length < 10) {
+        if (errorMessage) {
+          errorMessage.textContent = 'Message must be at least 10 characters';
+          errorMessage.classList.remove('hidden');
+        }
+        messageInput.classList.add('border-red-500');
+        messageInput.classList.remove('border-gray-300');
+        isValid = false;
+      } else {
+        if (errorMessage) errorMessage.classList.add('hidden');
+        messageInput.classList.remove('border-red-500');
+        messageInput.classList.add('border-gray-300');
+      }
+    }
+
+    return isValid;
+  }
+
+  // Live input validations
+  if (nameInput) nameInput.addEventListener('input', () => {
+    if (nameInput.value.trim().length >= 2) {
+      if (errorName) errorName.classList.add('hidden');
+      nameInput.classList.remove('border-red-500');
+      nameInput.classList.add('border-gray-300');
+    }
+  });
+
+  if (emailInput) emailInput.addEventListener('input', () => {
+    if (validateEmail(emailInput.value.trim())) {
+      if (errorEmail) errorEmail.classList.add('hidden');
+      emailInput.classList.remove('border-red-500');
+      emailInput.classList.add('border-gray-300');
+    }
+  });
+
+  if (messageInput) messageInput.addEventListener('input', () => {
+    if (messageInput.value.trim().length >= 10) {
+      if (errorMessage) errorMessage.classList.add('hidden');
+      messageInput.classList.remove('border-red-500');
+      messageInput.classList.add('border-gray-300');
+    }
+  });
+
+  if (formEl) {
+    formEl.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (isSubmitting) return;
+
+      const isValid = checkFormValidity();
+      if (!isValid) return;
+
+      // Start submission
+      isSubmitting = true;
+      if (submitBtn) submitBtn.disabled = true;
+      if (idleContent) idleContent.classList.add('hidden');
+      if (loadingContent) loadingContent.classList.remove('hidden');
+      if (errorAlert) errorAlert.classList.add('hidden');
+
+      try {
+        const hcaptchaResponse = (document.getElementsByName('h-captcha-response')[0] as HTMLInputElement)?.value || '';
+
+        const payload = {
+          access_key: '1bd0a6cc-e1d8-457f-ad90-2ab9ffd39aa1',
+          name: nameInput?.value || '',
+          email: emailInput?.value || '',
+          message: messageInput?.value || '',
+          from_name: 'Top Trust Insurance Website',
+          subject: 'New Contact Form Submission - Top Trust Insurance',
+          'h-captcha-response': hcaptchaResponse,
+        };
+
+        const response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        });
+
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+          // Success
+          if (successModal) successModal.classList.remove('hidden');
+          formEl.reset();
+        } else {
+          // Error response from API
+          if (errorAlert && errorText) {
+            errorText.textContent = result.message || 'There was an error sending your message. Please try again.';
+            errorAlert.classList.remove('hidden');
+          }
+        }
+      } catch (err) {
+        console.error('Contact form submit error:', err);
+        if (errorAlert && errorText) {
+          errorText.textContent = 'An unexpected network error occurred. Please check your connection and try again.';
+          errorAlert.classList.remove('hidden');
+        }
+      } finally {
+        isSubmitting = false;
+        if (submitBtn) submitBtn.disabled = false;
+        if (idleContent) idleContent.classList.remove('hidden');
+        if (loadingContent) loadingContent.classList.add('hidden');
+      }
+    });
+  }
+
+  if (closeModalBtn && successModal) {
+    closeModalBtn.addEventListener('click', () => {
+      successModal.classList.add('hidden');
+    });
+  }
+</script>

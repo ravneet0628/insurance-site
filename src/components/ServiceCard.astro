@@ -1,0 +1,105 @@
+---
+import { Icon } from 'astro-icon/components';
+import Card from './Card.astro';
+import CTAButton from './CTAButton.astro';
+import IconContainer from './IconContainer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  icon: string;
+  features: string[];
+  link: string;
+  variant?: 'default' | 'featured' | 'compact';
+  maxFeatures?: number;
+  ctaText?: string;
+  serviceId?: string;
+  class?: string;
+}
+
+const {
+  title,
+  description,
+  icon,
+  features = [],
+  link,
+  variant = 'default',
+  maxFeatures = 3,
+  ctaText = 'Learn More →',
+  serviceId,
+  class: className = '',
+} = Astro.props;
+
+const variantClasses = {
+  default: '',
+  featured: 'border-2 border-primary/20',
+  compact: '',
+};
+
+const iconSizes = {
+  default: 'lg',
+  featured: 'xl',
+  compact: 'md',
+} as const;
+
+const displayFeatures = features.slice(0, maxFeatures);
+---
+
+<div class="group h-full">
+  <Card
+    class={`h-full p-8 flex flex-col card-hover border-0 bg-white relative overflow-hidden ${variantClasses[variant]} ${className}`}
+  >
+    {/* Optimized Background Pattern */}
+    <div class="absolute top-0 right-0 w-20 h-20 bg-primary/5 rounded-full -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500 will-change-transform"></div>
+
+    {/* Icon Section */}
+    <div class="relative z-10 mb-6">
+      <IconContainer
+        icon={icon}
+        variant="gradient"
+        size={iconSizes[variant]}
+        class="hover-scale"
+      />
+    </div>
+
+    {/* Content */}
+    <div class="relative z-10 flex-1 flex flex-col">
+      <h3 class="text-card-title mb-4 leading-tight">{title}</h3>
+
+      <div class="flex-1">
+        <p class="text-body content-spacing-sm line-clamp-3">
+          {description}
+        </p>
+      </div>
+
+      {/* Feature List */}
+      {displayFeatures.length > 0 && (
+        <div class="content-spacing">
+          <ul class="space-y-2" role="list">
+            {displayFeatures.map((feature) => (
+              <li class="flex items-start text-sm text-gray-600">
+                <Icon
+                  name="lucide:check-circle"
+                  class="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0"
+                  aria-hidden="true"
+                />
+                <span>{feature}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* CTA Button */}
+      <CTAButton
+        variant="outline"
+        size="md"
+        to={link}
+        class="mt-auto w-full"
+        aria-label={`Learn more about ${title}`}
+      >
+        {ctaText}
+      </CTAButton>
+    </div>
+  </Card>
+</div>

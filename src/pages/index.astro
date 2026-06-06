@@ -1,0 +1,337 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import PageContainer from '../components/PageContainer.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import CTASection from '../components/CTASection.astro';
+import { homePageContent } from '../content/data/pages/home';
+import { allServicesContent } from '../content/data/services';
+
+const { hero, services, about, meta } = homePageContent;
+
+const serviceDetailsMap: { [key: string]: { icon: string; features: string[] } } = {
+  'super-visa-insurance': {
+    icon: 'ShieldCheck',
+    features: [
+      'Minimum $100,000 coverage required',
+      'Valid for multiple entries',
+      'Pre-existing conditions accepted',
+    ],
+  },
+  'visitors-insurance': {
+    icon: 'Plane',
+    features: [
+      'Emergency medical coverage',
+      'Prescription drugs coverage',
+      'Trip interruption protection',
+    ],
+  },
+  'life-insurance': {
+    icon: 'HeartHandshake',
+    features: ['Term and whole life options', 'Affordable premium rates', 'Tax-free death benefit'],
+  },
+  'disability-insurance': {
+    icon: 'UserCheck',
+    features: [
+      'Income replacement up to 85%',
+      'Short and long-term options',
+      'Own occupation coverage',
+    ],
+  },
+  'critical-illness-insurance': {
+    icon: 'Heart',
+    features: [
+      'Lump sum tax-free benefit',
+      'Coverage for 25+ conditions',
+      'Return of premium options',
+    ],
+  },
+  resp: {
+    icon: 'BookOpen',
+    features: [
+      'Government grants up to $7,200',
+      '20% Canada Education Savings Grant',
+      'Tax-deferred growth',
+    ],
+  },
+  rrsp: {
+    icon: 'PiggyBank',
+    features: ['Immediate tax deductions', 'Tax-deferred growth', 'Retirement income planning'],
+  },
+  tfsa: {
+    icon: 'ArrowUpRight',
+    features: ['Tax-free growth', 'Flexible withdrawals', 'No minimum age requirement'],
+  },
+  fhsa: {
+    icon: 'Home',
+    features: [
+      'Tax deductible contributions',
+      'Tax-free withdrawals for home',
+      'Up to $40,000 contribution room',
+    ],
+  },
+};
+
+const cta = {
+  title: 'Ready to Get Protected?',
+  subtitle:
+    'Join thousands of satisfied customers who trust Top Trust Insurance for their protection needs.',
+  primaryButton: {
+    text: 'Contact Us',
+    href: '/contact',
+  },
+  secondaryButton: {
+    text: 'Learn More',
+    href: '/resources',
+  },
+};
+
+const partners = [
+  { name: 'Manulife', logo: '/images/partners/manulife.png' },
+  { name: 'Sun Life', logo: '/images/partners/sunlife.png' },
+  { name: 'Canada Life', logo: '/images/partners/canadalife.png' },
+  { name: 'Desjardins', logo: '/images/partners/desjardins.png' },
+  { name: 'BMO Insurance', logo: '/images/partners/bmo.gif' },
+  { name: 'Industrial Alliance', logo: '/images/partners/ia.gif' },
+  { name: 'Equitable Life', logo: '/images/partners/equitable.png' },
+  { name: 'Foresters Financial', logo: '/images/partners/foresters.svg' },
+];
+
+// Combine Local Business JSON-LD Schema
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'InsuranceAgency',
+  'name': 'Top Trust Insurance',
+  'telephone': '905-961-0050',
+  'url': 'https://toptrustinsurance.ca',
+  'logo': 'https://toptrustinsurance.ca/logo-bg.jpg',
+  'image': 'https://toptrustinsurance.ca/images/about-team.jpg',
+  'description': meta.description,
+  'address': {
+    '@type': 'PostalAddress',
+    'addressCountry': 'CA',
+    'addressRegion': 'ON'
+  },
+  'openingHours': 'Mo-Fr 09:00-17:00'
+};
+---
+
+<Layout
+  title={meta.title}
+  description={meta.description}
+  keywords={meta.keywords}
+  canonical="https://toptrustinsurance.ca"
+  schema={schema}
+>
+  {/* Hero Section */}
+  <Hero
+    title={hero.title}
+    subtitle={hero.subtitle}
+    bgImg={hero.backgroundImage}
+    primaryCTA={{ text: 'Contact Us', link: '/contact' }}
+    secondaryCTA={{ text: 'View Services', scrollTo: 'services-section' }}
+    height="lg"
+    overlay="light"
+  />
+
+  {/* Services & Investment Solutions Section */}
+  <PageContainer id="services-section" class="py-16 lg:py-24" as="section">
+    <SectionHeader
+      title={services.title}
+      subtitle={services.subtitle}
+      textAlign="center"
+      class="mb-16"
+    />
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {
+        allServicesContent.map((service) => {
+          const details = serviceDetailsMap[service.slug];
+          return (
+            <ServiceCard
+              title={service.hero.title}
+              description={service.overview?.highlights?.[0] ?? ''}
+              icon={details?.icon ?? 'ShieldCheck'}
+              features={details?.features ?? []}
+              link={`/services/${service.slug}`}
+              variant="default"
+            />
+          );
+        })
+      }
+    </div>
+  </PageContainer>
+
+  {/* About Section */}
+  <section class="py-16 lg:py-24 bg-gray-50">
+    <PageContainer>
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div>
+          <SectionHeader
+            title={about.title}
+            subtitle={about.subtitle}
+            textAlign="left"
+            class="mb-6"
+          />
+
+          <p class="text-lg text-gray-600 leading-relaxed mb-8">{about.description}</p>
+
+          <div class="space-y-3 mb-8">
+            {
+              about.features.map((feature: string) => (
+                <div class="flex items-center space-x-3">
+                  <div class="w-2 h-2 bg-primary rounded-full flex-shrink-0" />
+                  <span class="text-gray-700">{feature}</span>
+                </div>
+              ))
+            }
+          </div>
+
+          <div>
+            <a
+              href={about.cta.link}
+              class="inline-flex items-center px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-200"
+            >
+              {about.cta.text}
+              <svg
+                class="w-5 h-5 ml-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 h-full relative overflow-hidden">
+            {/* Top decorative gradient bar */}
+            <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-primary to-blue-600" />
+            <div class="flex flex-col items-center text-center pt-2">
+              <div class="relative mb-6">
+                <div class="w-24 h-24 rounded-full bg-gradient-to-tr from-primary to-blue-600 flex items-center justify-center text-white font-ubuntu font-bold text-3xl shadow-lg border-4 border-white ring-4 ring-primary/10 select-none">
+                  SS
+                </div>
+                <div class="absolute -bottom-1 -right-1 bg-green-500 text-white rounded-full p-1.5 shadow-md border-2 border-white flex items-center justify-center" title="Verified Advisor">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+              </div>
+
+              <h4 class="text-2xl font-bold text-gray-900 mb-1">
+                Sukhvir Singh
+              </h4>
+              <p class="text-blue-600 font-semibold mb-4">Licensed Insurance Advisor</p>
+              <p class="text-gray-600 leading-relaxed">
+                Sukhvir Singh specializes in providing comprehensive insurance and financial solutions tailored to your unique needs. He works with Canada's top insurance companies to ensure you get the best coverage at competitive rates.
+              </p>
+
+              <div class="mt-6 pt-6 border-t border-gray-200 w-full">
+                <div class="flex items-center justify-center space-x-4 text-sm text-gray-500">
+                  <div class="flex items-center">
+                    <svg
+                      class="w-4 h-4 mr-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                      />
+                    </svg>
+                    Licensed Professional
+                  </div>
+                  <div class="flex items-center">
+                    <svg
+                      class="w-4 h-4 mr-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                    Certified Advisor
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </PageContainer>
+  </section>
+
+  {/* Enhanced Partners Banner with Moving Slideshow */}
+  <section class="py-12 bg-white border-t border-gray-200 overflow-hidden">
+    <PageContainer>
+      <div class="text-center mb-8">
+        <h3 class="text-lg font-ubuntu font-semibold text-gray-900 mb-2">
+          Trusted Partners
+        </h3>
+        <p class="text-sm text-gray-600">
+          We work with Canada's leading insurance companies
+        </p>
+      </div>
+
+      {/* Animated Logo Slideshow */}
+      <div class="relative overflow-hidden">
+        <div class="flex space-x-8 animate-slide-left">
+          {
+            partners.map((partner) => (
+              <div class="flex-shrink-0 w-36 h-16 flex items-center justify-center">
+                <img
+                  src={partner.logo}
+                  alt={`${partner.name} logo`}
+                  class="max-h-12 max-w-full object-contain"
+                />
+              </div>
+            ))
+          }
+          {
+            partners.map((partner) => (
+              <div class="flex-shrink-0 w-36 h-16 flex items-center justify-center">
+                <img
+                  src={partner.logo}
+                  alt={`${partner.name} logo`}
+                  class="max-h-12 max-w-full object-contain"
+                />
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </PageContainer>
+  </section>
+
+  {/* CTA Section */}
+  <CTASection
+    title={cta.title}
+    subtitle={cta.subtitle}
+    primaryCTA={{
+      text: cta.primaryButton.text,
+      href: cta.primaryButton.href,
+    }}
+    secondaryCTA={{
+      text: cta.secondaryButton.text,
+      href: cta.secondaryButton.href,
+    }}
+    backgroundImage="/images/handshake.jpg"
+  />
+</Layout>

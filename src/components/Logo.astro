@@ -1,0 +1,28 @@
+---
+interface Props {
+  class?: string;
+  iconOnly?: boolean;
+  light?: boolean;
+}
+
+const { class: className = '', iconOnly = false, light = false } = Astro.props;
+---
+<div class={`flex items-center ${className}`}>
+  {/* Premium Logo Mark */}
+  <img
+    src={light ? "/logo-bg.jpg" : "/logo-transparent.png"}
+    alt=""
+    class="w-9 h-9 mr-3 object-contain rounded-lg"
+    aria-hidden="true"
+  />
+
+  {!iconOnly && (
+    <span
+      class={`text-2xl font-ubuntu font-bold tracking-tight ${
+        light ? 'text-white' : 'text-primary'
+      }`}
+    >
+      Top Trust
+    </span>
+  )}
+</div>

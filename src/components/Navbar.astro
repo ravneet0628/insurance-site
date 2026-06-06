@@ -1,0 +1,185 @@
+---
+import { Icon } from 'astro-icon/components';
+import Logo from './Logo.astro';
+
+const navigation = [
+  { name: 'Home', href: '/' },
+  { name: 'Resources', href: '/resources' },
+  { name: 'Contact', href: '/contact' },
+];
+
+const { pathname } = Astro.url;
+const normalize = (p: string) => p.replace(/\/$/, '') || '/';
+const currentPath = normalize(pathname);
+
+const isActive = (href: string) => {
+  const normHref = normalize(href);
+  if (normHref === '/') {
+    return currentPath === '/';
+  }
+  return currentPath.startsWith(normHref);
+};
+
+const ENCODED_EMAIL = [115, 117, 107, 104, 118, 105, 114, 115, 105, 110, 103, 104, 51, 49, 64, 121, 97, 104, 111, 111, 46, 99, 111, 109];
+const ENCODED_EMAIL_STR = ENCODED_EMAIL.join(',');
+---
+
+<nav
+  class="bg-white shadow-lg sticky top-0 z-50"
+  role="navigation"
+  aria-label="Main Navigation"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16">
+      {/* Logo */}
+      <div class="flex items-center">
+        <a href="/" class="flex-shrink-0" aria-label="Go to homepage">
+          <Logo />
+        </a>
+      </div>
+
+      {/* Desktop Navigation */}
+      <div class="hidden md:flex items-center space-x-8">
+        {navigation.map((item) => (
+          <a
+            href={item.href}
+            class={`px-3 py-2 text-sm font-medium transition-colors duration-200 relative ${
+              isActive(item.href) ? 'text-primary' : 'text-neutral-text hover:text-primary'
+            }`}
+            aria-current={isActive(item.href) ? 'page' : undefined}
+            aria-label={item.name}
+          >
+            {item.name}
+            {isActive(item.href) && (
+              <span class="absolute bottom-0 left-0 w-full h-0.5 bg-primary transform transition-transform duration-200" />
+            )}
+          </a>
+        ))}
+      </div>
+
+      {/* Contact Info */}
+      <div class="hidden lg:flex items-center space-x-4">
+        <a
+          href="tel:9059610050"
+          class="flex items-center text-sm text-neutral-text hover:text-primary transition-colors"
+          aria-label="Call Top Trust Insurance"
+        >
+          <Icon name="lucide:phone" class="w-4 h-4 mr-1" aria-hidden="true" />
+          (905) 961-0050
+        </a>
+        <span class="flex items-center text-sm text-neutral-text hover:text-primary transition-colors">
+          <Icon name="lucide:mail" class="w-4 h-4 mr-1" />
+          <span class="obfuscated-email" data-email={ENCODED_EMAIL_STR}>Loading...</span>
+        </span>
+      </div>
+
+      {/* Mobile menu button */}
+      <div class="md:hidden flex items-center">
+        <button
+          id="mobile-menu-button"
+          class="text-neutral-text hover:text-primary focus:outline-none focus:text-primary transition-colors"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+        >
+          <Icon id="menu-icon" name="lucide:menu" class="w-6 h-6" />
+          <Icon id="close-icon" name="lucide:x" class="w-6 h-6 hidden" />
+        </button>
+      </div>
+    </div>
+  </div>
+
+  {/* Mobile Navigation */}
+  <div
+    id="mobile-nav"
+    class="md:hidden max-h-0 opacity-0 overflow-hidden transition-all duration-300 ease-in-out border-t bg-white"
+  >
+    <div class="px-2 pt-2 pb-3 space-y-1 bg-white">
+      {navigation.map((item) => (
+        <a
+          href={item.href}
+          class={`block px-3 py-2 text-base font-medium transition-colors duration-200 ${
+            isActive(item.href)
+              ? 'text-primary bg-primary/10'
+              : 'text-neutral-text hover:text-primary hover:bg-gray-50'
+          }`}
+        >
+          {item.name}
+        </a>
+      ))}
+      <div class="pt-4 border-t">
+        <a
+          href="tel:9059610050"
+          class="flex items-center px-3 py-2 text-sm text-neutral-text hover:text-primary transition-colors"
+        >
+          <Icon name="lucide:phone" class="w-4 h-4 mr-2" />
+          (905) 961-0050
+        </a>
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-text hover:text-primary transition-colors">
+          <Icon name="lucide:mail" class="w-4 h-4 mr-2" />
+          <span class="obfuscated-email" data-email={ENCODED_EMAIL_STR}>Loading...</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Mobile menu toggle logic
+  const button = document.getElementById('mobile-menu-button');
+  const mobileNav = document.getElementById('mobile-nav');
+  const menuIcon = document.getElementById('menu-icon');
+  const closeIcon = document.getElementById('close-icon');
+
+  if (button && mobileNav && menuIcon && closeIcon) {
+    button.addEventListener('click', () => {
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+      button.setAttribute('aria-expanded', (!isExpanded).toString());
+      
+      if (isExpanded) {
+        mobileNav.style.maxHeight = '0';
+        mobileNav.style.opacity = '0';
+        menuIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+      } else {
+        mobileNav.style.maxHeight = '300px';
+        mobileNav.style.opacity = '1';
+        menuIcon.classList.add('hidden');
+        closeIcon.classList.remove('hidden');
+      }
+    });
+  }
+
+  // Email obfuscation decode function
+  function decodeEmails() {
+    document.querySelectorAll('.obfuscated-email').forEach((el) => {
+      const encodedAttr = el.getAttribute('data-email');
+      if (encodedAttr) {
+        const encoded = encodedAttr.split(',').map(Number);
+        const email = encoded.map((c) => String.fromCharCode(c)).join('');
+        
+        const parent = el.parentElement;
+        if (parent && parent.tagName === 'SPAN') {
+          // Replace span wrapper with a link to preserve layout/styling
+          const link = document.createElement('a');
+          link.href = `mailto:${email}`;
+          link.className = parent.className;
+          
+          // Copy child nodes except the obfuscated span itself
+          Array.from(parent.childNodes).forEach((child) => {
+            if (child === el) {
+              link.appendChild(document.createTextNode(email));
+            } else {
+              link.appendChild(child.cloneNode(true));
+            }
+          });
+          parent.replaceWith(link);
+        } else {
+          el.outerHTML = `<a href="mailto:${email}" class="text-neutral-text hover:text-primary transition-colors">${email}</a>`;
+        }
+      }
+    });
+  }
+
+  // Run immediately and also on page transitions (if any SPA-like router is added later)
+  decodeEmails();
+</script>

@@ -1,0 +1,112 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  label?: string;
+  title: string;
+  subtitle?: string;
+  icon?: string;
+  textAlign?: 'left' | 'center' | 'right';
+  alignment?: 'left' | 'center' | 'right';
+  class?: string;
+  titleSize?: 'sm' | 'md' | 'lg' | 'xl';
+  subtitleMaxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl';
+}
+
+const {
+  label,
+  title,
+  subtitle,
+  icon,
+  textAlign,
+  alignment,
+  class: className = '',
+  titleSize = 'lg',
+  subtitleMaxWidth = '3xl',
+} = Astro.props;
+
+const actualAlignment = alignment || textAlign || 'center';
+const actualLabel = label || title;
+
+const titleSizeClasses = {
+  sm: 'text-2xl md:text-3xl',
+  md: 'text-3xl md:text-4xl',
+  lg: 'text-4xl md:text-5xl',
+  xl: 'text-5xl md:text-6xl',
+};
+
+const maxWidthClasses = {
+  sm: 'max-w-sm',
+  md: 'max-w-md',
+  lg: 'max-w-lg',
+  xl: 'max-w-xl',
+  '2xl': 'max-w-2xl',
+  '3xl': 'max-w-3xl',
+  '4xl': 'max-w-4xl',
+};
+
+const alignmentClasses = {
+  left: 'text-left',
+  center: 'text-center',
+  right: 'text-right',
+};
+
+const justifyClasses = {
+  left: 'justify-start',
+  center: 'justify-center',
+  right: 'justify-end',
+};
+
+const getIconName = (name: string) => {
+  if (typeof name !== 'string') return 'shield';
+  const kebab = name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+  return `lucide:${kebab}`;
+};
+
+const iconName = icon ? getIconName(icon) : null;
+---
+
+<div class={`mb-16 ${alignmentClasses[actualAlignment]} ${className}`}>
+  {/* Section Label with Decorative Elements */}
+  <div class={`flex items-center mb-4 ${justifyClasses[actualAlignment]}`}>
+    {
+      actualAlignment === 'center' ? (
+        <>
+          {iconName && <Icon name={iconName} class="w-6 h-6 text-primary mr-2" />}
+          <span class="text-primary font-semibold uppercase tracking-wider text-sm">
+            {actualLabel}
+          </span>
+          {iconName && <Icon name={iconName} class="w-6 h-6 text-primary ml-2" />}
+        </>
+      ) : (
+        <>
+          <div class="h-1 w-12 bg-primary mr-4" />
+          <span class="text-primary font-semibold uppercase tracking-wider text-sm">
+            {actualLabel}
+          </span>
+          {actualAlignment === 'left' && <div class="h-1 w-12 bg-primary ml-4" />}
+        </>
+      )
+    }
+  </div>
+
+  {/* Main Title */}
+  <h2
+    class={`${titleSizeClasses[titleSize]} font-ubuntu font-bold text-neutral-text mb-6 leading-tight`}
+  >
+    {title}
+  </h2>
+
+  {/* Optional Subtitle */}
+  {
+    subtitle && (
+      <p
+        class={`text-lg text-gray-600 leading-relaxed ${
+          actualAlignment === 'center' ? `mx-auto ${maxWidthClasses[subtitleMaxWidth]}` : ''
+        }`}
+      >
+        {subtitle}
+      </p>
+    )
+  }
+</div>

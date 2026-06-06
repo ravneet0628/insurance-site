@@ -1,0 +1,46 @@
+---
+import { Icon } from 'astro-icon/components';
+import Layout from '../layouts/Layout.astro';
+import CTAButton from '../components/CTAButton.astro';
+---
+
+<Layout
+  title="Page Not Found - Top Trust Insurance"
+  description="The page you're looking for doesn't exist. Return to Top Trust Insurance homepage."
+>
+  <div class="min-h-[600px] flex items-center justify-center bg-neutral-bg">
+    <div class="max-w-md mx-auto text-center px-4">
+      <div class="mb-8">
+        <div class="text-6xl font-ubuntu font-bold text-primary mb-4">404</div>
+        <h1 class="text-2xl font-ubuntu font-bold text-neutral-text mb-4">
+          Page Not Found
+        </h1>
+        <p class="text-gray-600 mb-8">
+          Sorry, the page you're looking for doesn't exist. It might have been moved, deleted,
+          or you entered the wrong URL.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        <CTAButton href="/" class="w-full">
+          <Icon name="lucide:home" class="w-5 h-5 mr-2" />
+          Back to Home
+        </CTAButton>
+
+        <CTAButton id="btn-back" variant="outline" class="w-full">
+          <Icon name="lucide:arrow-left" class="w-5 h-5 mr-2" />
+          Go Back
+        </CTAButton>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  const btnBack = document.getElementById('btn-back');
+  if (btnBack) {
+    btnBack.addEventListener('click', () => {
+      window.history.back();
+    });
+  }
+</script>

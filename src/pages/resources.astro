@@ -1,0 +1,966 @@
+---
+import { Icon } from 'astro-icon/components';
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import PageContainer from '../components/PageContainer.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import CTASection from '../components/CTASection.astro';
+import Card from '../components/Card.astro';
+
+const usefulLinks = [
+  {
+    category: 'Government Resources',
+    icon: 'Building',
+    links: [
+      {
+        title: 'Canada Revenue Agency',
+        description: 'Tax information and benefits',
+        url: 'https://www.canada.ca/en/revenue-agency.html',
+        icon: 'FileText',
+      },
+      {
+        title: 'Government of Canada Benefits',
+        description: 'Find government benefits and services',
+        url: 'https://www.canada.ca/en/government/benefits.html',
+        icon: 'Award',
+      },
+      {
+        title: 'Financial Consumer Agency of Canada',
+        description: 'Financial education and tools',
+        url: 'https://www.canada.ca/en/financial-consumer-agency.html',
+        icon: 'BookOpen',
+      },
+    ],
+  },
+  {
+    category: 'Insurance Resources',
+    icon: 'Shield',
+    links: [
+      {
+        title: 'Insurance Bureau of Canada',
+        description: 'Industry information and consumer guides',
+        url: 'https://www.ibc.ca/',
+        icon: 'Shield',
+      },
+      {
+        title: 'Life Insurance Association',
+        description: 'Life insurance information and statistics',
+        url: 'https://www.clhia.ca/',
+        icon: 'Heart',
+      },
+      {
+        title: 'Ombudsman for Life & Health Insurance',
+        description: 'Consumer protection and complaints',
+        url: 'https://www.olhi.ca/',
+        icon: 'Users',
+      },
+    ],
+  },
+  {
+    category: 'Financial Planning',
+    icon: 'TrendingUp',
+    links: [
+      {
+        title: 'Financial Planning Standards Council',
+        description: 'Find certified financial planners',
+        url: 'https://www.fpsc.ca/',
+        icon: 'User',
+      },
+      {
+        title: 'Investor Education Fund',
+        description: 'Investment education and resources',
+        url: 'https://www.getsmarteraboutmoney.ca/',
+        icon: 'PiggyBank',
+      },
+      {
+        title: 'Canada Pension Plan',
+        description: 'Retirement planning information',
+        url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp.html',
+        icon: 'Calendar',
+      },
+    ],
+  },
+  {
+    category: 'Health & Safety',
+    icon: 'Heart',
+    links: [
+      {
+        title: 'Health Canada',
+        description: 'Health information and regulations',
+        url: 'https://www.canada.ca/en/health-canada.html',
+        icon: 'Heart',
+      },
+      {
+        title: 'Canadian Mental Health Association',
+        description: 'Mental health resources and support',
+        url: 'https://cmha.ca/',
+        icon: 'Users',
+      },
+      {
+        title: 'Travel Health Insurance',
+        description: 'Travel health advice and requirements',
+        url: 'https://travel.gc.ca/travelling/health-safety/insurance',
+        icon: 'Globe',
+      },
+    ],
+  },
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  'itemListElement': [
+    {
+      '@type': 'ListItem',
+      'position': 1,
+      'name': 'Home',
+      'item': 'https://toptrustinsurance.ca/'
+    },
+    {
+      '@type': 'ListItem',
+      'position': 2,
+      'name': 'Resources',
+      'item': 'https://toptrustinsurance.ca/resources'
+    }
+  ]
+};
+
+const ENCODED_EMAIL = [115, 117, 107, 104, 118, 105, 114, 115, 105, 110, 103, 104, 51, 49, 64, 121, 97, 104, 111, 111, 46, 99, 111, 109];
+const ENCODED_EMAIL_STR = ENCODED_EMAIL.join(',');
+---
+
+<Layout
+  title="Resources - Top Trust Insurance | Financial Tools & Links"
+  description="Access our FNA calculator, helpful links, and financial resources. Tools and information to help you make informed insurance and financial decisions."
+  keywords={['FNA calculator', 'financial tools', 'insurance resources', 'Canada benefits', 'financial planning']}
+  canonical="https://toptrustinsurance.ca/resources"
+  schema={schema}
+>
+  {/* Hero Section */}
+  <Hero
+    title="Resources & Tools"
+    subtitle="Access our financial needs analysis calculator, helpful links, and expert resources to make informed decisions about your insurance and financial planning."
+    bgImg="/images/business-growth.jpg"
+    primaryCTA={{ text: 'FNA Calculator', scrollTo: 'fna-calculator' }}
+    secondaryCTA={{ text: 'View Resources', scrollTo: 'useful-links' }}
+    height="lg"
+    overlay="medium"
+  />
+
+  {/* FNA Calculator Section */}
+  <section id="fna-calculator" class="py-16 lg:py-24 bg-white">
+    <PageContainer>
+      <SectionHeader
+        title="Financial Needs Analysis Calculator"
+        subtitle="Calculate your insurance needs with our comprehensive FNA tool. Get personalized recommendations based on your financial situation."
+        textAlign="center"
+        class="mb-16"
+      />
+
+      <div class="max-w-6xl mx-auto">
+        <Card class="p-8">
+          <div class="flex items-center mb-6">
+            <Icon name="lucide:calculator" class="w-8 h-8 text-primary mr-3" />
+            <h3 class="text-2xl font-ubuntu font-bold text-gray-900">
+              Financial Needs Assessment Calculator
+            </h3>
+          </div>
+
+          {/* Calculator Form */}
+          <div class="space-y-8">
+            {/* Client Details */}
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+              <h4 class="text-lg font-ubuntu font-bold text-gray-900 mb-4">
+                Client Details
+              </h4>
+              <div class="grid md:grid-cols-3 gap-4">
+                <div>
+                  <label for="client-name" class="block text-sm font-medium text-gray-700 mb-2">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    id="client-name"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder="Client Name"
+                  />
+                </div>
+                <div>
+                  <label for="client-phone" class="block text-sm font-medium text-gray-700 mb-2">
+                    Phone#
+                  </label>
+                  <input
+                    type="tel"
+                    id="client-phone"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder="Client Phone"
+                  />
+                </div>
+                <div>
+                  <label for="client-email" class="block text-sm font-medium text-gray-700 mb-2">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    id="client-email"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder="Client Email"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Advisor Details */}
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+              <h4 class="text-lg font-ubuntu font-bold text-gray-900 mb-4">
+                Advisor Details
+              </h4>
+              <div class="grid md:grid-cols-3 gap-4">
+                <div>
+                  <label for="advisor-name" class="block text-sm font-medium text-gray-700 mb-2">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    id="advisor-name"
+                    value="Sukhvir Singh"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder="Advisor Name"
+                  />
+                </div>
+                <div>
+                  <label for="advisor-phone" class="block text-sm font-medium text-gray-700 mb-2">
+                    Phone#
+                  </label>
+                  <input
+                    type="tel"
+                    id="advisor-phone"
+                    value="(905) 961-0050"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder="Advisor Phone"
+                  />
+                </div>
+                <div>
+                  <label for="advisor-email" class="block text-sm font-medium text-gray-700 mb-2">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    id="advisor-email"
+                    data-encoded={ENCODED_EMAIL_STR}
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder="Advisor Email"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Section A: Current debts and financial needs */}
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+              <h4 class="text-lg font-ubuntu font-bold text-gray-900 mb-4">
+                A - Identify your current debts and financial needs
+              </h4>
+              <div class="space-y-4">
+                <div>
+                  <label for="mortgage-amount" class="block text-sm font-medium text-gray-700 mb-2">
+                    1. Total Mortgage Amount ($)
+                  </label>
+                  <input
+                    type="number"
+                    id="mortgage-amount"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder="0"
+                  />
+                </div>
+                <div>
+                  <label for="loans" class="block text-sm font-medium text-gray-700 mb-2">
+                    2. Loans (Auto, Credit Cards, Personal & others) ($)
+                  </label>
+                  <input
+                    type="number"
+                    id="loans"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder="0"
+                  />
+                </div>
+                <div>
+                  <label for="education-funds" class="block text-sm font-medium text-gray-700 mb-2">
+                    3. Children Education Funds ($)
+                  </label>
+                  <input
+                    type="number"
+                    id="education-funds"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder="0"
+                  />
+                </div>
+                <div>
+                  <label for="emergency-funds" class="block text-sm font-medium text-gray-700 mb-2">
+                    4. Emergency Funds (3-6 months) ($)
+                  </label>
+                  <input
+                    type="number"
+                    id="emergency-funds"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder="0"
+                  />
+                </div>
+                <div>
+                  <label for="final-expenses" class="block text-sm font-medium text-gray-700 mb-2">
+                    5. Final expenses (Probate, Executor fees, & Other Fees) ($)
+                  </label>
+                  <input
+                    type="number"
+                    id="final-expenses"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder="0"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Section B: Future financial needs */}
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+              <h4 class="text-lg font-ubuntu font-bold text-gray-900 mb-4">
+                B - Determine your future financial needs
+              </h4>
+              <div class="space-y-4">
+                <div>
+                  <label for="annual-income" class="block text-sm font-medium text-gray-700 mb-2">
+                    1. Annual Income to take home ($)
+                  </label>
+                  <input
+                    type="number"
+                    id="annual-income"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder="0"
+                  />
+                </div>
+                <div>
+                  <label for="years-to-replace" class="block text-sm font-medium text-gray-700 mb-2">
+                    2. Number of years the income needs to be replaced
+                  </label>
+                  <input
+                    type="number"
+                    id="years-to-replace"
+                    value="1"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder="1"
+                    min="1"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Section C: Assets and financial resources */}
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+              <h4 class="text-lg font-ubuntu font-bold text-gray-900 mb-4">
+                C - Deduct your assets and financial resources
+              </h4>
+              <div class="space-y-4">
+                <div>
+                  <label for="cash-savings" class="block text-sm font-medium text-gray-700 mb-2">
+                    1. Cash and Savings ($)
+                  </label>
+                  <input
+                    type="number"
+                    id="cash-savings"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder="0"
+                  />
+                </div>
+                <div>
+                  <label for="stocks-bonds" class="block text-sm font-medium text-gray-700 mb-2">
+                    2. Stocks and Bonds ($)
+                  </label>
+                  <input
+                    type="number"
+                    id="stocks-bonds"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder="0"
+                  />
+                </div>
+                <div>
+                  <label for="rrsp-tfsa" class="block text-sm font-medium text-gray-700 mb-2">
+                    3. RRSP, TFSA ($)
+                  </label>
+                  <input
+                    type="number"
+                    id="rrsp-tfsa"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder="0"
+                  />
+                </div>
+                <div>
+                  <label for="insured-mortgage" class="block text-sm font-medium text-gray-700 mb-2">
+                    4. Insured Mortgage ($)
+                  </label>
+                  <input
+                    type="number"
+                    id="insured-mortgage"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder="0"
+                  />
+                </div>
+                <div>
+                  <label for="existing-life-insurance" class="block text-sm font-medium text-gray-700 mb-2">
+                    5. Existing Life Insurance ($)
+                  </label>
+                  <input
+                    type="number"
+                    id="existing-life-insurance"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder="0"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Calculate Buttons */}
+            <div class="flex space-x-4 pt-4">
+              <button
+                id="btn-calculate"
+                class="flex-1 bg-primary text-white py-3 px-6 rounded-lg font-semibold focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-opacity duration-200 hover:opacity-90"
+              >
+                Calculate FNA
+              </button>
+              <button
+                id="btn-reset"
+                class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg font-semibold focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 transition-opacity duration-200 hover:opacity-90"
+              >
+                Reset
+              </button>
+            </div>
+
+            {/* Results Section */}
+            <div id="fna-results" class="bg-white border border-gray-200 rounded-lg p-6 mt-8 hidden">
+              <h4 class="text-lg font-ubuntu font-bold text-gray-900 mb-4">
+                Your Financial Needs Analysis
+              </h4>
+
+              <div class="space-y-4">
+                {/* Section Totals */}
+                <div class="grid md:grid-cols-3 gap-4 mb-6">
+                  <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                    <div class="text-sm font-medium text-blue-700 mb-1">Total (+A)</div>
+                    <div class="text-xl font-bold text-blue-900" id="result-total-a">
+                      $0
+                    </div>
+                  </div>
+                  <div class="bg-green-50 p-4 rounded-lg border border-green-200">
+                    <div class="text-sm font-medium text-green-700 mb-1">Total (+B)</div>
+                    <div class="text-xl font-bold text-green-900" id="result-total-b">
+                      $0
+                    </div>
+                  </div>
+                  <div class="bg-red-50 p-4 rounded-lg border border-red-200">
+                    <div class="text-sm font-medium text-red-700 mb-1">Total (-C)</div>
+                    <div class="text-xl font-bold text-red-900" id="result-total-c">
+                      -$0
+                    </div>
+                  </div>
+                </div>
+
+                {/* Final Result */}
+                <div class="bg-primary/5 p-6 rounded-lg border border-primary/20">
+                  <div class="flex items-center justify-between">
+                    <div>
+                      <div class="flex items-center mb-2">
+                        <Icon name="lucide:calculator" class="w-6 h-6 text-primary mr-2" />
+                        <span class="text-lg font-semibold text-primary">Life Insurance Need</span>
+                      </div>
+                      <div class="text-3xl font-bold text-primary" id="result-insurance-need">
+                        $0
+                      </div>
+                      <div class="text-sm text-gray-600 mt-1">Result: A+B-C</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Action Buttons */}
+                <div class="flex space-x-4 pt-4">
+                  <a
+                    href="/contact"
+                    target="_blank"
+                    class="flex-1 bg-primary text-white py-3 px-6 rounded-lg font-semibold focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-opacity duration-200 hover:opacity-90 text-center"
+                  >
+                    Contact Expert
+                  </a>
+                  <button
+                    id="btn-print"
+                    class="flex-1 bg-gray-600 text-white py-3 px-6 rounded-lg font-semibold focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-offset-2 transition-opacity duration-200 hover:opacity-90 flex items-center justify-center"
+                  >
+                    <Icon name="lucide:printer" class="w-4 h-4 mr-2" />
+                    Print Report
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Card>
+      </div>
+    </PageContainer>
+  </section>
+
+  {/* Useful Links Section */}
+  <section id="useful-links" class="py-16 lg:py-24 bg-gray-50">
+    <PageContainer>
+      <SectionHeader
+        title="Useful Links & Resources"
+        subtitle="Access helpful resources from government agencies, industry organizations, and financial planning tools to make informed decisions."
+        textAlign="center"
+        class="mb-16"
+      />
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {
+          usefulLinks.map((category) => (
+            <div class="space-y-6">
+              <div class="text-center">
+                <div class="w-16 h-16 bg-gradient-to-br from-primary to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <Icon name={`lucide:${category.icon.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()}`} class="w-8 h-8 text-white" />
+                </div>
+                <h3 class="text-xl font-ubuntu font-bold text-gray-900">{category.category}</h3>
+              </div>
+
+              <div class="space-y-4">
+                {category.links.map((link) => (
+                  <Card class="p-4 h-48 min-h-48 flex flex-col hover:shadow-lg transition-shadow duration-300">
+                    <div class="flex items-start mb-3">
+                      <div class="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+                        <Icon name={`lucide:${link.icon.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()}`} class="w-4 h-4 text-primary" />
+                      </div>
+                      <div class="flex-1 min-w-0">
+                        <h4 class="text-sm font-semibold text-gray-900 line-clamp-2">
+                          {link.title}
+                        </h4>
+                      </div>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4 flex-1 line-clamp-3">
+                      {link.description}
+                    </p>
+                    <a
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center text-sm font-medium text-primary hover:text-primary/80 transition-colors mt-auto"
+                    >
+                      Visit Site
+                      <Icon name="lucide:external-link" class="w-3 h-3 ml-1" />
+                    </a>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </PageContainer>
+  </section>
+
+  {/* Ready to Get Protected Section */}
+  <CTASection
+    title="Ready to Get Protected?"
+    subtitle="Use our resources to get informed, then let our experts help you find the perfect insurance solution for your needs."
+    primaryCTA={{
+      text: 'Contact Our Experts',
+      href: '/contact',
+    }}
+    secondaryCTA={{
+      text: 'Our Solutions',
+      href: '/',
+    }}
+    backgroundImage="/images/family-protection.jpg"
+  />
+</Layout>
+
+<script>
+  // Advisor email decoding
+  const advEmail = document.getElementById('advisor-email') as HTMLInputElement | null;
+  if (advEmail) {
+    const encodedStr = advEmail.getAttribute('data-encoded');
+    if (encodedStr) {
+      const decoded = encodedStr.split(',').map(Number).map(c => String.fromCharCode(c)).join('');
+      advEmail.value = decoded;
+    }
+  }
+
+  // Calculator State
+  const elements = {
+    clientName: document.getElementById('client-name') as HTMLInputElement,
+    clientPhone: document.getElementById('client-phone') as HTMLInputElement,
+    clientEmail: document.getElementById('client-email') as HTMLInputElement,
+    
+    advisorName: document.getElementById('advisor-name') as HTMLInputElement,
+    advisorPhone: document.getElementById('advisor-phone') as HTMLInputElement,
+    advisorEmail: document.getElementById('advisor-email') as HTMLInputElement,
+
+    mortgageAmount: document.getElementById('mortgage-amount') as HTMLInputElement,
+    loans: document.getElementById('loans') as HTMLInputElement,
+    educationFunds: document.getElementById('education-funds') as HTMLInputElement,
+    emergencyFunds: document.getElementById('emergency-funds') as HTMLInputElement,
+    finalExpenses: document.getElementById('final-expenses') as HTMLInputElement,
+
+    annualIncome: document.getElementById('annual-income') as HTMLInputElement,
+    yearsToReplace: document.getElementById('years-to-replace') as HTMLInputElement,
+
+    cashSavings: document.getElementById('cash-savings') as HTMLInputElement,
+    stocksBonds: document.getElementById('stocks-bonds') as HTMLInputElement,
+    rrspTfsa: document.getElementById('rrsp-tfsa') as HTMLInputElement,
+    insuredMortgage: document.getElementById('insured-mortgage') as HTMLInputElement,
+    existingLifeInsurance: document.getElementById('existing-life-insurance') as HTMLInputElement,
+
+    btnCalculate: document.getElementById('btn-calculate') as HTMLButtonElement,
+    btnReset: document.getElementById('btn-reset') as HTMLButtonElement,
+    btnPrint: document.getElementById('btn-print') as HTMLButtonElement,
+
+    resultsSection: document.getElementById('fna-results') as HTMLDivElement,
+    resultTotalA: document.getElementById('result-total-a') as HTMLDivElement,
+    resultTotalB: document.getElementById('result-total-b') as HTMLDivElement,
+    resultTotalC: document.getElementById('result-total-c') as HTMLDivElement,
+    resultInsuranceNeed: document.getElementById('result-insurance-need') as HTMLDivElement,
+  };
+
+  // State to hold latest calculated results
+  let calculatedState = {
+    totalA: 0,
+    totalB: 0,
+    totalC: 0,
+    lifeInsuranceNeed: 0
+  };
+
+  function calculateFNA() {
+    const val = (el: HTMLInputElement) => parseFloat(el.value) || 0;
+
+    const totalA = [
+      val(elements.mortgageAmount),
+      val(elements.loans),
+      val(elements.educationFunds),
+      val(elements.emergencyFunds),
+      val(elements.finalExpenses)
+    ].reduce((sum, v) => sum + v, 0);
+
+    const annualIncome = val(elements.annualIncome);
+    const yearsToReplace = val(elements.yearsToReplace) || 1;
+    const totalB = annualIncome * yearsToReplace;
+
+    const totalC = [
+      val(elements.cashSavings),
+      val(elements.stocksBonds),
+      val(elements.rrspTfsa),
+      val(elements.insuredMortgage),
+      val(elements.existingLifeInsurance)
+    ].reduce((sum, v) => sum + v, 0);
+
+    const lifeInsuranceNeed = Math.max(0, totalA + totalB - totalC);
+
+    // Save state
+    calculatedState = { totalA, totalB, totalC, lifeInsuranceNeed };
+
+    // Update UI
+    elements.resultTotalA.textContent = `$${totalA.toLocaleString()}`;
+    elements.resultTotalB.textContent = `$${totalB.toLocaleString()}`;
+    elements.resultTotalC.textContent = `-$${totalC.toLocaleString()}`;
+    elements.resultInsuranceNeed.textContent = `$${lifeInsuranceNeed.toLocaleString()}`;
+
+    elements.resultsSection.classList.remove('hidden');
+    elements.resultsSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function resetFNA() {
+    const inputs = [
+      elements.clientName, elements.clientPhone, elements.clientEmail,
+      elements.mortgageAmount, elements.loans, elements.educationFunds, elements.emergencyFunds, elements.finalExpenses,
+      elements.annualIncome, elements.cashSavings, elements.stocksBonds, elements.rrspTfsa, elements.insuredMortgage, elements.existingLifeInsurance
+    ];
+
+    inputs.forEach(input => {
+      if (input) input.value = '';
+    });
+
+    if (elements.yearsToReplace) elements.yearsToReplace.value = '1';
+    
+    // Restore default advisor details
+    if (elements.advisorName) elements.advisorName.value = 'Sukhvir Singh';
+    if (elements.advisorPhone) elements.advisorPhone.value = '(905) 961-0050';
+    if (advEmail) {
+      const encodedStr = advEmail.getAttribute('data-encoded');
+      if (encodedStr) {
+        advEmail.value = encodedStr.split(',').map(Number).map(c => String.fromCharCode(c)).join('');
+      }
+    }
+
+    elements.resultsSection.classList.add('hidden');
+    calculatedState = { totalA: 0, totalB: 0, totalC: 0, lifeInsuranceNeed: 0 };
+  }
+
+  function printFNA() {
+    if (!elements.resultsSection.classList.contains('hidden')) {
+      const clientName = elements.clientName.value || 'N/A';
+      const clientPhone = elements.clientPhone.value || 'N/A';
+      const clientEmail = elements.clientEmail.value || 'N/A';
+      const advNameVal = elements.advisorName.value || 'Sukhvir Singh';
+      const advPhoneVal = elements.advisorPhone.value || '(905) 961-0050';
+      const advEmailVal = elements.advisorEmail.value || '';
+
+      const val = (el: HTMLInputElement) => parseFloat(el.value) || 0;
+
+      const printWindow = window.open('', '_blank');
+      if (!printWindow) {
+        alert('Please allow pop-ups to print your FNA report.');
+        return;
+      }
+
+      const currentDate = new Date().toLocaleDateString('en-CA');
+      
+      const printContent = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>Financial Needs Analysis Report</title>
+          <style>
+            @page { margin: 1in; }
+            body { 
+              margin: 0; 
+              padding: 20px; 
+              font-family: Arial, sans-serif; 
+              line-height: 1.4;
+              color: #333;
+            }
+            .letterhead { 
+              border-bottom: 3px solid #1e2a78; 
+              padding-bottom: 20px; 
+              margin-bottom: 30px; 
+            }
+            .company-name { 
+              font-size: 28px; 
+              font-weight: bold; 
+              color: #1e2a78; 
+              margin-bottom: 10px; 
+            }
+            .contact-details { 
+              font-size: 14px; 
+              color: #666; 
+            }
+            .report-title { 
+              font-size: 24px; 
+              font-weight: bold; 
+              margin: 30px 0 20px 0; 
+              text-align: center; 
+            }
+            .section { 
+              margin-bottom: 25px; 
+            }
+            .section-title { 
+              font-size: 18px; 
+              font-weight: bold; 
+              margin-bottom: 15px; 
+              background: #f8f9fa; 
+              padding: 10px; 
+              border-left: 4px solid #1e2a78;
+            }
+            .field-row { 
+              display: flex; 
+              justify-content: space-between; 
+              margin-bottom: 8px; 
+              padding: 4px 0;
+            }
+            .field-label { 
+              font-weight: bold; 
+              flex: 1;
+            }
+            .field-value {
+              text-align: right;
+              min-width: 120px;
+            }
+            .results-box { 
+              border: 2px solid #1e2a78; 
+              padding: 20px; 
+              margin: 20px 0; 
+              background: #f8f9fa; 
+            }
+            .total-need { 
+              font-size: 20px; 
+              font-weight: bold; 
+              color: #1e2a78; 
+              text-align: center; 
+              margin-top: 15px; 
+              padding: 10px;
+              background: white;
+              border-radius: 5px;
+            }
+            .footer { 
+              margin-top: 40px; 
+              padding-top: 20px; 
+              border-top: 1px solid #ccc; 
+              font-size: 12px; 
+              color: #666; 
+            }
+            .summary-row {
+              font-weight: bold;
+              border-top: 2px solid #1e2a78;
+              margin-top: 10px;
+              padding-top: 8px;
+            }
+            @media print {
+              body { print-color-adjust: exact; }
+            }
+          </style>
+        </head>
+        <body>
+          <div class="letterhead">
+            <div class="company-name">Top Trust Insurance</div>
+            <div class="contact-details">
+              Phone: ${advPhoneVal} | Email: ${advEmailVal}<br>
+              Licensed Insurance Advisor - Serving Canada
+            </div>
+          </div>
+
+          <div class="report-title">Financial Needs Analysis Report</div>
+          <div style="text-align: center; margin-bottom: 30px; color: #666;">Generated on ${currentDate}</div>
+
+          <div class="section">
+            <div class="section-title">Client Information</div>
+            <div class="field-row">
+              <span class="field-label">Name:</span> 
+              <span class="field-value">${clientName}</span>
+            </div>
+            <div class="field-row">
+              <span class="field-label">Phone:</span> 
+              <span class="field-value">${clientPhone}</span>
+            </div>
+            <div class="field-row">
+              <span class="field-label">Email:</span> 
+              <span class="field-value">${clientEmail}</span>
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="section-title">Advisor Information</div>
+            <div class="field-row">
+              <span class="field-label">Name:</span> 
+              <span class="field-value">${advNameVal}</span>
+            </div>
+            <div class="field-row">
+              <span class="field-label">Phone:</span> 
+              <span class="field-value">${advPhoneVal}</span>
+            </div>
+            <div class="field-row">
+              <span class="field-label">Email:</span> 
+              <span class="field-value">${advEmailVal}</span>
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="section-title">A - Current Debts and Financial Needs</div>
+            <div class="field-row">
+              <span class="field-label">Total Mortgage Amount:</span> 
+              <span class="field-value">$${val(elements.mortgageAmount).toLocaleString()}</span>
+            </div>
+            <div class="field-row">
+              <span class="field-label">Loans (Auto, Credit Cards, Personal & others):</span> 
+              <span class="field-value">$${val(elements.loans).toLocaleString()}</span>
+            </div>
+            <div class="field-row">
+              <span class="field-label">Children Education Funds:</span> 
+              <span class="field-value">$${val(elements.educationFunds).toLocaleString()}</span>
+            </div>
+            <div class="field-row">
+              <span class="field-label">Emergency Funds (3-6 months):</span> 
+              <span class="field-value">$${val(elements.emergencyFunds).toLocaleString()}</span>
+            </div>
+            <div class="field-row">
+              <span class="field-label">Final expenses:</span> 
+              <span class="field-value">$${val(elements.finalExpenses).toLocaleString()}</span>
+            </div>
+            <div class="field-row summary-row">
+              <span class="field-label">Total Section A:</span> 
+              <span class="field-value">$${calculatedState.totalA.toLocaleString()}</span>
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="section-title">B - Future Financial Needs</div>
+            <div class="field-row">
+              <span class="field-label">Annual Income to take home:</span> 
+              <span class="field-value">$${val(elements.annualIncome).toLocaleString()}</span>
+            </div>
+            <div class="field-row">
+              <span class="field-label">Number of years to replace income:</span> 
+              <span class="field-value">${val(elements.yearsToReplace)} years</span>
+            </div>
+            <div class="field-row summary-row">
+              <span class="field-label">Total Section B:</span> 
+              <span class="field-value">$${calculatedState.totalB.toLocaleString()}</span>
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="section-title">C - Assets and Financial Resources</div>
+            <div class="field-row">
+              <span class="field-label">Cash and Savings:</span> 
+              <span class="field-value">$${val(elements.cashSavings).toLocaleString()}</span>
+            </div>
+            <div class="field-row">
+              <span class="field-label">Stocks and Bonds:</span> 
+              <span class="field-value">$${val(elements.stocksBonds).toLocaleString()}</span>
+            </div>
+            <div class="field-row">
+              <span class="field-label">RRSP, TFSA:</span> 
+              <span class="field-value">$${val(elements.rrspTfsa).toLocaleString()}</span>
+            </div>
+            <div class="field-row">
+              <span class="field-label">Insured Mortgage:</span> 
+              <span class="field-value">$${val(elements.insuredMortgage).toLocaleString()}</span>
+            </div>
+            <div class="field-row">
+              <span class="field-label">Existing Life Insurance:</span> 
+              <span class="field-value">$${val(elements.existingLifeInsurance).toLocaleString()}</span>
+            </div>
+            <div class="field-row summary-row">
+              <span class="field-label">Total Section C:</span> 
+              <span class="field-value">$${calculatedState.totalC.toLocaleString()}</span>
+            </div>
+          </div>
+
+          <div class="results-box">
+            <div style="text-align: center; font-size: 18px; font-weight: bold; margin-bottom: 20px;">
+              FINANCIAL NEEDS ANALYSIS RESULTS
+            </div>
+            <div class="field-row">
+              <span class="field-label">Total Current & Future Needs (A + B):</span> 
+              <span class="field-value">$${(calculatedState.totalA + calculatedState.totalB).toLocaleString()}</span>
+            </div>
+            <div class="field-row">
+              <span class="field-label">Less: Available Assets (C):</span> 
+              <span class="field-value">-$${calculatedState.totalC.toLocaleString()}</span>
+            </div>
+            <div class="total-need">
+              Life Insurance Need: $${calculatedState.lifeInsuranceNeed.toLocaleString()}
+            </div>
+          </div>
+
+          <div class="footer">
+            <strong>Note:</strong> This Financial Needs Analysis provides a comprehensive assessment based on the information provided. 
+            For personalized recommendations and to explore insurance options, please contact our experts.<br><br>
+            <em>This report was generated by Top Trust Insurance's online FNA calculator. Results are estimates and should be reviewed with a licensed insurance professional.</em>
+          </div>
+        </body>
+        </html>
+      `;
+
+      printWindow.document.write(printContent);
+      printWindow.document.close();
+      
+      setTimeout(() => {
+        printWindow.focus();
+        printWindow.print();
+      }, 500);
+    }
+  }
+
+  // Bind Events
+  if (elements.btnCalculate) elements.btnCalculate.addEventListener('click', calculateFNA);
+  if (elements.btnReset) elements.btnReset.addEventListener('click', resetFNA);
+  if (elements.btnPrint) elements.btnPrint.addEventListener('click', printFNA);
+</script>

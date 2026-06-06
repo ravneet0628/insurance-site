@@ -1,0 +1,108 @@
+---
+import { Icon } from 'astro-icon/components';
+import Logo from './Logo.astro';
+
+const currentYear = new Date().getFullYear();
+const ENCODED_EMAIL = [115, 117, 107, 104, 118, 105, 114, 115, 105, 110, 103, 104, 51, 49, 64, 121, 97, 104, 111, 111, 46, 99, 111, 109];
+const ENCODED_EMAIL_STR = ENCODED_EMAIL.join(',');
+---
+
+<footer class="bg-primary text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {/* Company Info */}
+      <div class="space-y-4">
+        <Logo light={true} />
+        <p class="text-gray-300 text-sm leading-relaxed">
+          Your trusted insurance advisor providing comprehensive coverage solutions to protect what matters most.
+        </p>
+      </div>
+
+      {/* Quick Links */}
+      <div class="space-y-4">
+        <h4 class="text-lg font-ubuntu font-semibold">Quick Links</h4>
+        <ul class="space-y-2">
+          <li>
+            <a href="/" class="text-gray-300 hover:text-white transition-colors text-sm">
+              Home
+            </a>
+          </li>
+          <li>
+            <a href="/resources" class="text-gray-300 hover:text-white transition-colors text-sm">
+              Resources
+            </a>
+          </li>
+          <li>
+            <a href="/contact" class="text-gray-300 hover:text-white transition-colors text-sm">
+              Contact Us
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      {/* Services */}
+      <div class="space-y-4">
+        <h4 class="text-lg font-ubuntu font-semibold">Our Services</h4>
+        <ul class="space-y-2">
+          <li>
+            <a href="/services/life-insurance" class="text-gray-300 hover:text-white transition-colors text-sm">
+              Life Insurance
+            </a>
+          </li>
+          <li>
+            <a href="/services/super-visa-insurance" class="text-gray-300 hover:text-white transition-colors text-sm">
+              Super Visa Insurance
+            </a>
+          </li>
+          <li>
+            <a href="/services/visitors-insurance" class="text-gray-300 hover:text-white transition-colors text-sm">
+              Visitors Insurance
+            </a>
+          </li>
+          <li>
+            <a href="/services/disability-insurance" class="text-gray-300 hover:text-white transition-colors text-sm">
+              Disability Insurance
+            </a>
+          </li>
+          <li>
+            <a href="/services/critical-illness-insurance" class="text-gray-300 hover:text-white transition-colors text-sm">
+              Critical Illness Insurance
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      {/* Contact Info */}
+      <div class="space-y-4">
+        <h4 class="text-lg font-ubuntu font-semibold">Contact Info</h4>
+        <div class="space-y-3">
+          <div class="flex items-center space-x-3">
+            <Icon name="lucide:phone" class="w-5 h-5 text-gray-300 flex-shrink-0" />
+            <a
+              href="tel:9059610050"
+              class="text-gray-300 hover:text-white transition-colors text-sm"
+            >
+              (905) 961-0050
+            </a>
+          </div>
+          <div class="flex items-center space-x-3">
+            <Icon name="lucide:mail" class="w-5 h-5 text-gray-300 flex-shrink-0" />
+            <span class="text-gray-300 hover:text-white transition-colors text-sm flex items-center">
+              <span class="obfuscated-email" data-email={ENCODED_EMAIL_STR}>Loading...</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Bottom Bar */}
+    <div class="border-t border-gray-600 mt-8 pt-8">
+      <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+        <p class="text-gray-300 text-sm">
+          © {currentYear} Top Trust Insurance. All rights reserved.
+        </p>
+        <div class="text-gray-300 text-sm">Licensed Insurance Advisor - Serving Canada</div>
+      </div>
+    </div>
+  </div>
+</footer>
