@@ -4,10 +4,10 @@ export const contactPageContent: ContactPageContent = {
   meta: {
     title: 'Contact Us - Top Trust Insurance | Get in Touch',
     description:
-      'Contact licensed insurance advisor Sukhveer Singh at Top Trust Insurance. Get quotes, ask questions, or discuss life, travel, and investment planning.',
+      'Contact licensed insurance advisor Sukhvir Singh at Top Trust Insurance. Get quotes, ask questions, or discuss life, travel, and investment planning.',
     keywords: [
       'contact Top Trust',
-      'Sukhveer Singh advisor',
+      'Sukhvir Singh advisor',
       'insurance advisor Ontario',
       'Top Trust Insurance',
       'insurance quotes',
@@ -18,7 +18,7 @@ export const contactPageContent: ContactPageContent = {
   hero: {
     title: 'Contact Top Trust',
     subtitle:
-      "We're here to help with all your insurance and financial security needs. Reach out to advisor Sukhveer Singh today.",
+      "We're here to help with all your insurance and financial security needs. Reach out to advisor Sukhvir Singh today.",
     backgroundImage: '/images/office-building.jpg',
     primaryCTA: {
       text: 'Our Services',
@@ -38,7 +38,7 @@ export const contactPageContent: ContactPageContent = {
       title: 'Phone',
       numbers: [
         {
-          label: 'Sukhveer Singh',
+          label: 'Sukhvir Singh',
           value: '(905) 961-0050',
           href: 'tel:9059610050',
         },
@@ -48,7 +48,7 @@ export const contactPageContent: ContactPageContent = {
       title: 'Email',
       addresses: [
         {
-          label: 'Sukhveer Singh',
+          label: 'Sukhvir Singh',
           value: 'sukhvirsingh31@yahoo.com',
           href: 'mailto:sukhvirsingh31@yahoo.com',
         },

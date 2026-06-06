@@ -39,7 +39,7 @@ const ResourcesPage: React.FC = () => {
 
   // Advisor Details
   const [advisorDetails, setAdvisorDetails] = useState({
-    name: 'Sukhveer Singh',
+    name: 'Sukhvir Singh',
     phone: '(905) 961-0050',
     email: 'sukhvirsingh31@yahoo.com',
   });

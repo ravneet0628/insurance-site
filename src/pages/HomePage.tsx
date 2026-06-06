@@ -236,11 +236,11 @@ const HomePage: React.FC = () => {
 
                   {/* Bio */}
                   <h4 className="text-2xl font-bold text-gray-900 mb-1">
-                    Sukhveer Singh
+                    Sukhvir Singh
                   </h4>
                   <p className="text-blue-600 font-semibold mb-4">Licensed Insurance Advisor</p>
                   <p className="text-gray-600 leading-relaxed">
-                    Sukhveer Singh specializes in providing comprehensive insurance and financial solutions tailored to your unique needs. He works with Canada's top insurance companies to ensure you get the best coverage at competitive rates.
+                    Sukhvir Singh specializes in providing comprehensive insurance and financial solutions tailored to your unique needs. He works with Canada's top insurance companies to ensure you get the best coverage at competitive rates.
                   </p>
 
                   {/* Contact Info */}
