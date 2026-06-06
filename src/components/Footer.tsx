@@ -2,6 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Phone, Mail } from 'lucide-react';
 import Logo from './Logo';
+import ObfuscatedEmail from './ObfuscatedEmail';
+
+// prettier-ignore
+const ENCODED_EMAIL = [115,117,107,104,118,105,114,115,105,110,103,104,51,49,64,121,97,104,111,111,46,99,111,109];
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -109,12 +113,10 @@ const Footer: React.FC = () => {
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-gray-300 flex-shrink-0" />
-                <a
-                  href="mailto:sukhvirsingh31@yahoo.com"
+                <ObfuscatedEmail
+                  encodedEmail={ENCODED_EMAIL}
                   className="text-gray-300 hover:text-white transition-colors text-sm"
-                >
-                  sukhvirsingh31@yahoo.com
-                </a>
+                />
               </div>
             </div>
           </div>

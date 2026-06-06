@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Phone, Mail } from 'lucide-react';
 import Logo from './Logo';
+import ObfuscatedEmail from './ObfuscatedEmail';
+
+// prettier-ignore
+const ENCODED_EMAIL = [115,117,107,104,118,105,114,115,105,110,103,104,51,49,64,121,97,104,111,111,46,99,111,109];
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -60,13 +64,10 @@ const Navbar: React.FC = () => {
               <Phone className="w-4 h-4 mr-1" aria-hidden="true" />
               (905) 961-0050
             </a>
-            <a
-              href="mailto:sukhvirsingh31@yahoo.com"
-              className="flex items-center text-sm text-neutral-text hover:text-primary transition-colors"
-            >
+            <span className="flex items-center text-sm text-neutral-text hover:text-primary transition-colors">
               <Mail className="w-4 h-4 mr-1" />
-              sukhvirsingh31@yahoo.com
-            </a>
+              <ObfuscatedEmail encodedEmail={ENCODED_EMAIL} />
+            </span>
           </div>
 
           {/* Mobile menu button */}
@@ -114,13 +115,10 @@ const Navbar: React.FC = () => {
               <Phone className="w-4 h-4 mr-2" />
               (905) 961-0050
             </a>
-            <a
-              href="mailto:sukhvirsingh31@yahoo.com"
-              className="flex items-center px-3 py-2 text-sm text-neutral-text hover:text-primary transition-colors"
-            >
+            <span className="flex items-center px-3 py-2 text-sm text-neutral-text hover:text-primary transition-colors">
               <Mail className="w-4 h-4 mr-2" />
-              sukhvirsingh31@yahoo.com
-            </a>
+              <ObfuscatedEmail encodedEmail={ENCODED_EMAIL} />
+            </span>
           </div>
         </div>
       </div>

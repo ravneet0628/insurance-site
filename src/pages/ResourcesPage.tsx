@@ -38,11 +38,20 @@ const ResourcesPage: React.FC = () => {
   });
 
   // Advisor Details
+  // prettier-ignore
+  const encodedAdvisorEmail = [115,117,107,104,118,105,114,115,105,110,103,104,51,49,64,121,97,104,111,111,46,99,111,109];
   const [advisorDetails, setAdvisorDetails] = useState({
     name: 'Sukhvir Singh',
     phone: '(905) 961-0050',
-    email: 'sukhvirsingh31@yahoo.com',
+    email: '',
   });
+
+  useEffect(() => {
+    setAdvisorDetails(prev => ({
+      ...prev,
+      email: encodedAdvisorEmail.map(c => String.fromCharCode(c)).join(''),
+    }));
+  }, []);
 
   // Section A: Current debts and financial needs
   const [sectionA, setSectionA] = useState({
@@ -256,7 +265,7 @@ const ResourcesPage: React.FC = () => {
           <div class="letterhead">
             <div class="company-name">Top Trust Insurance</div>
             <div class="contact-details">
-              Phone: (905) 961-0050 | Email: sukhvirsingh31@yahoo.com<br>
+              Phone: (905) 961-0050 | Email: ${advisorDetails.email}<br>
               Licensed Insurance Advisor - Serving Canada
             </div>
           </div>

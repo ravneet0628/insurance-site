@@ -111,10 +111,9 @@ export interface ContactPageContent {
     };
     email: {
       title: string;
+      encodedEmail: number[];
       addresses: Array<{
         label: string;
-        value: string;
-        href: string;
       }>;
     };
     hours: {

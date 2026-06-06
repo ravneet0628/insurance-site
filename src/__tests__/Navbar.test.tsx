@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { describe, it, expect } from 'vitest';
 import '@testing-library/jest-dom';
@@ -60,7 +60,7 @@ describe('Navbar Component', () => {
     });
   });
 
-  it('renders contact information links', () => {
+  it('renders contact information links', async () => {
     render(
       <RouterWrapper>
         <Navbar />
@@ -71,10 +71,13 @@ describe('Navbar Component', () => {
     expect(phoneLink).toBeInTheDocument();
     expect(phoneLink).toHaveAttribute('href', 'tel:9059610050');
 
-    const emailLinks = screen.getAllByRole('link', { name: 'sukhvirsingh31@yahoo.com' });
-    expect(emailLinks).toHaveLength(2); // Desktop and mobile
-    emailLinks.forEach((link) => {
-      expect(link).toHaveAttribute('href', 'mailto:sukhvirsingh31@yahoo.com');
+    // Email is decoded asynchronously via ObfuscatedEmail component
+    await waitFor(() => {
+      const emailLinks = screen.getAllByRole('link', { name: 'sukhvirsingh31@yahoo.com' });
+      expect(emailLinks).toHaveLength(2); // Desktop and mobile
+      emailLinks.forEach((link) => {
+        expect(link).toHaveAttribute('href', 'mailto:sukhvirsingh31@yahoo.com');
+      });
     });
   });
 });

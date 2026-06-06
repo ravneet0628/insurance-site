@@ -9,6 +9,7 @@ import { Phone, Mail, Clock, Send, Loader2 } from 'lucide-react';
 import Card from '../components/Card';
 import CTAButton from '../components/CTAButton';
 import SEO from '../components/SEO';
+import ObfuscatedEmail from '../components/ObfuscatedEmail';
 import { submitContact } from '../utils/api';
 import { useContactPageContent } from '../content/hooks/usePageContent';
 
@@ -72,17 +73,12 @@ const ContactPage: React.FC = () => {
     }
   };
 
-  // Build contact info from CMS data
+  // Build contact info from CMS data (email handled separately for obfuscation)
   const contactInfo = [
     {
       icon: Phone,
       title: content.contactInfo.phone.title,
       details: content.contactInfo.phone.numbers,
-    },
-    {
-      icon: Mail,
-      title: content.contactInfo.email.title,
-      details: content.contactInfo.email.addresses,
     },
     {
       icon: Clock,
@@ -107,7 +103,6 @@ const ContactPage: React.FC = () => {
           '@type': 'InsuranceAgency',
           name: 'Top Trust Insurance',
           telephone: content.contactInfo.phone.numbers[0]?.value,
-          email: content.contactInfo.email.addresses[0]?.value,
           url: 'https://toptrustinsurance.ca',
           openingHours: ['Mo-Fr 09:00-17:00'],
         })}
@@ -173,6 +168,36 @@ const ContactPage: React.FC = () => {
                   </Card>
                 </motion.div>
               ))}
+
+              {/* Email Card - rendered separately for obfuscation */}
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                <Card className="flex items-start p-6 hover:shadow-md transition-all duration-300">
+                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mr-4">
+                    <Mail className="w-6 h-6 text-primary" />
+                  </div>
+                  <div className="flex-grow text-left">
+                    <h3 className="text-lg font-ubuntu font-bold text-neutral-text mb-2">
+                      {content.contactInfo.email.title}
+                    </h3>
+                    <div className="space-y-1">
+                      {content.contactInfo.email.addresses.map((addr, i) => (
+                        <div key={i} className="text-sm text-gray-600 leading-relaxed">
+                          <span className="text-gray-500">{addr.label}:</span>{' '}
+                          <ObfuscatedEmail
+                            encodedEmail={content.contactInfo.email.encodedEmail}
+                            className="text-primary hover:text-primary/80 font-medium break-all"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </Card>
+              </motion.div>
             </div>
 
             {/* Right Column: Contact Form Card */}

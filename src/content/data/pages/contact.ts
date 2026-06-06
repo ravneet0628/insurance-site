@@ -46,11 +46,11 @@ export const contactPageContent: ContactPageContent = {
     },
     email: {
       title: 'Email',
+      // prettier-ignore
+      encodedEmail: [115,117,107,104,118,105,114,115,105,110,103,104,51,49,64,121,97,104,111,111,46,99,111,109],
       addresses: [
         {
           label: 'Sukhvir Singh',
-          value: 'sukhvirsingh31@yahoo.com',
-          href: 'mailto:sukhvirsingh31@yahoo.com',
         },
       ],
     },
