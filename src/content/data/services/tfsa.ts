@@ -17,7 +17,7 @@ export const tfsaContent: ServiceContent = {
     title: 'TFSA - Tax-Free Savings Account',
     subtitle:
       'Achieve your financial goals with completely tax-free growth and withdrawals. The most flexible savings and investment account available to Canadians.',
-    backgroundImage: '/images/office-building.jpg',
+    backgroundImage: '/images/service-tfsa.png',
     ctaText: 'Open TFSA Account',
     ctaLink: '/contact',
   },
@@ -114,6 +114,6 @@ export const tfsaContent: ServiceContent = {
       "Every dollar you don't save in a TFSA is a dollar that could be growing completely tax-free. Open your account today.",
     buttonText: 'Open TFSA Today',
     buttonLink: '/contact',
-    backgroundImage: '/images/office-building.jpg',
+    backgroundImage: '/images/service-tfsa.png',
   },
 };

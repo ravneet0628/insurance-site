@@ -17,7 +17,7 @@ export const disabilityInsuranceContent: ServiceContent = {
     title: 'Disability Insurance',
     subtitle:
       'Protect your most valuable asset - your ability to earn income. Get comprehensive disability coverage for when you need it most.',
-    backgroundImage: '/images/office-building.jpg',
+    backgroundImage: '/images/service-disability.png',
     ctaText: 'Protect Your Income',
     ctaLink: '/contact',
   },
@@ -114,6 +114,6 @@ export const disabilityInsuranceContent: ServiceContent = {
       "Statistics show you're more likely to become disabled than to die during your working years. Protect your income today.",
     buttonText: 'Get Disability Quote',
     buttonLink: '/contact',
-    backgroundImage: '/images/office-building.jpg',
+    backgroundImage: '/images/service-disability.png',
   },
 };

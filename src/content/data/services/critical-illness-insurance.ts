@@ -17,7 +17,7 @@ export const criticalIllnessInsuranceContent: ServiceContent = {
     title: 'Critical Illness Insurance',
     subtitle:
       'Financial protection when you need it most. Get a lump sum payment to help cover expenses when diagnosed with a critical illness.',
-    backgroundImage: '/images/family-protection.jpg',
+    backgroundImage: '/images/service-critical-illness.png',
     ctaText: 'Get Protection Quote',
     ctaLink: '/contact',
   },
@@ -114,6 +114,6 @@ export const criticalIllnessInsuranceContent: ServiceContent = {
       "One in two people will be diagnosed with cancer in their lifetime. Don't face a critical illness without financial protection.",
     buttonText: 'Get Critical Illness Quote',
     buttonLink: '/contact',
-    backgroundImage: '/images/family-protection.jpg',
+    backgroundImage: '/images/service-critical-illness.png',
   },
 };

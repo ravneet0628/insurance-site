@@ -124,7 +124,14 @@ const schema = {
                   contactInfo.email.addresses.map((addr) => (
                     <div class="text-sm text-gray-600 leading-relaxed">
                       <span class="text-gray-500">{addr.label}:</span>{' '}
-                      <span class="obfuscated-email text-primary hover:text-primary/80 font-medium break-all" data-email={ENCODED_EMAIL_STR}>Loading...</span>
+                      <a
+                        href="#"
+                        class="obfuscated-email text-primary hover:text-primary/80 font-medium break-all"
+                        data-email={ENCODED_EMAIL_STR}
+                        aria-label={`Email ${addr.label}`}
+                      >
+                        <span data-email-label>Loading...</span>
+                      </a>
                     </div>
                   ))
                 }
@@ -200,6 +207,17 @@ const schema = {
                 <p id="error-message" class="mt-1 text-sm text-red-500 hidden"></p>
               </div>
 
+              <div>
+                <div
+                  class="h-captcha"
+                  data-captcha="true"
+                  data-callback="onContactCaptchaVerified"
+                ></div>
+                <p id="error-captcha" class="mt-2 text-sm text-red-500 hidden">
+                  Please complete the captcha before sending your message.
+                </p>
+              </div>
+
               <CTAButton type="submit" id="btn-submit-contact" class="w-full">
                 <span id="submit-idle-content" class="flex items-center justify-center">
                   <Icon name="lucide:send" class="w-4 h-4 mr-2" />
@@ -232,16 +250,26 @@ const schema = {
       <CTAButton id="btn-close-modal">Close</CTAButton>
     </div>
   </div>
+
+<script src="https://web3forms.com/client/script.js" async defer></script>
 </Layout>
 
 <script>
   // Email Obfuscation Decode
-  document.querySelectorAll('.obfuscated-email').forEach((el) => {
+  document.querySelectorAll<HTMLAnchorElement>('.obfuscated-email').forEach((el) => {
     const encodedAttr = el.getAttribute('data-email');
     if (encodedAttr) {
       const encoded = encodedAttr.split(',').map(Number);
       const email = encoded.map((c) => String.fromCharCode(c)).join('');
-      el.outerHTML = `<a href="mailto:${email}" class="text-primary hover:text-primary/80 font-medium break-all">${email}</a>`;
+      const label = el.querySelector('[data-email-label]');
+
+      el.href = `mailto:${email}`;
+      el.setAttribute('aria-label', `Email ${email}`);
+      if (label) {
+        label.textContent = email;
+      } else {
+        el.textContent = email;
+      }
     }
   });
 
@@ -254,6 +282,7 @@ const schema = {
   const errorName = document.getElementById('error-name') as HTMLParagraphElement | null;
   const errorEmail = document.getElementById('error-email') as HTMLParagraphElement | null;
   const errorMessage = document.getElementById('error-message') as HTMLParagraphElement | null;
+  const errorCaptcha = document.getElementById('error-captcha') as HTMLParagraphElement | null;
 
   const errorAlert = document.getElementById('form-error-alert') as HTMLDivElement | null;
   const errorText = document.getElementById('form-error-text') as HTMLParagraphElement | null;
@@ -266,6 +295,25 @@ const schema = {
   const closeModalBtn = document.getElementById('btn-close-modal') as HTMLButtonElement | null;
 
   let isSubmitting = false;
+  const contactCaptchaWindow = window as Window & {
+    hcaptcha?: { reset: () => void };
+    onContactCaptchaVerified?: () => void;
+  };
+
+  contactCaptchaWindow.onContactCaptchaVerified = () => {
+    if (errorCaptcha) errorCaptcha.classList.add('hidden');
+  };
+
+  function getHcaptchaResponse() {
+    return (
+      formEl?.querySelector<HTMLTextAreaElement>('textarea[name="h-captcha-response"]')?.value ||
+      ''
+    );
+  }
+
+  function resetHcaptcha() {
+    contactCaptchaWindow.hcaptcha?.reset();
+  }
 
   function validateEmail(email: string) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -353,6 +401,13 @@ const schema = {
       }
     }
 
+    if (!getHcaptchaResponse()) {
+      if (errorCaptcha) errorCaptcha.classList.remove('hidden');
+      isValid = false;
+    } else if (errorCaptcha) {
+      errorCaptcha.classList.add('hidden');
+    }
+
     return isValid;
   }
 
@@ -397,7 +452,7 @@ const schema = {
       if (errorAlert) errorAlert.classList.add('hidden');
 
       try {
-        const hcaptchaResponse = (document.getElementsByName('h-captcha-response')[0] as HTMLInputElement)?.value || '';
+        const hcaptchaResponse = getHcaptchaResponse();
 
         const payload = {
           access_key: '1bd0a6cc-e1d8-457f-ad90-2ab9ffd39aa1',
@@ -424,12 +479,14 @@ const schema = {
           // Success
           if (successModal) successModal.classList.remove('hidden');
           formEl.reset();
+          resetHcaptcha();
         } else {
           // Error response from API
           if (errorAlert && errorText) {
             errorText.textContent = result.message || 'There was an error sending your message. Please try again.';
             errorAlert.classList.remove('hidden');
           }
+          resetHcaptcha();
         }
       } catch (err) {
         console.error('Contact form submit error:', err);
@@ -437,6 +494,7 @@ const schema = {
           errorText.textContent = 'An unexpected network error occurred. Please check your connection and try again.';
           errorAlert.classList.remove('hidden');
         }
+        resetHcaptcha();
       } finally {
         isSubmitting = false;
         if (submitBtn) submitBtn.disabled = false;

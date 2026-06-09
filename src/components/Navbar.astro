@@ -67,10 +67,15 @@ const ENCODED_EMAIL_STR = ENCODED_EMAIL.join(',');
           <Icon name="lucide:phone" class="w-4 h-4 mr-1" aria-hidden="true" />
           (905) 961-0050
         </a>
-        <span class="flex items-center text-sm text-neutral-text hover:text-primary transition-colors">
-          <Icon name="lucide:mail" class="w-4 h-4 mr-1" />
-          <span class="obfuscated-email" data-email={ENCODED_EMAIL_STR}>Loading...</span>
-        </span>
+        <a
+          href="#"
+          class="obfuscated-email flex items-center text-sm text-neutral-text hover:text-primary transition-colors"
+          data-email={ENCODED_EMAIL_STR}
+          aria-label="Email Top Trust Insurance"
+        >
+          <Icon name="lucide:mail" class="w-4 h-4 mr-1" aria-hidden="true" />
+          <span data-email-label>Loading...</span>
+        </a>
       </div>
 
       {/* Mobile menu button */}
@@ -114,10 +119,15 @@ const ENCODED_EMAIL_STR = ENCODED_EMAIL.join(',');
           <Icon name="lucide:phone" class="w-4 h-4 mr-2" />
           (905) 961-0050
         </a>
-        <span class="flex items-center px-3 py-2 text-sm text-neutral-text hover:text-primary transition-colors">
-          <Icon name="lucide:mail" class="w-4 h-4 mr-2" />
-          <span class="obfuscated-email" data-email={ENCODED_EMAIL_STR}>Loading...</span>
-        </span>
+        <a
+          href="#"
+          class="obfuscated-email flex items-center px-3 py-2 text-sm text-neutral-text hover:text-primary transition-colors"
+          data-email={ENCODED_EMAIL_STR}
+          aria-label="Email Top Trust Insurance"
+        >
+          <Icon name="lucide:mail" class="w-4 h-4 mr-2" aria-hidden="true" />
+          <span data-email-label>Loading...</span>
+        </a>
       </div>
     </div>
   </div>
@@ -133,48 +143,31 @@ const ENCODED_EMAIL_STR = ENCODED_EMAIL.join(',');
   if (button && mobileNav && menuIcon && closeIcon) {
     button.addEventListener('click', () => {
       const isExpanded = button.getAttribute('aria-expanded') === 'true';
-      button.setAttribute('aria-expanded', (!isExpanded).toString());
-      
-      if (isExpanded) {
-        mobileNav.style.maxHeight = '0';
-        mobileNav.style.opacity = '0';
-        menuIcon.classList.remove('hidden');
-        closeIcon.classList.add('hidden');
-      } else {
-        mobileNav.style.maxHeight = '300px';
-        mobileNav.style.opacity = '1';
-        menuIcon.classList.add('hidden');
-        closeIcon.classList.remove('hidden');
-      }
+      button.setAttribute('aria-expanded', String(!isExpanded));
+      mobileNav.classList.toggle('max-h-0', isExpanded);
+      mobileNav.classList.toggle('max-h-80', !isExpanded);
+      mobileNav.classList.toggle('opacity-0', isExpanded);
+      mobileNav.classList.toggle('opacity-100', !isExpanded);
+      menuIcon.classList.toggle('hidden', !isExpanded);
+      closeIcon.classList.toggle('hidden', isExpanded);
     });
   }
 
   // Email obfuscation decode function
   function decodeEmails() {
-    document.querySelectorAll('.obfuscated-email').forEach((el) => {
+    document.querySelectorAll<HTMLAnchorElement>('.obfuscated-email').forEach((el) => {
       const encodedAttr = el.getAttribute('data-email');
       if (encodedAttr) {
         const encoded = encodedAttr.split(',').map(Number);
         const email = encoded.map((c) => String.fromCharCode(c)).join('');
-        
-        const parent = el.parentElement;
-        if (parent && parent.tagName === 'SPAN') {
-          // Replace span wrapper with a link to preserve layout/styling
-          const link = document.createElement('a');
-          link.href = `mailto:${email}`;
-          link.className = parent.className;
-          
-          // Copy child nodes except the obfuscated span itself
-          Array.from(parent.childNodes).forEach((child) => {
-            if (child === el) {
-              link.appendChild(document.createTextNode(email));
-            } else {
-              link.appendChild(child.cloneNode(true));
-            }
-          });
-          parent.replaceWith(link);
+        const label = el.querySelector('[data-email-label]');
+
+        el.href = `mailto:${email}`;
+        el.setAttribute('aria-label', `Email ${email}`);
+        if (label) {
+          label.textContent = email;
         } else {
-          el.outerHTML = `<a href="mailto:${email}" class="text-neutral-text hover:text-primary transition-colors">${email}</a>`;
+          el.textContent = email;
         }
       }
     });

@@ -18,7 +18,7 @@ export const respContent: ServiceContent = {
     title: 'RESP - Education Savings Plan',
     subtitle:
       "Invest in your child's future with government grants and tax-deferred growth. Build education savings that grow with your family's dreams.",
-    backgroundImage: '/images/family-protection.jpg',
+    backgroundImage: '/images/service-resp.png',
     ctaText: 'Start Saving Today',
     ctaLink: '/contact',
   },
@@ -115,6 +115,6 @@ export const respContent: ServiceContent = {
       "Start saving today and watch government grants and compound growth build your child's education fund.",
     buttonText: 'Open RESP Account',
     buttonLink: '/contact',
-    backgroundImage: '/images/family-protection.jpg',
+    backgroundImage: '/images/service-resp.png',
   },
 };

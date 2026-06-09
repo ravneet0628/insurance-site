@@ -7,5 +7,8 @@ export default defineConfig({
   publicDir: './public',
   outDir: './dist',
   output: 'static',
+  build: {
+    inlineStylesheets: 'always',
+  },
   integrations: [icon()],
 });

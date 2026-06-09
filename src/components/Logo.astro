@@ -1,4 +1,8 @@
 ---
+import { Image } from 'astro:assets';
+import logoBg from '../assets/logo-bg.jpg';
+import logoTransparent from '../assets/logo-transparent.png';
+
 interface Props {
   class?: string;
   iconOnly?: boolean;
@@ -6,13 +10,20 @@ interface Props {
 }
 
 const { class: className = '', iconOnly = false, light = false } = Astro.props;
+const logoSrc = light ? logoBg : logoTransparent;
 ---
 <div class={`flex items-center ${className}`}>
   {/* Premium Logo Mark */}
-  <img
-    src={light ? "/logo-bg.jpg" : "/logo-transparent.png"}
+  <Image
+    src={logoSrc}
     alt=""
     class="w-9 h-9 mr-3 object-contain rounded-lg"
+    width={36}
+    height={36}
+    format="webp"
+    quality={82}
+    loading="eager"
+    decoding="async"
     aria-hidden="true"
   />
 

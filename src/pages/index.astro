@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import PageContainer from '../components/PageContainer.astro';
@@ -7,6 +8,10 @@ import ServiceCard from '../components/ServiceCard.astro';
 import CTASection from '../components/CTASection.astro';
 import { homePageContent } from '../content/data/pages/home';
 import { allServicesContent } from '../content/data/services';
+import canadaLifeLogo from '../assets/images/partners/canadalife.png';
+import desjardinsLogo from '../assets/images/partners/desjardins.png';
+import manulifeLogo from '../assets/images/partners/manulife.png';
+import sunLifeLogo from '../assets/images/partners/sunlife.png';
 
 const { hero, services, about, meta } = homePageContent;
 
@@ -88,10 +93,10 @@ const cta = {
 };
 
 const partners = [
-  { name: 'Manulife', logo: '/images/partners/manulife.png' },
-  { name: 'Sun Life', logo: '/images/partners/sunlife.png' },
-  { name: 'Canada Life', logo: '/images/partners/canadalife.png' },
-  { name: 'Desjardins', logo: '/images/partners/desjardins.png' },
+  { name: 'Manulife', logo: manulifeLogo, optimized: true },
+  { name: 'Sun Life', logo: sunLifeLogo, optimized: true },
+  { name: 'Canada Life', logo: canadaLifeLogo, optimized: true },
+  { name: 'Desjardins', logo: desjardinsLogo, optimized: true },
   { name: 'BMO Insurance', logo: '/images/partners/bmo.gif' },
   { name: 'Industrial Alliance', logo: '/images/partners/ia.gif' },
   { name: 'Equitable Life', logo: '/images/partners/equitable.png' },
@@ -296,22 +301,56 @@ const schema = {
           {
             partners.map((partner) => (
               <div class="flex-shrink-0 w-36 h-16 flex items-center justify-center">
-                <img
-                  src={partner.logo}
-                  alt={`${partner.name} logo`}
-                  class="max-h-12 max-w-full object-contain"
-                />
+                {partner.optimized ? (
+                  <Image
+                    src={partner.logo}
+                    alt={`${partner.name} logo`}
+                    class="max-h-12 max-w-full object-contain"
+                    width={144}
+                    format="webp"
+                    quality={82}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ) : (
+                  <img
+                    src={partner.logo}
+                    alt={`${partner.name} logo`}
+                    class="max-h-12 max-w-full object-contain"
+                    width="144"
+                    height="48"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                )}
               </div>
             ))
           }
           {
             partners.map((partner) => (
               <div class="flex-shrink-0 w-36 h-16 flex items-center justify-center">
-                <img
-                  src={partner.logo}
-                  alt={`${partner.name} logo`}
-                  class="max-h-12 max-w-full object-contain"
-                />
+                {partner.optimized ? (
+                  <Image
+                    src={partner.logo}
+                    alt={`${partner.name} logo`}
+                    class="max-h-12 max-w-full object-contain"
+                    width={144}
+                    format="webp"
+                    quality={82}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ) : (
+                  <img
+                    src={partner.logo}
+                    alt={`${partner.name} logo`}
+                    class="max-h-12 max-w-full object-contain"
+                    width="144"
+                    height="48"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                )}
               </div>
             ))
           }

@@ -17,7 +17,7 @@ export const visitorsInsuranceContent: ServiceContent = {
     title: 'Visitors Insurance',
     subtitle:
       'Comprehensive travel medical insurance for visitors to Canada and Canadians traveling abroad. Protect yourself from unexpected medical emergencies.',
-    backgroundImage: '/images/hero-bg.jpg',
+    backgroundImage: '/images/service-visitors.png',
     ctaText: 'Get Travel Quote',
     ctaLink: '/contact',
   },
@@ -114,6 +114,6 @@ export const visitorsInsuranceContent: ServiceContent = {
       "Don't let unexpected medical emergencies ruin your trip. Get comprehensive visitors insurance coverage today.",
     buttonText: 'Get Travel Insurance Quote',
     buttonLink: '/contact',
-    backgroundImage: '/images/hero-bg.jpg',
+    backgroundImage: '/images/service-visitors.png',
   },
 };

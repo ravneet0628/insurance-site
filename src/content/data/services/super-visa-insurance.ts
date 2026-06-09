@@ -17,7 +17,7 @@ export const superVisaInsuranceContent: ServiceContent = {
     title: 'Super Visa Insurance',
     subtitle:
       'Government-approved mandatory insurance coverage for parents and grandparents visiting Canada on a Super Visa.',
-    backgroundImage: '/images/family-protection.jpg',
+    backgroundImage: '/images/service-super-visa.png',
     ctaText: 'Get Coverage Quote',
     ctaLink: '/contact',
   },
@@ -115,6 +115,6 @@ export const superVisaInsuranceContent: ServiceContent = {
       'Get government-approved Super Visa insurance coverage and take the first step toward reuniting with your family in Canada.',
     buttonText: 'Get Super Visa Quote',
     buttonLink: '/contact',
-    backgroundImage: '/images/family-protection.jpg',
+    backgroundImage: '/images/service-super-visa.png',
   },
 };

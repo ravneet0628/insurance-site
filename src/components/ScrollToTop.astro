@@ -14,23 +14,47 @@ import { Icon } from 'astro-icon/components';
   const btn = document.getElementById('scroll-to-top');
 
   if (btn) {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 400) {
+    let isVisible = false;
+    let ticking = false;
+
+    const updateVisibility = () => {
+      const shouldShow = window.scrollY > 400;
+      ticking = false;
+
+      if (shouldShow === isVisible) {
+        return;
+      }
+
+      isVisible = shouldShow;
+      if (shouldShow) {
         btn.classList.remove('hidden');
-        setTimeout(() => {
-          btn.classList.remove('opacity-0', 'translate-y-4');
-          btn.classList.add('opacity-100', 'translate-y-0');
-        }, 10);
+        requestAnimationFrame(() => {
+          btn.classList.toggle('opacity-0', !isVisible);
+          btn.classList.toggle('translate-y-4', !isVisible);
+          btn.classList.toggle('opacity-100', isVisible);
+          btn.classList.toggle('translate-y-0', isVisible);
+        });
       } else {
         btn.classList.remove('opacity-100', 'translate-y-0');
         btn.classList.add('opacity-0', 'translate-y-4');
         setTimeout(() => {
-          if (window.scrollY <= 400) {
+          if (!isVisible) {
             btn.classList.add('hidden');
           }
         }, 300);
       }
-    });
+    };
+
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(updateVisibility);
+        }
+      },
+      { passive: true }
+    );
 
     btn.addEventListener('click', () => {
       window.scrollTo({

@@ -1,12 +1,22 @@
 ---
+import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 import Layout from '../../layouts/Layout.astro';
 import PageContainer from '../../components/PageContainer.astro';
 import Card from '../../components/Card.astro';
 import CTAButton from '../../components/CTAButton.astro';
-import CTASection from '../../components/CTASection.astro';
 import ScrollToTop from '../../components/ScrollToTop.astro';
 import { allServicesContent } from '../../content/data/services';
+import criticalIllnessService from '../../assets/images/service-critical-illness.png';
+import disabilityService from '../../assets/images/service-disability.png';
+import fhsaService from '../../assets/images/service-fhsa.png';
+import lifeService from '../../assets/images/service-life.png';
+import professionalConsultation from '../../assets/images/professional-consultation.jpg';
+import respService from '../../assets/images/service-resp.png';
+import rrspService from '../../assets/images/service-rrsp.png';
+import superVisaService from '../../assets/images/service-super-visa.png';
+import tfsaService from '../../assets/images/service-tfsa.png';
+import visitorsService from '../../assets/images/service-visitors.png';
 
 export async function getStaticPaths() {
   return allServicesContent.map((service) => ({
@@ -30,20 +40,22 @@ const serviceIconMap: Record<string, string> = {
   'fhsa': 'Home',
 };
 
-const serviceImageMap: Record<string, string> = {
-  'life-insurance': '/images/life-protection.jpg',
-  'super-visa-insurance': '/images/travel-insurance.jpg',
-  'visitors-insurance': '/images/travel-insurance.jpg',
-  'disability-insurance': '/images/professional-consultation.jpg',
-  'critical-illness-insurance': '/images/critical-care.jpg',
-  'resp': '/images/education-savings.jpg',
-  'rrsp': '/images/investment-growth.jpg',
-  'tfsa': '/images/investment-growth.jpg',
-  'fhsa': '/images/investment-growth.jpg',
-};
-
 const iconName = serviceIconMap[serviceSlug] || 'Shield';
-const serviceImage = serviceImageMap[serviceSlug] || '/images/professional-consultation.jpg';
+const optimizedImageMap = {
+  '/images/professional-consultation.jpg': professionalConsultation,
+  '/images/service-critical-illness.png': criticalIllnessService,
+  '/images/service-disability.png': disabilityService,
+  '/images/service-fhsa.png': fhsaService,
+  '/images/service-life.png': lifeService,
+  '/images/service-resp.png': respService,
+  '/images/service-rrsp.png': rrspService,
+  '/images/service-super-visa.png': superVisaService,
+  '/images/service-tfsa.png': tfsaService,
+  '/images/service-visitors.png': visitorsService,
+};
+const heroImagePath = service.hero.backgroundImage || '/images/professional-consultation.jpg';
+const heroImage =
+  optimizedImageMap[heroImagePath as keyof typeof optimizedImageMap] || professionalConsultation;
 
 const schema = {
   '@context': 'https://schema.org',
@@ -80,20 +92,11 @@ const schema = {
 >
   <main class="flex-grow">
     {/* Enhanced Hero Section */}
-    <section class="relative py-24 md:py-32 bg-gradient-to-br from-primary to-blue-600 overflow-hidden">
-      {/* Background Image */}
-      <div class="absolute inset-0">
-        <img
-          src={service.hero.backgroundImage || serviceImage}
-          alt={`${service.hero.title} background`}
-          class="w-full h-full object-cover opacity-20"
-        />
-        <div class="absolute inset-0 bg-gradient-to-r from-primary/90 to-blue-600/90"></div>
-      </div>
+    <section class="relative overflow-hidden bg-gradient-to-br from-primary via-blue-600 to-blue-700 py-20 md:py-28">
 
       {/* Content */}
-      <PageContainer class="relative z-10">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <PageContainer background="none" class="relative z-10">
+        <div class="grid grid-cols-1 items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
           {/* Text Content */}
           <div class="text-white">
             <div class="flex items-center mb-4">
@@ -111,7 +114,7 @@ const schema = {
               {service.hero.subtitle}
             </p>
 
-            <div class="flex flex-col sm:flex-row gap-4">
+            <div class="flex flex-col gap-4 sm:flex-row">
               <CTAButton href={service.hero.ctaLink} variant="light" size="lg">
                 {service.hero.ctaText}
               </CTAButton>
@@ -122,15 +125,25 @@ const schema = {
             </div>
           </div>
 
-          {/* Visual Element */}
-          <div class="hidden lg:block">
-            <div class="relative flex justify-center">
-              <div class="w-96 h-96 bg-white/10 rounded-full border border-white/20 flex items-center justify-center">
-                <div class="w-64 h-64 bg-white/20 rounded-full border border-white/20 flex items-center justify-center">
-                  <div class="w-32 h-32 bg-white rounded-full flex items-center justify-center shadow-xl">
-                    <Icon name={`lucide:${iconName.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()}`} class="w-16 h-16 text-primary" />
-                  </div>
-                </div>
+          {/* Service Image */}
+          <div class="relative">
+            <div class="relative overflow-hidden rounded-2xl border border-white/20 bg-white/10 shadow-2xl">
+              <Image
+                src={heroImage}
+                alt={`${service.hero.title} coverage and planning`}
+                class="h-64 w-full object-cover sm:h-80 lg:h-[430px]"
+                widths={[480, 768, 1024]}
+                sizes="(min-width: 1024px) 42vw, 100vw"
+                width={1024}
+                format="webp"
+                quality={82}
+                loading="eager"
+                decoding="async"
+                fetchpriority="high"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-primary/30 via-transparent to-transparent"></div>
+              <div class="absolute left-5 top-5 flex h-14 w-14 items-center justify-center rounded-full bg-white shadow-xl">
+                <Icon name={`lucide:${iconName.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()}`} class="h-7 w-7 text-primary" />
               </div>
             </div>
           </div>
@@ -139,10 +152,9 @@ const schema = {
     </section>
 
     {/* Overview Section */}
-    <section class="py-20 bg-white">
+    <section class="bg-white py-16 md:py-20">
       <PageContainer>
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Content */}
+        <div class="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-16">
           <div>
             <div class="flex items-center mb-6">
               <div class="h-1 w-12 bg-primary mr-4"></div>
@@ -151,101 +163,77 @@ const schema = {
               </span>
             </div>
 
-            <h2 class="text-4xl md:text-5xl font-ubuntu font-bold text-neutral-text mb-8 leading-tight">
+            <h2 class="mb-6 max-w-3xl text-3xl font-ubuntu font-bold leading-tight text-neutral-text md:text-5xl">
               {service.overview.title}
             </h2>
 
-            <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+            <p class="max-w-3xl text-lg leading-relaxed text-gray-600">
               {service.overview.content}
             </p>
+          </div>
 
-            {service.overview.highlights && (
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+          {service.overview.highlights && (
+            <aside class="rounded-2xl border border-blue-100 bg-blue-50/60 p-6 shadow-sm">
+              <div class="mb-5 flex items-center gap-3">
+                <div class="flex h-11 w-11 items-center justify-center rounded-full bg-primary text-white">
+                  <Icon name={`lucide:${iconName.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()}`} class="h-5 w-5" />
+                </div>
+                <h3 class="font-ubuntu text-xl font-bold text-neutral-text">At a glance</h3>
+              </div>
+              <ul class="space-y-4">
                 {service.overview.highlights.map((highlight) => (
-                  <div class="flex items-center p-4 bg-gray-50 rounded-lg">
-                    <Icon name="lucide:check-circle-2" class="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
-                    <span class="text-gray-700 font-medium">{highlight}</span>
-                  </div>
+                  <li class="flex items-start gap-3">
+                    <Icon name="lucide:check-circle-2" class="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
+                    <span class="font-medium leading-relaxed text-gray-700">{highlight}</span>
+                  </li>
                 ))}
-              </div>
-            )}
-          </div>
-
-          {/* Image */}
-          <div class="relative">
-            <div class="rounded-2xl overflow-hidden shadow-2xl">
-              <img
-                src={serviceImage}
-                alt={`${service.overview.title} consultation and planning`}
-                class="w-full h-[400px] object-cover"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent"></div>
-            </div>
-
-            {/* Floating Stats */}
-            <div class="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-xl border">
-              <div class="flex items-center space-x-4">
-                <div class="text-center">
-                  <div class="text-2xl font-bold text-primary">24/7</div>
-                  <div class="text-sm text-gray-600">Support</div>
-                </div>
-                <div class="h-8 w-px bg-gray-200"></div>
-                <div class="text-center">
-                  <div class="text-2xl font-bold text-primary">100%</div>
-                  <div class="text-sm text-gray-600">Satisfaction</div>
-                </div>
-              </div>
-            </div>
-          </div>
+              </ul>
+            </aside>
+          )}
         </div>
       </PageContainer>
     </section>
 
     {/* Features Section */}
-    <section class="py-20 bg-gradient-to-br from-gray-50 to-white">
-      <PageContainer>
-        <div class="text-center mb-16">
-          <div class="flex items-center justify-center mb-4">
-            <Icon name="lucide:star" class="w-6 h-6 text-primary mr-2" />
+    <section class="bg-gradient-to-br from-gray-50 to-white py-16 md:py-20">
+      <PageContainer background="none">
+        <div class="mb-12 max-w-3xl">
+          <div class="mb-4 flex items-center">
+            <div class="mr-4 h-1 w-12 bg-primary"></div>
             <span class="text-primary font-semibold uppercase tracking-wider text-sm">
               Key Features
             </span>
-            <Icon name="lucide:star" class="w-6 h-6 text-primary ml-2" />
           </div>
-          <h2 class="text-4xl md:text-5xl font-ubuntu font-bold text-neutral-text mb-6">
+          <h2 class="mb-5 text-3xl font-ubuntu font-bold text-neutral-text md:text-5xl">
             {service.features.title}
           </h2>
           {service.features.subtitle && (
-            <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+            <p class="text-lg leading-relaxed text-gray-600">
               {service.features.subtitle}
             </p>
           )}
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {service.features.features.map((feature) => (
             <div class="group">
-              <Card class="h-full p-8 hover:shadow-xl transition-all duration-500 hover:-translate-y-2 bg-white border-0 relative overflow-hidden">
-                {/* Background Pattern */}
-                <div class="absolute top-0 right-0 w-20 h-20 bg-primary/5 rounded-full -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500"></div>
-
+              <Card hover={false} class="relative h-full overflow-hidden border border-gray-100 bg-white p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
                 <div class="relative z-10">
-                  {/* Enhanced Icon */}
-                  <div class="w-16 h-16 bg-gradient-to-br from-primary to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <Icon name={`lucide:${feature.icon.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()}`} class="w-8 h-8 text-white" />
+                  <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <Icon name={`lucide:${feature.icon.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()}`} class="h-6 w-6" />
                   </div>
 
-                  <h3 class="text-xl font-ubuntu font-bold text-neutral-text mb-4">
+                  <h3 class="mb-3 text-xl font-ubuntu font-bold text-neutral-text">
                     {feature.title}
                   </h3>
 
-                  <p class="text-gray-600 mb-6 leading-relaxed">{feature.description}</p>
+                  <p class="mb-6 leading-relaxed text-gray-600">{feature.description}</p>
 
                   {feature.details && (
                     <ul class="space-y-3">
                       {feature.details.map((detail) => (
                         <li class="flex items-start">
-                          <Icon name="lucide:check-circle-2" class="w-4 h-4 text-green-500 mt-0.5 mr-3 flex-shrink-0" />
+                          <Icon name="lucide:check" class="mt-1 mr-3 h-4 w-4 flex-shrink-0 text-primary" />
                           <span class="text-sm text-gray-600">{detail}</span>
                         </li>
                       ))}
@@ -260,50 +248,45 @@ const schema = {
     </section>
 
     {/* Details Section */}
-    <section class="py-20 bg-white">
+    <section class="bg-white py-16 md:py-20">
       <PageContainer>
-        <div class="text-center mb-16">
-          <div class="flex items-center justify-center mb-4">
-            <Icon name="lucide:info" class="w-6 h-6 text-primary mr-2" />
+        <div class="mb-12 max-w-4xl">
+          <div class="mb-4 flex items-center">
+            <div class="mr-4 h-1 w-12 bg-primary"></div>
             <span class="text-primary font-semibold uppercase tracking-wider text-sm">
               Detailed Information
             </span>
-            <Icon name="lucide:info" class="w-6 h-6 text-primary ml-2" />
           </div>
-          <h2 class="text-4xl md:text-5xl font-ubuntu font-bold text-neutral-text mb-6">
+          <h2 class="mb-5 text-3xl font-ubuntu font-bold text-neutral-text md:text-5xl">
             {service.details.title}
           </h2>
-          <p class="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed">
+          <p class="text-lg leading-relaxed text-gray-600">
             {service.details.content}
           </p>
         </div>
 
         {service.details.items && (
-          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div class="divide-y divide-gray-200 rounded-2xl border border-gray-200 bg-white">
             {service.details.items.map((item) => (
-              <div class="group">
-                <Card class="h-full p-8 bg-gradient-to-br from-gray-50 to-white hover:shadow-xl transition-all duration-500 hover:-translate-y-1">
-                  <div class="mb-6">
-                    <h3 class="text-2xl font-ubuntu font-bold text-neutral-text mb-4">
-                      {item.title}
-                    </h3>
-                    <div class="w-12 h-1 bg-primary"></div>
-                  </div>
+              <article class="grid gap-6 p-6 md:grid-cols-[280px_minmax(0,1fr)] md:p-8">
+                <div>
+                  <h3 class="mb-3 text-2xl font-ubuntu font-bold text-neutral-text">
+                    {item.title}
+                  </h3>
+                  <p class="leading-relaxed text-gray-600">{item.description}</p>
+                </div>
 
-                  <p class="text-gray-600 mb-6 leading-relaxed">{item.description}</p>
-
-                  {item.benefits && (
-                    <ul class="space-y-3">
-                      {item.benefits.map((benefit) => (
-                        <li class="flex items-start">
-                          <Icon name="lucide:arrow-right" class="w-4 h-4 text-primary mt-0.5 mr-3 flex-shrink-0" />
-                          <span class="text-sm text-gray-700">{benefit}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </Card>
-              </div>
+                {item.benefits && (
+                  <ul class="grid gap-3 sm:grid-cols-2">
+                    {item.benefits.map((benefit) => (
+                      <li class="flex items-start rounded-lg bg-gray-50 p-3">
+                        <Icon name="lucide:arrow-right" class="mt-0.5 mr-3 h-4 w-4 flex-shrink-0 text-primary" />
+                        <span class="text-sm leading-relaxed text-gray-700">{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </article>
             ))}
           </div>
         )}
@@ -311,19 +294,24 @@ const schema = {
     </section>
 
     {/* Enhanced CTA Section */}
-    <CTASection
-      title={service.cta.title}
-      subtitle={service.cta.subtitle}
-      backgroundImage="/images/financial-planning.jpg"
-      primaryCTA={{
-        text: 'Contact Us',
-        href: '/contact',
-      }}
-      secondaryCTA={{
-        text: 'Learn More',
-        href: '/resources',
-      }}
-    />
+    <section class="bg-gradient-to-br from-primary via-blue-600 to-blue-700 py-16 text-white md:py-20">
+      <PageContainer background="none">
+        <div class="mx-auto max-w-4xl text-center">
+          <h2 class="mb-5 text-3xl font-ubuntu font-bold md:text-5xl">{service.cta.title}</h2>
+          <p class="mx-auto mb-8 max-w-3xl text-lg leading-relaxed text-blue-50 md:text-xl">
+            {service.cta.subtitle}
+          </p>
+          <div class="flex flex-col justify-center gap-4 sm:flex-row">
+            <CTAButton href={service.cta.buttonLink} variant="light" size="lg">
+              {service.cta.buttonText}
+            </CTAButton>
+            <CTAButton href="/resources" variant="light-outline" size="lg">
+              Learn More
+            </CTAButton>
+          </div>
+        </div>
+      </PageContainer>
+    </section>
   </main>
 
   <ScrollToTop />

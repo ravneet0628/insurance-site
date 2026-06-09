@@ -19,7 +19,7 @@ export const fhsaContent: ServiceContent = {
     title: 'FHSA',
     subtitle:
       'First Home Savings Account combining RRSP and TFSA benefits for first-time home buyers.',
-    backgroundImage: '/images/real-estate.jpg',
+    backgroundImage: '/images/service-fhsa.png',
     ctaText: 'Open FHSA Account',
     ctaLink: '/contact',
   },
@@ -130,6 +130,6 @@ export const fhsaContent: ServiceContent = {
       'Open your FHSA today and take advantage of the best tax benefits available for first-time home buyers.',
     buttonText: 'Open FHSA Account',
     buttonLink: '/contact',
-    backgroundImage: '/images/real-estate.jpg',
+    backgroundImage: '/images/service-fhsa.png',
   },
 };

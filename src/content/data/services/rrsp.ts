@@ -17,7 +17,7 @@ export const rrspContent: ServiceContent = {
     title: 'RRSP - Retirement Savings Plan',
     subtitle:
       "Build your retirement wealth with tax-deductible contributions and tax-deferred growth. Secure your financial future with Canada's premier retirement savings vehicle.",
-    backgroundImage: '/images/office-building.jpg',
+    backgroundImage: '/images/service-rrsp.png',
     ctaText: 'Start Retirement Planning',
     ctaLink: '/contact',
   },
@@ -114,6 +114,6 @@ export const rrspContent: ServiceContent = {
       'Every year you delay retirement savings is a year of lost compound growth. Start your RRSP and secure your financial future.',
     buttonText: 'Open RRSP Account',
     buttonLink: '/contact',
-    backgroundImage: '/images/office-building.jpg',
+    backgroundImage: '/images/service-rrsp.png',
   },
 };

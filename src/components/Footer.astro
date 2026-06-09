@@ -87,9 +87,14 @@ const ENCODED_EMAIL_STR = ENCODED_EMAIL.join(',');
           </div>
           <div class="flex items-center space-x-3">
             <Icon name="lucide:mail" class="w-5 h-5 text-gray-300 flex-shrink-0" />
-            <span class="text-gray-300 hover:text-white transition-colors text-sm flex items-center">
-              <span class="obfuscated-email" data-email={ENCODED_EMAIL_STR}>Loading...</span>
-            </span>
+            <a
+              href="#"
+              class="obfuscated-email text-gray-300 hover:text-white transition-colors text-sm flex items-center"
+              data-email={ENCODED_EMAIL_STR}
+              aria-label="Email Top Trust Insurance"
+            >
+              <span data-email-label>Loading...</span>
+            </a>
           </div>
         </div>
       </div>

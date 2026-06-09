@@ -12,7 +12,7 @@ export const lifeInsuranceContent: ServiceContent = {
     title: 'Life Insurance',
     subtitle:
       "Protect your family's financial future with comprehensive life insurance coverage tailored to your needs.",
-    backgroundImage: '/images/family-protection.jpg',
+    backgroundImage: '/images/service-life.png',
     ctaText: 'Get Started',
     ctaLink: '/contact',
   },
@@ -116,6 +116,6 @@ export const lifeInsuranceContent: ServiceContent = {
       "Get a personalized life insurance quote in minutes and secure your family's financial future today.",
     buttonText: 'Contact Us',
     buttonLink: '/contact',
-    backgroundImage: '/images/family-protection.jpg',
+    backgroundImage: '/images/service-life.png',
   },
 };

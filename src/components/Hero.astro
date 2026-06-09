@@ -1,6 +1,10 @@
 ---
+import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 import CTAButton from './CTAButton.astro';
+import businessGrowth from '../assets/images/business-growth.jpg';
+import familyProtection from '../assets/images/family-protection.jpg';
+import officeBuilding from '../assets/images/office-building.jpg';
 
 interface CTAProps {
   text: string;
@@ -41,24 +45,45 @@ const overlayClasses = {
   heavy: 'rgba(30, 42, 120, 0.85)',
 };
 
-const backgroundStyle = bgImg
-  ? `linear-gradient(${overlayClasses[overlay]}, ${overlayClasses[overlay]}), url(${bgImg})`
-  : 'linear-gradient(135deg, rgb(97, 107, 172) 0%, #2563eb 50%, #1e40af 100%)';
+const fallbackBackground = 'linear-gradient(135deg, rgb(97, 107, 172) 0%, #2563eb 50%, #1e40af 100%)';
+const heroImageMap = {
+  '/images/business-growth.jpg': businessGrowth,
+  '/images/family-protection.jpg': familyProtection,
+  '/images/office-building.jpg': officeBuilding,
+};
+const heroImage = bgImg ? heroImageMap[bgImg as keyof typeof heroImageMap] : undefined;
 
 const hasCtaButtons = primaryCTA || secondaryCTA;
 ---
 
 <section
-  class={`relative flex flex-col items-center justify-center text-white ${heightClasses[height]} overflow-hidden ${bgImg ? 'bg-fixed md:bg-fixed bg-scroll' : ''}`}
-  style={{
-    backgroundImage: bgImg ? backgroundStyle : undefined,
-    background: bgImg ? undefined : backgroundStyle,
-    backgroundSize: bgImg ? 'cover' : undefined,
-    backgroundPosition: bgImg ? 'center' : undefined,
-    backgroundRepeat: bgImg ? 'no-repeat' : undefined,
-  }}
+  class={`relative flex flex-col items-center justify-center text-white ${heightClasses[height]} overflow-hidden`}
+  style={{ background: bgImg ? undefined : fallbackBackground }}
   role="banner"
 >
+  {heroImage && (
+    <Image
+      src={heroImage}
+      alt=""
+      class="absolute inset-0 z-0 h-full w-full object-cover"
+      widths={[640, 1024, 1440]}
+      sizes="100vw"
+      width={1440}
+      format="webp"
+      quality={76}
+      loading="eager"
+      decoding="async"
+      fetchpriority="high"
+      aria-hidden="true"
+    />
+  )}
+  {heroImage && (
+    <div
+      class="absolute inset-0 z-10"
+      style={{ backgroundColor: overlayClasses[overlay] }}
+      aria-hidden="true"
+    ></div>
+  )}
   {/* Enhanced overlay stack with proper z-indexing */}
   <div class="absolute inset-0 bg-black/10 z-10"></div>
   <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/20 z-20"></div>
